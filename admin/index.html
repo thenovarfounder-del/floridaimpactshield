@@ -376,4 +376,34 @@ function filterLeads(type, el) {
   renderSupabaseLeads(type);
 }
 </script>
+
+<script>
+let allLeads = [];
+async function loadLeadsFromSupabase() {
+  try {
+    const res = await fetch('/api/get-leads');
+    const data = await res.json();
+    if (Array.isArray(data)) {
+      allLeads = data.map(l => ({
+        firstName: l.first_name, lastName: l.last_name,
+        email: l.email, phone: l.phone, county: l.county,
+        annualPremium: l.annual_premium, notes: l.message,
+        type: l.type, status: l.status, createdAt: l.created_at, page: l.page
+      }));
+      renderSupabaseLeads('all');
+      document.getElementById('m-leads').textContent = allLeads.length;
+      document.getElementById('m-eva').textContent = allLeads.filter(l=>l.type?.includes('eva')).length;
+      document.getElementById('m-quotes').textContent = allLeads.filter(l=>l.type==='quote_request').length;
+    }
+  } catch(e) { console.log('Load error:', e); }
+}
+function renderSupabaseLeads(filter) {
+  const leads = filter==='all' ? allLeads : allLeads.filter(l=>l.type===filter);
+  const tbody = document.getElementById('leadsTable');
+  if (!tbody) return;
+  if (!leads.length) { tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--slate)">No leads yet.</td></tr>'; return; }
+  tbody.innerHTML = leads.map(l=>'<tr><td style="color:var(--white)">'+(l.firstName||'')+' '+(l.lastName||'')+'</td><td><a href="mailto:'+l.email+'" style="color:var(--sky-light)">'+(l.email||'-')+'</a></td><td>'+(l.phone||'-')+'</td><td>'+(l.county||'-')+'</td><td>'+(l.annualPremium||'-')+'</td><td><span class="tag">'+(l.type||'unknown')+'</span></td><td><span class="status-new">'+(l.status||'new')+'</span></td><td>'+new Date(l.createdAt).toLocaleDateString()+'</td><td><button onclick="callLead(''+l.phone+'')" class="action-btn">Call</button></td></tr>').join('');
+}
+document.addEventListener('DOMContentLoaded', loadLeadsFromSupabase);
+</script>
 </body></html>
