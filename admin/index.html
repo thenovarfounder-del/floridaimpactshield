@@ -311,9 +311,69 @@ function copyPost(){navigator.clipboard.writeText(document.getElementById('blog-
 function sendNewsletter(){const n=JSON.parse(localStorage.getItem('fis_newsletter')||'[]').length;if(!n){alert('No subscribers yet.');return;}alert(`In production: sends to ${n} subscribers via Resend/SendGrid API\n\nConnect in /api/newsletter.js with your email service API key.`);}
 function previewNewsletter(){const s=document.getElementById('nl-subject')?.value;const b=document.getElementById('nl-body')?.value;const w=window.open('','_blank');w.document.write('<h2>'+s+'</h2><hr><div style="font-family:sans-serif;max-width:600px;margin:20px auto">'+b.replace(/\n/g,'<br>')+'</div>');}
 
-// Init
-document.addEventListener('DOMContentLoaded',()=>{
-  renderLeads('all');
+// Init - load from Supabase
+document.addEventListener('DOMContentLoaded', () => {
+  loadLeadsFromSupabase();
 });
+
+let allLeads = [];
+
+async function loadLeadsFromSupabase() {
+  try {
+    const res = await fetch('/api/get-leads');
+    const data = await res.json();
+    if (Array.isArray(data)) {
+      allLeads = data.map(l => ({
+        firstName: l.first_name,
+        lastName: l.last_name,
+        email: l.email,
+        phone: l.phone,
+        county: l.county,
+        annualPremium: l.annual_premium,
+        notes: l.message,
+        type: l.type,
+        status: l.status,
+        createdAt: l.created_at,
+        page: l.page
+      }));
+      renderSupabaseLeads('all');
+    }
+  } catch(e) {
+    console.log('Supabase load error:', e);
+    renderLeads('all');
+  }
+}
+
+function renderSupabaseLeads(filter) {
+  const leads = filter === 'all' ? allLeads : allLeads.filter(l => l.type === filter);
+  const tbody = document.getElementById('leadsTable');
+  if (!tbody) return;
+  document.getElementById('m-leads').textContent = allLeads.length;
+  document.getElementById('m-eva').textContent = allLeads.filter(l => l.type?.includes('eva')).length;
+  document.getElementById('m-quotes').textContent = allLeads.filter(l => l.type === 'quote_request').length;
+  if (!leads.length) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--slate)">No leads yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = leads.map(l => `
+    <tr>
+      <td style="color:var(--white)">${l.firstName||''} ${l.lastName||''}</td>
+      <td><a href="mailto:${l.email}" style="color:var(--sky-light)">${l.email||'&mdash;'}</a></td>
+      <td><a href="tel:${l.phone}" style="color:var(--sky-light)">${l.phone||'&mdash;'}</a></td>
+      <td>${l.county||'&mdash;'}</td>
+      <td>${l.annualPremium||'&mdash;'}</td>
+      <td><span class="tag">${l.type||'unknown'}</span></td>
+      <td><span class="status-${l.status==='new'?'new':l.status==='booked'?'booked':'contacted'}">${l.status||'new'}</span></td>
+      <td>${new Date(l.createdAt).toLocaleDateString()}</td>
+      <td><button onclick="callLead('${l.phone}')" class="action-btn btn-sm">&#x1F4DE;</button></td>
+    </tr>`).join('');
+}
+
+// Override filterLeads to use Supabase data
+function filterLeads(type, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderSupabaseLeads(type);
+}
 </script>
 </body></html>
