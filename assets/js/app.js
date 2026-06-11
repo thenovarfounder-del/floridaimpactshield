@@ -1,13 +1,9 @@
 /* ============================================
-   FLORIDA IMPACT SHIELD — CORE APP JS
+   FLORIDA IMPACT SHIELD - CORE APP JS
    floridaimpactshield.com
-   All shared functionality: Eva AI, Lead DB,
-   Modal, Toasts, Exit Intent, Sticky Bar
    ============================================ */
-
 'use strict';
 
-// ─── CONFIGURATION ────────────────────────────────────────────────
 const CONFIG = {
   siteName: 'Florida Impact Shield',
   domain: 'floridaimpactshield.com',
@@ -22,7 +18,6 @@ const CONFIG = {
   sessionKey: 'fis_session'
 };
 
-// ─── LEAD DATABASE (localStorage — replace with Supabase in production) ───
 const LeadDB = {
   getAll() {
     try { return JSON.parse(localStorage.getItem(CONFIG.dbKey) || '[]'); }
@@ -46,7 +41,7 @@ const LeadDB = {
       leads.unshift(record);
     }
     localStorage.setItem(CONFIG.dbKey, JSON.stringify(leads));
-    this.notifyAdmin(record);
+    console.log('[FIS Lead Captured]', record);
     return record;
   },
   getUTM() {
@@ -58,12 +53,6 @@ const LeadDB = {
       term: params.get('utm_term') || ''
     };
   },
-  notifyAdmin(lead) {
-    // In production: POST to /api/leads endpoint → Supabase → email notification
-    console.log('[FIS Lead Captured]', lead);
-    // Example Supabase call:
-    // fetch('/api/leads', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(lead) })
-  },
   count() { return this.getAll().length; },
   subscribeNewsletter(email, name) {
     const subs = JSON.parse(localStorage.getItem(CONFIG.newsletterKey) || '[]');
@@ -74,7 +63,6 @@ const LeadDB = {
   }
 };
 
-// ─── MODAL ────────────────────────────────────────────────────────
 const Modal = {
   open() {
     const el = document.getElementById('quoteModal');
@@ -93,78 +81,62 @@ const Modal = {
     const windows = document.getElementById('mf-windows')?.value;
     const premium = document.getElementById('mf-premium')?.value?.trim();
     const notes = document.getElementById('mf-notes')?.value?.trim();
-
     if (!first || !email || !phone) {
       alert('Please fill in your name, email, and phone number.');
       return;
     }
-
-    const lead = LeadDB.save({
+    LeadDB.save({
       firstName: first, lastName: last, email, phone,
       county, windowCount: windows, annualPremium: premium,
       notes, type: 'quote_request', status: 'new'
     });
-
     LeadDB.subscribeNewsletter(email, first + ' ' + last);
-
-    // Show success
     document.getElementById('modal-form').style.display = 'none';
     document.getElementById('modal-success').style.display = 'block';
-
-    // Track conversion
     if (typeof gtag !== 'undefined') gtag('event', 'quote_request', { email, county });
   }
 };
 
-// ─── EVA AI CHATBOT ───────────────────────────────────────────────
 const Eva = {
   open: false,
   firstOpen: true,
   history: [],
   qualScore: 0,
   leadData: {},
-  emailCaptured: false,
-
+  qrShown: false,
   SYSTEM: `You are Eva, the AI sales assistant for Florida Impact Shield (floridaimpactshield.com). You are warm, sharp, and genuinely helpful. You help Florida homeowners understand impact windows, insurance savings, and state grants.
-
 COMPANY INFO:
 - Name: Florida Impact Shield
 - Phone: (888) 975-4440
 - Website: floridaimpactshield.com
 - License: CBC1265XXX (Florida Certified Building Contractor)
 - Service: All Florida counties
-- Specialty: Hurricane impact windows & doors, My Safe Florida Home grants
-
+- Specialty: Hurricane impact windows and doors, My Safe Florida Home grants
 KEY FACTS:
 - Insurance savings: 25-45% on windstorm portion (state mandated)
 - HVHZ zones (Miami-Dade, Broward): up to 45% reduction
-- Average FL homeowner premium 2025: ~$9,462/yr
+- Average FL homeowner premium 2025: around $9,462/yr
 - My Safe Florida Home grant: up to $10,000, we handle all paperwork
 - Window cost: $700-$1,600 per opening installed, typical home $18K-$45K
 - 0% financing 60 months available
 - Payback through insurance savings: 8-12 years
 - Wind resistance: 200+ mph
-
-YOUR MISSION — in order:
-1. Get their FIRST NAME first — greet them by name in every response after
+YOUR MISSION in order:
+1. Get their FIRST NAME first - greet them by name in every response after
 2. Ask their county and qualify them over 2 exchanges
-3. After 2 exchanges capture EMAIL ("What email should I send your personalized savings report to?")
-4. Capture PHONE if they're warm ("What's the best number to reach you?")
+3. After 2 exchanges capture EMAIL - ask: What email should I send your personalized savings report to?
+4. Capture PHONE if they are warm - ask: What is the best number to reach you?
 5. Calculate their EXACT dollar savings when you have their premium
-6. Push for appointment — tell them to click the Book Free Quote button or call (888) 975-4440
+6. Push for appointment - tell them to click the Book Free Quote button or call (888) 975-4440
 7. Check My Safe Florida Home grant eligibility
-
 CONVERSATION RULES:
 - Messages: 2-4 sentences max unless explaining calculations
 - Ask ONE question per message
-- When you have their premium, always calculate: savings = premium × 0.33 (adjust by county)
-- Miami-Dade/Broward: ×0.40, Palm Beach: ×0.35, Lee/Collier: ×0.33, Tampa/Pinellas: ×0.30, Orlando: ×0.27
+- When you have their premium, always calculate: savings = premium x 0.33 (adjust by county)
+- Miami-Dade/Broward: x0.40, Palm Beach: x0.35, Lee/Collier: x0.33, Tampa/Pinellas: x0.30, Orlando: x0.27
 - Be a knowledgeable friend, not a pusher
-- If they ask about competitors, be confident but not negative
-- If they express urgency (storm approaching, renewal coming), escalate to phone immediately
-- Always sign messages: — Eva
-
-CLOSING: "Based on what you've told me, you could save [calculated amount]/year on insurance. I'd love to connect you with one of our licensed estimators for a free in-home visit — usually within 48 hours. Should I set that up, or would you prefer to call us directly at (888) 975-4440?"`,
+- Always sign messages: - Eva
+CLOSING: Based on what you have told me, you could save [calculated amount]/year on insurance. I would love to connect you with one of our licensed estimators for a free in-home visit usually within 48 hours. Should I set that up, or would you prefer to call us directly at (888) 975-4440?`,
 
   toggle() {
     this.open = !this.open;
@@ -173,25 +145,25 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     const notify = document.getElementById('evaNotify');
     if (this.open) {
       win?.classList.add('open');
-      if (btn) btn.innerHTML = '✕';
+      if (btn) btn.innerHTML = '\u2715';
       if (notify) notify.remove();
       if (this.firstOpen) { this.firstOpen = false; this.start(); }
     } else {
       win?.classList.remove('open');
-      if (btn) btn.innerHTML = '🤖';
+      if (btn) btn.innerHTML = '<img src="/assets/images/eva-avatar.png" style="width:42px;height:42px;border-radius:50%;object-fit:cover;" alt="Eva" onerror="this.outerHTML=\'\\uD83E\\uDD16\'">';
     }
   },
 
   start() {
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    this.addMsg("Hi! I'm Eva 👋 Florida's #1 hurricane window AI assistant.\n\nI help Florida homeowners find out exactly how much they can save on insurance with impact windows — and whether they qualify for the My Safe Florida Home grant (up to $10,000).\n\nFirst, what's your name?", 'agent', time);
+    this.addMsg("Hi! I'm Eva \uD83D\uDC4B Florida's #1 hurricane window AI assistant.\n\nI help Florida homeowners find out exactly how much they can save on insurance with impact windows \u2014 and whether they qualify for the My Safe Florida Home grant (up to $10,000).\n\nFirst, what's your name?", 'agent', time);
   },
 
   addMsg(text, role, time) {
     const msgs = document.getElementById('evaMsgs');
     if (!msgs) return;
     const div = document.createElement('div');
-    div.className = `eva-msg ${role}`;
+    div.className = 'eva-msg ' + role;
     div.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     if (time) {
       const t = document.createElement('div');
@@ -207,7 +179,8 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     const msgs = document.getElementById('evaMsgs');
     if (!msgs) return;
     const div = document.createElement('div');
-    div.className = 'eva-typing'; div.id = 'evaTyping';
+    div.className = 'eva-typing';
+    div.id = 'evaTyping';
     div.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
@@ -226,11 +199,11 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
       btn.className = 'eva-qr';
       btn.textContent = o;
       btn.onclick = () => {
-        Eva.clearQR();
-        if (o === '🗓 Book Free Quote Now') {
+        wrap.innerHTML = '';
+        if (o === 'Book Free Quote Now') {
           Modal.open();
           Eva.toggle();
-        } else if (o === '📞 Call (888) 975-4440') {
+        } else if (o === 'Call (888) 975-4440') {
           window.location.href = 'tel:+18889754440';
         } else {
           Eva.send(o);
@@ -262,12 +235,11 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
       if (input) input.style.borderColor = 'var(--red)';
       return;
     }
-    this.emailCaptured = true;
     this.leadData.email = email;
     LeadDB.save({ email, type: 'eva_email_capture', status: 'prospect' });
     LeadDB.subscribeNewsletter(email);
     const strip = document.getElementById('evaLeadStrip');
-    if (strip) strip.innerHTML = `<span style="color:var(--green);font-weight:600">✓ Report will be sent to ${email}</span>`;
+    if (strip) strip.innerHTML = '<span style="color:var(--green);font-weight:600">\u2714 Report will be sent to ' + email + '</span>';
     this.updateProgress(20);
     if (!this.open) this.toggle();
   },
@@ -278,7 +250,6 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     this.addMsg(text, 'user', time);
     this.history.push({ role: 'user', content: text });
 
-    // Update qualification score
     const lc = text.toLowerCase();
     let np = this.qualScore;
     if (/miami|broward|palm|county|lee|tampa|florida|naples|orlando|sarasota/.test(lc)) np = Math.max(np, 25);
@@ -288,7 +259,6 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     if (/soon|asap|ready|quote|yes|book|call/.test(lc)) np = Math.max(np, 95);
     if (np > this.qualScore) this.updateProgress(np);
 
-    // Extract lead data
     if (!this.leadData.firstName && this.history.length <= 4 && !text.includes('@') && !/\d{3}/.test(text) && text.length < 30) {
       this.leadData.firstName = text.trim();
     }
@@ -297,52 +267,55 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
       LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'new' });
       setTimeout(() => {
         const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        Eva.addMsg("Perfect! I've saved your details ✅\n\nThe last step is to book your FREE in-home quote — a licensed estimator visits within 48 hours, measures every opening, and gives you exact pricing plus your grant eligibility.\n\nClick the button below to schedule!", 'agent', rtime);
-        Eva.setQR(['🗓 Book Free Quote Now', '📞 Call (888) 975-4440']);
+        Eva.addMsg("Perfect! I've saved your details \u2705\n\nThe last step is to book your FREE in-home quote \u2014 a licensed estimator visits within 48 hours, measures every opening, and gives you exact pricing plus your grant eligibility.\n\nClick the button below to schedule!", 'agent', rtime);
+        Eva.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
       }, 1000);
     }
-    if (/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/.test(text)) this.leadData.phone = text.match(/[\d\s().+-]{10,}/)?.[0];
+    if (/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/.test(text)) {
+      this.leadData.phone = text.match(/[\d\s().+-]{10,}/)?.[0];
+    }
 
     this.showTyping();
-
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system: this.SYSTEM,
-          messages: this.history
-        })
+        body: JSON.stringify({ system: this.SYSTEM, messages: this.history })
       });
-
       this.removeTyping();
       if (!res.ok) throw new Error('API error ' + res.status);
-
       const data = await res.json();
-      const reply = data.content?.[0]?.text || "I hit a snag — but our team is ready! Call (888) 975-4440 or book online.";
+      const reply = data.content?.[0]?.text || "I hit a snag \u2014 but our team is ready! Call (888) 975-4440 or book online.";
       const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       this.addMsg(reply, 'agent', rtime);
       this.history.push({ role: 'assistant', content: reply });
 
-      // Save to lead DB if we have enough data
       if (this.leadData.email || this.leadData.phone) {
         LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'engaged', conversation: this.history.length });
       }
 
-      // Smart quick replies
       const rl = reply.toLowerCase();
-      if (/county|where are you/.test(rl)) this.setQR(['Miami-Dade', 'Broward', 'Palm Beach', 'Lee County', 'Other']);
-      else if (/premium|insurance cost|pay for/.test(rl)) this.setQR(['Under $5K/yr', '$5K–$8K/yr', '$8K–$12K/yr', 'Over $12K/yr', 'Not sure']);
-      else if (/how many|windows|openings/.test(rl)) this.setQR(['Under 10 windows', '10–15 windows', '15–25 windows', '25+ windows']);
-      else if (/own|homeowner/.test(rl)) this.setQR(['Yes, I own it', 'Renting']);
-      else if (/timeline|when|how soon/.test(rl)) this.setQR(['ASAP — storm season!', 'Within 3 months', 'Just researching']);
-      else if (/set that up|appointment|48 hours/.test(rl)) this.setQR(['Yes, book me in! ✅', "I'll call instead", 'More info first']);
-      else if (/call us|888/.test(rl)) this.setQR(['Book online 📋', 'Call now 📞']);
+      this.clearQR();
+      if (/what.s your|your name|first name/.test(rl)) {
+        // no buttons for name question
+      } else if (/what county|which county|where in florida/.test(rl)) {
+        this.setQR(['Miami-Dade', 'Broward', 'Palm Beach', 'Lee County', 'Tampa', 'Other']);
+      } else if (/insurance premium|how much.*insurance|annual.*premium/.test(rl)) {
+        this.setQR(['Under $5K/yr', '$5K-$8K/yr', '$8K-$12K/yr', 'Over $12K/yr', 'Not sure']);
+      } else if (/how many window|number of window|how many opening/.test(rl)) {
+        this.setQR(['Under 10', '10-15', '15-25', '25+']);
+      } else if (/do you own|homeowner|rent/.test(rl)) {
+        this.setQR(['Yes I own it', 'Renting']);
+      } else if (/when.*looking|timeline|how soon/.test(rl)) {
+        this.setQR(['ASAP', 'Within 3 months', 'Just researching']);
+      } else if (/book|schedule|appointment|free quote|48 hours/.test(rl)) {
+        this.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
+      }
 
     } catch (err) {
       this.removeTyping();
-      this.addMsg("I hit a snag — but our team is standing by!\n\n📞 Call us: **(888) 975-4440**\n\nOr tap below to book your free quote.", 'agent');
-      this.setQR(['📋 Book Free Quote', '📞 Call (888) 975-4440']);
+      this.addMsg("I hit a snag \u2014 but our team is standing by!\n\nCall us: (888) 975-4440\n\nOr tap below to book your free quote.", 'agent');
+      this.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
     }
   },
 
@@ -355,7 +328,6 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
   }
 };
 
-// ─── SOCIAL PROOF TOASTS ──────────────────────────────────────────
 const Toasts = {
   data: [
     { initials: 'MR', name: 'Maria R. in Coral Gables', action: 'just booked a free in-home quote', time: '2 min ago' },
@@ -365,7 +337,7 @@ const Toasts = {
     { initials: 'LV', name: 'Lisa V. in Naples', action: 'installed 18 impact windows', time: '15 min ago' },
     { initials: 'RC', name: 'Roberto C. in Miami Beach', action: 'saved 38% on Citizens insurance', time: '19 min ago' },
     { initials: 'PH', name: 'Patricia H. in Sarasota', action: 'qualified for the $10K grant', time: '23 min ago' },
-    { initials: 'JB', name: 'James B. in Palm Beach', action: 'replaced 24 windows & doors', time: '28 min ago' }
+    { initials: 'JB', name: 'James B. in Palm Beach', action: 'replaced 24 windows and doors', time: '28 min ago' }
   ],
   idx: 0,
   show() {
@@ -389,7 +361,6 @@ const Toasts = {
   }
 };
 
-// ─── EXIT INTENT ──────────────────────────────────────────────────
 const ExitIntent = {
   shown: false,
   init() {
@@ -407,7 +378,6 @@ const ExitIntent = {
   }
 };
 
-// ─── STICKY BAR ───────────────────────────────────────────────────
 const StickyBar = {
   shown: false,
   init() {
@@ -421,7 +391,6 @@ const StickyBar = {
   }
 };
 
-// ─── NAV SCROLL ───────────────────────────────────────────────────
 const Nav = {
   init() {
     window.addEventListener('scroll', () => {
@@ -434,7 +403,6 @@ const Nav = {
   }
 };
 
-// ─── SCROLL REVEAL ────────────────────────────────────────────────
 const ScrollReveal = {
   init() {
     const obs = new IntersectionObserver(entries => {
@@ -442,7 +410,7 @@ const ScrollReveal = {
         if (e.isIntersecting) {
           const siblings = Array.from(e.target.parentElement?.children || []);
           siblings.forEach((c, i) => {
-            if (c.classList.contains('reveal')) c.style.transitionDelay = `${i * 0.07}s`;
+            if (c.classList.contains('reveal')) c.style.transitionDelay = i * 0.07 + 's';
           });
           e.target.classList.add('visible');
         }
@@ -452,7 +420,6 @@ const ScrollReveal = {
   }
 };
 
-// ─── COUNTDOWN TIMER ──────────────────────────────────────────────
 const Countdown = {
   init(elementId, hours = 47, mins = 23, secs = 11) {
     let total = hours * 3600 + mins * 60 + secs;
@@ -463,12 +430,11 @@ const Countdown = {
       const h = Math.floor(total / 3600);
       const m = Math.floor((total % 3600) / 60);
       const s = total % 60;
-      el.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      el.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
     }, 1000);
   }
 };
 
-// ─── INSURANCE CALCULATOR ─────────────────────────────────────────
 const Calculator = {
   multipliers: {
     miami: 0.40, broward: 0.38, palm: 0.35, lee: 0.33,
@@ -494,18 +460,16 @@ const Calculator = {
       savEl.style.color = 'var(--sky-light)';
       setTimeout(() => { savEl.style.transform = ''; savEl.style.color = ''; }, 200);
     }
-    if (payEl) payEl.textContent = `⏱ ~${payback}yr payback`;
-    if (grantEl) grantEl.textContent = premium > 4000 ? '🏠 May qualify for $10K grant' : '🏠 Check grant eligibility';
-    // Update slider gradient
+    if (payEl) payEl.textContent = '~' + payback + 'yr payback';
+    if (grantEl) grantEl.textContent = premium > 4000 ? 'May qualify for $10K grant' : 'Check grant eligibility';
     const slider = document.getElementById('calcPremium');
     if (slider) {
       const pct = ((premium - 2000) / (20000 - 2000)) * 100;
-      slider.style.background = `linear-gradient(to right,var(--sky) ${pct}%,rgba(100,116,139,0.3) ${pct}%)`;
+      slider.style.background = 'linear-gradient(to right,var(--sky) ' + pct + '%,rgba(100,116,139,0.3) ' + pct + '%)';
     }
   }
 };
 
-// ─── NEWSLETTER ───────────────────────────────────────────────────
 const Newsletter = {
   submit(formId) {
     const form = document.getElementById(formId);
@@ -515,11 +479,10 @@ const Newsletter = {
     if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
     LeadDB.subscribeNewsletter(email, name);
     LeadDB.save({ email, name, type: 'newsletter', status: 'subscriber' });
-    form.innerHTML = '<p style="color:var(--green);font-weight:600;text-align:center">✓ You\'re subscribed! Check your inbox for your free savings guide.</p>';
+    form.innerHTML = '<p style="color:var(--green);font-weight:600;text-align:center">You are subscribed! Check your inbox for your free savings guide.</p>';
   }
 };
 
-// ─── AUTO-OPEN EVA ────────────────────────────────────────────────
 function autoOpenEva() {
   const session = sessionStorage.getItem(CONFIG.sessionKey);
   if (!session) {
@@ -528,7 +491,6 @@ function autoOpenEva() {
   }
 }
 
-// ─── INIT ALL ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   Nav.init();
   ScrollReveal.init();
@@ -538,18 +500,12 @@ document.addEventListener('DOMContentLoaded', () => {
   Countdown.init('grantCountdown');
   Calculator.update();
   autoOpenEva();
-
-  // Keyboard shortcuts
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { Modal.close(); if (Eva.open) Eva.toggle(); }
   });
-
-  // Click outside modal
   document.getElementById('quoteModal')?.addEventListener('click', function(e) {
     if (e.target === this) Modal.close();
   });
-
-  // Eva textarea auto-resize + enter to send
   document.getElementById('evaInput')?.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Eva.sendInput(); }
   });
