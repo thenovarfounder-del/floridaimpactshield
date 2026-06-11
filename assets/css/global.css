@@ -3,7 +3,7 @@
    floridaimpactshield.com
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,8 +24,8 @@
   --slate-light: #94A3B8;
   --glass: rgba(14,165,233,0.08);
   --glass-border: rgba(14,165,233,0.2);
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
   --domain: 'floridaimpactshield.com';
   --phone: '(888) 975-4440';
   --email: 'info@floridaimpactshield.com';
