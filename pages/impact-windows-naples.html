@@ -245,7 +245,62 @@
 <div class="sticky-bar" id="stickyBar"><div class="sticky-left">&#x1F4DE; Serving Lee and Collier Counties &mdash; <strong>Book your free quote today.</strong></div><div class="sticky-right"><a href="tel:+18889754440" class="btn btn-phone btn-sm">Call</a><button onclick="Modal.open()" class="btn btn-amber btn-sm">Free Quote &rarr;</button></div></div>
 <div class="eva-fab"><div class="eva-window" id="evaWindow"><div class="eva-header"><div class="eva-header-left"><div class="eva-avatar-wrap"><img src="/assets/images/eva-avatar.png" style="width:36px;height:36px;border-radius:50%;object-fit:cover;" alt="Eva"><div class="eva-online"></div></div><div><div class="eva-name">Eva &mdash; AI Assistant</div><div class="eva-status"><span class="pulse-dot"></span> Online</div></div></div><div class="eva-header-actions"><a href="tel:+18889754440" class="eva-hdr-btn green">Call</a><a href="#" onclick="Modal.open();return false;" class="eva-hdr-btn">Quote</a><button class="eva-close" onclick="Eva.toggle()">&#x2715;</button></div></div><div class="eva-lead-strip" id="evaLeadStrip"><div><span>Get your savings report</span> &mdash; drop your email:</div><div class="eva-lead-row"><input class="eva-lead-input" id="evaEmailInput" type="email" placeholder="your@email.com"><button class="eva-lead-btn" onclick="Eva.captureEmail()">Send &rarr;</button></div></div><div class="eva-progress" id="evaProgress"><div class="eva-progress-labels">Qualification <span id="evaPct">0%</span></div><div class="eva-progress-track"><div class="eva-progress-fill" id="evaFill" style="width:0%"></div></div></div><div class="eva-messages" id="evaMsgs"></div><div class="eva-qr-wrap" id="evaQR"></div><div class="eva-input-wrap"><textarea class="eva-textarea" id="evaInput" placeholder="Ask about impact windows..." rows="1"></textarea><button class="eva-send" onclick="Eva.sendInput()">&#x27A4;</button></div><div class="eva-powered">Powered by Claude AI</div></div><button class="eva-btn" id="evaBtn" onclick="Eva.toggle()" style="padding:0;overflow:hidden;background:linear-gradient(135deg,#0c2a45,#0ea5e9);box-shadow:0 0 20px rgba(14,165,233,0.7);"><img src="/assets/images/eva-avatar.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="Eva"><div class="eva-notify" id="evaNotify">1</div></button></div>
 <div class="modal-overlay" id="quoteModal"><div class="modal-box"><button class="modal-close" onclick="Modal.close()">&#x2715;</button><div id="modal-form"><h2 style="font-size:22px;margin-bottom:6px">Free Quote &mdash; Lee and Collier Counties</h2><p style="font-size:13px;margin-bottom:22px">Licensed estimator visits within 48 hours. No cost, no pressure.</p><div class="form-row"><div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="mf-first" type="text"></div><div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="mf-last" type="text"></div></div><div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="mf-email" type="email"></div><div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="mf-phone" type="tel"></div><div class="form-row"><div class="form-group"><label class="form-label">Windows Count</label><select class="form-select" id="mf-windows"><option>1-5</option><option>6-15</option><option>16-25</option><option>26+</option></select></div><div class="form-group"><label class="form-label">Annual Premium</label><input class="form-input" id="mf-premium" placeholder="$8,500"></div></div><input type="hidden" id="mf-county" value="Lee and Collier Counties"><label style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--slate-light);margin-bottom:14px;cursor:pointer"><input type="checkbox" checked style="margin-top:1px"> I consent to be contacted. <a href="/pages/privacy-policy.html" style="color:var(--sky-light)">Privacy Policy</a>.</label><button class="btn btn-amber" style="width:100%;justify-content:center" onclick="Modal.submit()">Schedule Free Quote &rarr;</button></div><div id="modal-success" style="display:none;text-align:center;padding:24px 0"><div style="font-size:48px;margin-bottom:12px">&#x2705;</div><h3 style="font-family:var(--font-display);font-size:20px;margin-bottom:8px">You're booked!</h3><p style="font-size:13px">We'll call within 2 hours to confirm.</p></div></div></div>
-<footer class="site-footer"><div class="container"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><a href="/" class="nav-logo"><div class="nav-logo-icon">&#x1F6E1;&#xFE0F;</div>Florida Impact Shield</a><div style="font-size:13px;color:var(--slate)">&copy; 2026 Florida Impact Shield, LLC &middot; <span class="license-chip">CBC1265XXX</span></div><div style="display:flex;gap:16px"><a href="/pages/privacy-policy.html" style="font-size:12px;color:var(--slate)">Privacy</a><a href="/sitemap.xml" style="font-size:12px;color:var(--slate)">Sitemap</a></div></div></div></footer>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="nav-logo" style="display:inline-flex"><div class="nav-logo-icon">&#x1F6E1;&#xFE0F;</div>Florida Impact Shield</a>
+        <p class="footer-brand-desc">Florida's premier hurricane impact window and door installation company. Licensed, insured, and My Safe Florida Home approved. Serving all Florida counties since 2018.</p>
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+          <span class="badge badge-sky">&#x2B50; 4.9/5.0</span>
+          <span class="badge badge-green">&#x2705; Licensed CBC</span>
+          <span class="badge badge-amber">&#x1F3DB;&#xFE0F; MSFH Approved</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Locations</div>
+        <ul class="footer-links">
+          <li><a href="/pages/impact-windows-miami.html">Miami-Dade County</a></li>
+          <li><a href="/pages/impact-windows-broward.html">Broward County</a></li>
+          <li><a href="/pages/impact-windows-palm-beach.html">Palm Beach County</a></li>
+          <li><a href="/pages/impact-windows-naples.html">Naples / Lee County</a></li>
+          <li><a href="/pages/impact-windows-tampa.html">Tampa / Hillsborough</a></li>
+          <li><a href="/pages/impact-windows-orlando.html">Orlando Area</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links">
+          <li><a href="/pages/hurricane-windows-insurance-savings.html">Insurance Savings Guide</a></li>
+          <li><a href="/pages/my-safe-florida-home-grants.html">MSFH Grant Guide</a></li>
+          <li><a href="/pages/impact-windows-cost.html">Cost Guide 2026</a></li>
+          <li><a href="/pages/financing.html">0% Financing</a></li>
+          <li><a href="/blog/index.html">Blog &amp; News</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="/pages/about.html">About Us</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+          <li><a href="/pages/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/pages/terms.html">Terms of Service</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+        <div style="margin-top:20px">
+          <a href="tel:+18889754440" style="color:var(--sky-light);font-weight:600;font-size:15px;">&#x1F4DE; (888) 975-4440</a>
+          <div style="font-size:12px;color:var(--slate);margin-top:4px;">Mon&ndash;Sat 8am&ndash;6pm</div>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="footer-bottom">
+      <span>&copy; 2026 Florida Impact Shield, LLC. All rights reserved.</span>
+      <div class="footer-license"><span class="license-chip">CBC1265XXX</span><span>Florida Certified Building Contractor</span></div>
+      <span><a href="/pages/privacy-policy.html" style="color:var(--slate)">Privacy</a> &middot; <a href="/pages/terms.html" style="color:var(--slate)">Terms</a> &middot; <a href="/sitemap.xml" style="color:var(--slate)">Sitemap</a></span>
+    </div>
+  </div>
+</footer>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>
