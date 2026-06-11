@@ -16,7 +16,7 @@ const CONFIG = {
   email: 'info@floridaimpactshield.com',
   address: 'Miami, FL 33101',
   license: 'CBC1265XXX',
-  anthropicModel: 'claude-sonnet-4-20250514',
+  anthropicModel: 'claude-sonnet-4-5',
   dbKey: 'fis_leads_db',
   newsletterKey: 'fis_newsletter',
   sessionKey: 'fis_session'
