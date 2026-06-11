@@ -49,59 +49,39 @@
 <footer class="site-footer"><div class="container"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><a href="/" class="nav-logo"><div class="nav-logo-icon">🛡️</div>Florida Impact Shield</a><div style="font-size:13px;color:var(--slate)">© 2026 Florida Impact Shield, LLC · <span class="license-chip">CBC1265XXX</span></div></div></div></footer>
 <script src="/assets/js/app.js"></script>
 <script>
-function submitContact() {
-  const email = document.getElementById("cf-email")?.value?.trim();
-  const first = document.getElementById("cf-first")?.value?.trim();
-  const phone = document.getElementById("cf-phone")?.value?.trim();
-  const county = document.getElementById("cf-county")?.value;
-  const msg = document.getElementById("cf-msg")?.value?.trim();
-  if(!email){alert("Please enter your email.");return;}
-  LeadDB.save({firstName:first,email,phone,county,notes:msg,type:"contact_form",status:"new"});
-  LeadDB.subscribeNewsletter(email,first);
-  document.querySelector(".card:last-child").style.display="none";
-  document.getElementById("contact-success").style.display="block";
+async function submitContact() {
+  const email = document.getElementById('cf-email')?.value?.trim();
+  const first = document.getElementById('cf-first')?.value?.trim();
+  const last = document.getElementById('cf-last')?.value?.trim();
+  const phone = document.getElementById('cf-phone')?.value?.trim();
+  const county = document.getElementById('cf-county')?.value;
+  const msg = document.getElementById('cf-msg')?.value?.trim();
+  if (!email) { alert('Please enter your email.'); return; }
+  const btn = event.target;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: first,
+        lastName: last,
+        email: email,
+        phone: phone,
+        county: county,
+        message: msg,
+        type: 'contact_form',
+        status: 'new',
+        source: 'Contact Page',
+        page: '/pages/contact.html'
+      })
+    });
+  } catch(e) { console.log('API error:', e); }
+  LeadDB.save({ firstName: first, lastName: last, email, phone, county, notes: msg, type: 'contact_form', status: 'new' });
+  LeadDB.subscribeNewsletter(email, first);
+  document.getElementById('contact-success').style.display = 'block';
+  btn.style.display = 'none';
 }
 </script>
-
-<script>
-function submitContactForm() {
-  const name = document.getElementById('cf-name')?.value?.trim() || document.querySelector('[name="name"]')?.value?.trim() || document.querySelector('input[placeholder*="name" i]')?.value?.trim();
-  const email = document.getElementById('cf-email')?.value?.trim() || document.querySelector('[name="email"]')?.value?.trim() || document.querySelector('input[type="email"]')?.value?.trim();
-  const phone = document.getElementById('cf-phone')?.value?.trim() || document.querySelector('[name="phone"]')?.value?.trim() || document.querySelector('input[type="tel"]')?.value?.trim();
-  const message = document.getElementById('cf-message')?.value?.trim() || document.querySelector('[name="message"]')?.value?.trim() || document.querySelector('textarea')?.value?.trim();
-
-  if (!name || !email) {
-    alert('Please fill in your name and email.');
-    return;
-  }
-
-  const lead = {
-    firstName: name.split(' ')[0],
-    lastName: name.split(' ').slice(1).join(' '),
-    email: email,
-    phone: phone || '',
-    notes: message || '',
-    type: 'contact_form',
-    status: 'new',
-    id: 'lead_' + Date.now(),
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    source: 'Contact Page',
-    page: '/pages/contact.html',
-    utm: {}
-  };
-
-  const leads = JSON.parse(localStorage.getItem('fis_leads_db') || '[]');
-  leads.unshift(lead);
-  localStorage.setItem('fis_leads_db', JSON.stringify(leads));
-  console.log('[FIS Contact Form Submitted]', lead);
-
-  // Show success message
-  const form = document.querySelector('form') || document.querySelector('.contact-form') || document.querySelector('.card');
-  if (form) {
-    form.innerHTML = '<div style="text-align:center;padding:40px 0"><div style="font-size:56px;margin-bottom:16px">&#x2705;</div><h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:10px;color:var(--white)">Message Received!</h3><p style="color:var(--slate-light)">Thank you ' + lead.firstName + '. We will call you within 2 hours.<br><br><strong style="color:var(--amber)">(888) 975-4440</strong></p></div>';
-  }
-}
-</script>
-
 </body></html>
