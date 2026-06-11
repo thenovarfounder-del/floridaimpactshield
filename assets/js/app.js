@@ -265,6 +265,21 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
     if (text.includes('@')) {
       this.leadData.email = text;
       LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'new' });
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: this.leadData.firstName || '',
+          email: text,
+          phone: this.leadData.phone || '',
+          county: this.leadData.county || '',
+          type: 'eva_conversation',
+          status: 'new',
+          source: 'Eva Chatbot',
+          page: window.location.pathname,
+          conversationLength: this.history.length
+        })
+      }).catch(e => console.log('Eva lead save error:', e));
       setTimeout(() => {
         const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         Eva.addMsg("Perfect! I've saved your details \u2705\n\nThe last step is to book your FREE in-home quote \u2014 a licensed estimator visits within 48 hours, measures every opening, and gives you exact pricing plus your grant eligibility.\n\nClick the button below to schedule!", 'agent', rtime);
