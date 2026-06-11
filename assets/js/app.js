@@ -146,12 +146,13 @@ KEY FACTS:
 - Wind resistance: 200+ mph
 
 YOUR MISSION — in order:
-1. Capture EMAIL within first 2-3 messages ("What email should I send your personalized savings report to?")
-2. Capture PHONE if they're warm ("What's the best number to reach you?")
-3. Qualify: county → insurance premium → window count → homeowner status → timeline
-4. Calculate their EXACT dollar savings when you have their premium
-5. Push for appointment (quote) or phone call to (888) 975-4440
-6. Check My Safe Florida Home grant eligibility
+1. Get their FIRST NAME first — greet them by name in every response after
+2. Ask their county and qualify them over 2 exchanges
+3. After 2 exchanges capture EMAIL ("What email should I send your personalized savings report to?")
+4. Capture PHONE if they're warm ("What's the best number to reach you?")
+5. Calculate their EXACT dollar savings when you have their premium
+6. Push for appointment — tell them to click the Book Free Quote button or call (888) 975-4440
+7. Check My Safe Florida Home grant eligibility
 
 CONVERSATION RULES:
 - Messages: 2-4 sentences max unless explaining calculations
@@ -183,7 +184,7 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
 
   start() {
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    this.addMsg("Hi! I'm Eva 👋 Florida's #1 hurricane window AI assistant.\n\nI help Florida homeowners find out exactly how much they can save on insurance with impact windows — and whether they qualify for the My Safe Florida Home grant (up to $10,000).\n\nWhat's your first name?", 'agent', time);
+    this.addMsg("Hi! I'm Eva 👋 Florida's #1 hurricane window AI assistant.\n\nI help Florida homeowners find out exactly how much they can save on insurance with impact windows — and whether they qualify for the My Safe Florida Home grant (up to $10,000).\n\nFirst, what's your name?", 'agent', time);
   },
 
   addMsg(text, role, time) {
@@ -224,7 +225,17 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
       const btn = document.createElement('button');
       btn.className = 'eva-qr';
       btn.textContent = o;
-      btn.onclick = () => { Eva.clearQR(); Eva.send(o); };
+      btn.onclick = () => {
+        Eva.clearQR();
+        if (o === '🗓 Book Free Quote Now') {
+          Modal.open();
+          Eva.toggle();
+        } else if (o === '📞 Call (888) 975-4440') {
+          window.location.href = 'tel:+18889754440';
+        } else {
+          Eva.send(o);
+        }
+      };
       wrap.appendChild(btn);
     });
   },
@@ -278,7 +289,15 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     if (np > this.qualScore) this.updateProgress(np);
 
     // Extract lead data
-    if (text.includes('@')) this.leadData.email = text;
+    if (text.includes('@')) {
+      this.leadData.email = text;
+      LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'new' });
+      setTimeout(() => {
+        const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        Eva.addMsg("Perfect! I've saved your details ✅\n\nThe last step is to book your FREE in-home quote — a licensed estimator visits within 48 hours, measures every opening, and gives you exact pricing plus your grant eligibility.\n\nClick the button below to schedule!", 'agent', rtime);
+        Eva.setQR(['🗓 Book Free Quote Now', '📞 Call (888) 975-4440']);
+      }, 1000);
+    }
     if (/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/.test(text)) this.leadData.phone = text.match(/[\d\s().+-]{10,}/)?.[0];
 
     this.showTyping();
