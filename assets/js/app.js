@@ -362,20 +362,9 @@ const Toasts = {
 };
 
 const ExitIntent = {
-  shown: false,
-  init() {
-    document.addEventListener('mouseleave', e => {
-      if (e.clientY < 10 && !this.shown) {
-        this.shown = true;
-        const banner = document.getElementById('exitBanner');
-        if (banner) banner.classList.add('show');
-      }
-    });
-  },
-  hide() {
-    const banner = document.getElementById('exitBanner');
-    if (banner) banner.classList.remove('show');
-  }
+  shown: true,
+  init() {},
+  hide() {}
 };
 
 const StickyBar = {
