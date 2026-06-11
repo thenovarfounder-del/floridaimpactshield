@@ -289,6 +289,9 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     if (np > this.qualScore) this.updateProgress(np);
 
     // Extract lead data
+    if (!this.leadData.firstName && this.history.length <= 4 && !text.includes('@') && !/\d{3}/.test(text) && text.length < 30) {
+      this.leadData.firstName = text.trim();
+    }
     if (text.includes('@')) {
       this.leadData.email = text;
       LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'new' });
