@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Florida Impact Shield</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/css/global.css">
+<style>
+body{background:#060E1A}
+.admin-nav{background:var(--navy-mid);border-bottom:1px solid var(--glass-border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.admin-body{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:var(--navy-mid);border-right:1px solid var(--glass-border);padding:24px 0}
+.sidebar-item{padding:12px 24px;font-size:14px;font-weight:500;color:var(--slate-light);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;border-left:3px solid transparent}
+.sidebar-item:hover,.sidebar-item.active{color:var(--white);background:rgba(14,165,233,.08);border-left-color:var(--sky)}
+.main-area{padding:32px;overflow-y:auto}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.metric-card{background:var(--navy-mid);border:1px solid var(--glass-border);border-radius:12px;padding:20px}
+.metric-num{font-family:var(--font-display);font-size:36px;font-weight:800;line-height:1}
+.metric-label{font-size:12px;color:var(--slate);margin-top:6px}
+.metric-delta{font-size:12px;font-weight:600;margin-top:4px}
+.delta-up{color:var(--green)}
+.table-wrap{background:var(--navy-mid);border:1px solid var(--glass-border);border-radius:14px;overflow:hidden}
+.table-header{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--glass-border)}
+.table-title{font-family:var(--font-display);font-size:16px;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{padding:10px 16px;text-align:left;font-size:11px;font-weight:700;color:var(--slate-light);letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.2);border-bottom:1px solid var(--glass-border)}
+td{padding:12px 16px;font-size:13px;color:var(--slate-light);border-bottom:1px solid rgba(100,116,139,.1)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(14,165,233,.03)}
+.status-new{color:var(--amber);background:rgba(245,158,11,.1);padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.status-contacted{color:var(--sky-light);background:rgba(14,165,233,.1);padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.status-booked{color:var(--green);background:rgba(16,185,129,.1);padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--glass-border);margin-bottom:24px}
+.tab{padding:10px 20px;font-size:14px;font-weight:600;color:var(--slate);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.tab.active{color:var(--sky-light);border-bottom-color:var(--sky)}
+.panel{display:none}.panel.active{display:block}
+.blog-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px}
+.cal-day{background:rgba(10,22,40,.6);border:1px solid var(--glass-border);border-radius:6px;padding:8px;min-height:80px;font-size:11px}
+.cal-day-num{font-weight:700;color:var(--slate-light);margin-bottom:4px}
+.cal-post{background:rgba(14,165,233,.15);border:1px solid var(--glass-border);border-radius:4px;padding:3px 5px;font-size:10px;color:var(--sky-light);margin-bottom:2px;cursor:pointer}
+.cal-post.published{background:rgba(16,185,129,.12);color:var(--green);border-color:rgba(16,185,129,.25)}
+.action-btn{background:rgba(14,165,233,.1);border:1px solid var(--glass-border);color:var(--sky-light);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.action-btn:hover{background:rgba(14,165,233,.2);color:var(--white)}
+.action-btn.danger{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:var(--red)}
+.nl-compose{background:var(--navy-mid);border:1px solid var(--glass-border);border-radius:14px;padding:28px;margin-bottom:24px}
+.tag{display:inline-block;background:rgba(14,165,233,.1);border:1px solid var(--glass-border);color:var(--sky-light);font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="admin-nav">
+  <div style="display:flex;align-items:center;gap:10px"><div style="width:28px;height:28px;background:linear-gradient(135deg,var(--sky),var(--sky-dim));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px">🛡️</div><span style="font-family:var(--font-display);font-size:16px;font-weight:700">Florida Impact Shield — Admin</span></div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a href="/" target="_blank" class="action-btn">View Site</a>
+    <span style="font-size:13px;color:var(--slate)">admin@floridaimpactshield.com</span>
+  </div>
+</div>
+<div class="admin-body">
+  <div class="sidebar">
+    <div class="sidebar-item active" onclick="showPanel('leads')">📋 Leads</div>
+    <div class="sidebar-item" onclick="showPanel('newsletter')">📬 Newsletter</div>
+    <div class="sidebar-item" onclick="showPanel('blog')">✍️ Blog / Content</div>
+    <div class="sidebar-item" onclick="showPanel('analytics')">📊 Analytics</div>
+    <div class="sidebar-item" onclick="showPanel('settings')">⚙️ Settings</div>
+  </div>
+  <div class="main-area">
+    <!-- METRICS -->
+    <div class="metric-grid" id="metricGrid">
+      <div class="metric-card"><div class="metric-num" id="m-leads">0</div><div class="metric-label">Total Leads</div><div class="metric-delta delta-up">↑ This week</div></div>
+      <div class="metric-card"><div class="metric-num" id="m-subs">0</div><div class="metric-label">Email Subscribers</div><div class="metric-delta delta-up">↑ Newsletter</div></div>
+      <div class="metric-card"><div class="metric-num" id="m-eva">0</div><div class="metric-label">Eva Conversations</div><div class="metric-delta delta-up">↑ AI Engaged</div></div>
+      <div class="metric-card"><div class="metric-num" id="m-quotes">0</div><div class="metric-label">Quote Requests</div><div class="metric-delta delta-up">↑ High intent</div></div>
+    </div>
+
+    <!-- LEADS PANEL -->
+    <div class="panel active" id="panel-leads">
+      <div class="tab-bar">
+        <div class="tab active" onclick="filterLeads('all',this)">All Leads</div>
+        <div class="tab" onclick="filterLeads('quote_request',this)">Quote Requests</div>
+        <div class="tab" onclick="filterLeads('eva_conversation',this)">Eva Captured</div>
+        <div class="tab" onclick="filterLeads('newsletter',this)">Newsletter Only</div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Lead Database</div>
+          <div style="display:flex;gap:8px">
+            <button onclick="exportCSV()" class="action-btn">⬇ Export CSV</button>
+            <button onclick="clearLeads()" class="action-btn danger">🗑 Clear All</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>County</th><th>Premium</th><th>Type</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="leadsTable"><tr><td colspan="9" style="text-align:center;padding:32px;color:var(--slate)">No leads yet. They'll appear here as visitors engage with your site.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER PANEL -->
+    <div class="panel" id="panel-newsletter">
+      <div class="nl-compose">
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:4px;color:var(--white)">Compose Newsletter</h3>
+        <p style="font-size:13px;color:var(--slate-light);margin-bottom:20px">Broadcast to all subscribers. Powered by your lead database.</p>
+        <div class="form-group"><label class="form-label">Subject Line</label><input class="form-input" id="nl-subject" placeholder="🌀 Hurricane Season Alert: Are Your Windows Ready?"></div>
+        <div class="form-group"><label class="form-label">Preview Text</label><input class="form-input" id="nl-preview" placeholder="Florida homeowners are saving $3,200/yr..."></div>
+        <div class="form-group"><label class="form-label">Email Body (HTML or plain text)</label><textarea class="form-textarea" id="nl-body" style="min-height:200px" placeholder="Write your email here. You can use {first_name} to personalize.&#10;&#10;Hi {first_name},&#10;&#10;Hurricane season is here and Florida homeowners who haven't installed impact windows are at risk — both physically and financially..."></textarea></div>
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <button onclick="sendNewsletter()" class="btn btn-amber">📬 Send to All Subscribers</button>
+          <button onclick="previewNewsletter()" class="btn btn-outline">👁 Preview</button>
+        </div>
+        <p style="font-size:11px;color:var(--slate);margin-top:12px">⚠️ In production: connect to Resend, SendGrid, or Mailchimp API in /api/newsletter.js</p>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header"><div class="table-title">Subscriber List</div><button onclick="exportSubscribers()" class="action-btn">⬇ Export</button></div>
+        <table><thead><tr><th>Email</th><th>Name</th><th>Subscribed</th><th>Source</th></tr></thead>
+        <tbody id="subsTable"><tr><td colspan="4" style="text-align:center;padding:32px;color:var(--slate)">No subscribers yet.</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- BLOG PANEL -->
+    <div class="panel" id="panel-blog">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--white)">AI Blog Content Calendar</h3>
+        <button onclick="generatePost()" class="btn btn-amber btn-sm">✨ Generate Post with AI</button>
+      </div>
+      <div class="card" style="margin-bottom:24px">
+        <h4 style="font-size:16px;margin-bottom:6px;color:var(--white)">AI Content Generator</h4>
+        <p style="font-size:13px;color:var(--slate-light);margin-bottom:16px">Generate SEO-optimized blog posts automatically. Each post targets a high-value keyword cluster.</p>
+        <div class="form-group"><label class="form-label">Topic / Keyword</label><input class="form-input" id="blog-topic" placeholder="e.g. impact windows cost Miami 2026, MSFH grant Broward County"></div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <button onclick="setTopic('impact windows insurance discount Florida 2026')" class="action-btn">Insurance Savings</button>
+          <button onclick="setTopic('My Safe Florida Home Program guide 2026')" class="action-btn">MSFH Grants</button>
+          <button onclick="setTopic('hurricane impact windows cost Miami 2026')" class="action-btn">Cost Guide</button>
+          <button onclick="setTopic('hurricane windows vs shutters Florida')" class="action-btn">Windows vs Shutters</button>
+          <button onclick="setTopic('best impact windows brands Florida')" class="action-btn">Window Brands</button>
+          <button onclick="setTopic('impact windows Broward County insurance savings')" class="action-btn">Broward</button>
+        </div>
+        <button onclick="generatePost()" class="btn btn-sky" style="margin-top:16px">✨ Generate Full SEO Blog Post</button>
+        <div id="blog-output" style="display:none;margin-top:20px">
+          <div style="font-size:12px;color:var(--sky-light);margin-bottom:8px;font-weight:600">GENERATED POST</div>
+          <div id="blog-content" style="background:rgba(10,22,40,.8);border:1px solid var(--glass-border);border-radius:8px;padding:16px;font-size:13px;color:var(--slate-light);line-height:1.7;max-height:400px;overflow-y:auto;white-space:pre-wrap"></div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button onclick="savePost()" class="btn btn-amber btn-sm">💾 Save to Blog</button>
+            <button onclick="copyPost()" class="btn btn-outline btn-sm">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header"><div class="table-title">Published Posts</div></div>
+        <table><thead><tr><th>Title</th><th>Keyword</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="postsTable">
+          <tr><td><a href="/blog/impact-windows-insurance-discount-florida.html" style="color:var(--sky-light)">How Much Do Impact Windows Save on Florida Insurance in 2026?</a></td><td><span class="tag">insurance savings Florida</span></td><td><span class="status-booked">Published</span></td><td>Jun 2026</td><td><button class="action-btn">Edit</button></td></tr>
+          <tr><td><a href="/blog/my-safe-florida-home-program-guide.html" style="color:var(--sky-light)">My Safe Florida Home Program 2026: Complete Grant Guide</a></td><td><span class="tag">MSFH grant 2026</span></td><td><span class="status-booked">Published</span></td><td>May 2026</td><td><button class="action-btn">Edit</button></td></tr>
+          <tr><td><a href="/blog/hurricane-impact-windows-cost-florida.html" style="color:var(--sky-light)">Impact Windows Cost Florida 2026: Full Pricing Guide</a></td><td><span class="tag">impact windows cost Florida</span></td><td><span class="status-booked">Published</span></td><td>Apr 2026</td><td><button class="action-btn">Edit</button></td></tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ANALYTICS PANEL -->
+    <div class="panel" id="panel-analytics">
+      <div class="card">
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:16px;color:var(--white)">Analytics Setup</h3>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(10,22,40,.6);border-radius:8px;border:1px solid var(--glass-border)"><span style="font-size:20px">📊</span><div><div style="font-size:14px;font-weight:600;color:var(--white)">Google Analytics 4</div><div style="font-size:12px;color:var(--slate)">Add GA4 Measurement ID to index.html head → replace G-XXXXXXXXXX</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(10,22,40,.6);border-radius:8px;border:1px solid var(--glass-border)"><span style="font-size:20px">🔍</span><div><div style="font-size:14px;font-weight:600;color:var(--white)">Google Search Console</div><div style="font-size:12px;color:var(--slate)">Submit /sitemap.xml after DNS propagates (24-48 hours after domain setup)</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(10,22,40,.6);border-radius:8px;border:1px solid var(--glass-border)"><span style="font-size:20px">💾</span><div><div style="font-size:14px;font-weight:600;color:var(--white)">Supabase Lead Database</div><div style="font-size:12px;color:var(--slate)">Replace localStorage in /assets/js/app.js LeadDB.save() with POST to /api/leads → Supabase insert</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(10,22,40,.6);border-radius:8px;border:1px solid var(--glass-border)"><span style="font-size:20px">📧</span><div><div style="font-size:14px;font-weight:600;color:var(--white)">Resend Email Notifications</div><div style="font-size:12px;color:var(--slate)">Wire /api/leads.js to Resend API for instant new lead email alerts to info@floridaimpactshield.com</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div class="panel" id="panel-settings">
+      <div class="card">
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:20px;color:var(--white)">Site Settings</h3>
+        <div class="form-group"><label class="form-label">Business Phone</label><input class="form-input" value="(888) 975-4440"></div>
+        <div class="form-group"><label class="form-label">Business Email</label><input class="form-input" value="info@floridaimpactshield.com"></div>
+        <div class="form-group"><label class="form-label">License Number</label><input class="form-input" value="CBC1265XXX"></div>
+        <div class="form-group"><label class="form-label">Anthropic API Key (Eva Chatbot)</label><input class="form-input" type="password" placeholder="sk-ant-..."></div>
+        <div class="form-group"><label class="form-label">Supabase URL</label><input class="form-input" placeholder="https://xxxxx.supabase.co"></div>
+        <div class="form-group"><label class="form-label">Supabase Anon Key</label><input class="form-input" type="password" placeholder="eyJ..."></div>
+        <div class="form-group"><label class="form-label">Google Analytics ID</label><input class="form-input" placeholder="G-XXXXXXXXXX"></div>
+        <button class="btn btn-amber">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/app.js"></script>
+<script>
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s=>s.classList.remove('active'));
+  document.getElementById('panel-'+id)?.classList.add('active');
+  event.target.classList.add('active');
+  if(id==='leads') renderLeads('all');
+  if(id==='newsletter') renderSubs();
+}
+
+function renderLeads(filter) {
+  const leads = LeadDB.getAll().filter(l=>filter==='all'||l.type===filter);
+  const tbody = document.getElementById('leadsTable');
+  if(!tbody) return;
+  document.getElementById('m-leads').textContent = LeadDB.getAll().length;
+  document.getElementById('m-subs').textContent = JSON.parse(localStorage.getItem('fis_newsletter')||'[]').length;
+  document.getElementById('m-eva').textContent = LeadDB.getAll().filter(l=>l.type?.includes('eva')).length;
+  document.getElementById('m-quotes').textContent = LeadDB.getAll().filter(l=>l.type==='quote_request').length;
+  if(!leads.length){tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--slate)">No leads yet.</td></tr>';return;}
+  tbody.innerHTML = leads.map(l=>`
+    <tr>
+      <td style="color:var(--white)">${l.firstName||''} ${l.lastName||''}</td>
+      <td><a href="mailto:${l.email}" style="color:var(--sky-light)">${l.email||'—'}</a></td>
+      <td><a href="tel:${l.phone}" style="color:var(--sky-light)">${l.phone||'—'}</a></td>
+      <td>${l.county||'—'}</td>
+      <td>${l.annualPremium||'—'}</td>
+      <td><span class="tag">${l.type||'unknown'}</span></td>
+      <td><span class="status-${l.status==='new'?'new':l.status==='booked'?'booked':'contacted'}">${l.status||'new'}</span></td>
+      <td>${new Date(l.createdAt).toLocaleDateString()}</td>
+      <td><button onclick="callLead('${l.phone}')" class="action-btn btn-sm">📞</button></td>
+    </tr>`).join('');
+}
+
+function filterLeads(type, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderLeads(type);
+}
+
+function renderSubs() {
+  const subs = JSON.parse(localStorage.getItem('fis_newsletter')||'[]');
+  const tbody = document.getElementById('subsTable');
+  if(!tbody) return;
+  if(!subs.length){tbody.innerHTML='<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--slate)">No subscribers yet.</td></tr>';return;}
+  tbody.innerHTML = subs.map(s=>`<tr><td style="color:var(--sky-light)">${s.email}</td><td>${s.name||'—'}</td><td>${new Date(s.subscribedAt).toLocaleDateString()}</td><td><span class="tag">organic</span></td></tr>`).join('');
+}
+
+function exportCSV() {
+  const leads = LeadDB.getAll();
+  if(!leads.length){alert('No leads to export.');return;}
+  const headers = ['First Name','Last Name','Email','Phone','County','Premium','Type','Status','Date','Page'];
+  const rows = leads.map(l=>[l.firstName,l.lastName,l.email,l.phone,l.county,l.annualPremium,l.type,l.status,l.createdAt,l.page].map(v=>`"${v||''}"`).join(','));
+  const csv = [headers.join(','),...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download = 'fis-leads-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+
+function exportSubscribers() {
+  const subs = JSON.parse(localStorage.getItem('fis_newsletter')||'[]');
+  if(!subs.length){alert('No subscribers.');return;}
+  const csv = ['Email,Name,Date',...subs.map(s=>`"${s.email}","${s.name||''}","${s.subscribedAt}"`)].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download = 'fis-subscribers.csv';
+  a.click();
+}
+
+function clearLeads() {
+  if(!confirm('Delete ALL leads? This cannot be undone.')) return;
+  localStorage.removeItem('fis_leads_db');
+  renderLeads('all');
+}
+
+function callLead(phone){window.open('tel:'+phone);}
+
+function setTopic(t){document.getElementById('blog-topic').value=t;}
+
+async function generatePost() {
+  const topic = document.getElementById('blog-topic')?.value?.trim();
+  if(!topic){alert('Enter a topic/keyword first.');return;}
+  const btn = event.target;
+  btn.textContent = '⏳ Generating...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2000,
+        messages:[{role:'user',content:`Write a comprehensive, SEO-optimized blog post for floridaimpactshield.com about: "${topic}"
+
+Requirements:
+- 1,200-1,500 words
+- Title tag format: [Topic] | Florida Impact Shield
+- Meta description (155 chars)
+- H1, H2, H3 structure
+- Include: specific Florida insurance savings data, My Safe Florida Home grant info, call to action for free quote at (888) 975-4440
+- Internal links to: /pages/hurricane-windows-insurance-savings.html, /pages/my-safe-florida-home-grants.html
+- Schema-ready FAQ section at bottom (3-5 questions)
+- Written for Florida homeowners, conversational but authoritative
+- Keyword used naturally 4-6 times
+- End with strong CTA to book free in-home quote
+
+Output format: Full HTML article (just the article content, no full page wrapper)`}]
+      })
+    });
+    const data = await res.json();
+    const content = data.content?.[0]?.text || 'Generation failed — try again.';
+    document.getElementById('blog-output').style.display = 'block';
+    document.getElementById('blog-content').textContent = content;
+  } catch(e) {
+    alert('API error: '+e.message+'. Check your Anthropic API key in Settings.');
+  }
+  btn.textContent = '✨ Generate Full SEO Blog Post';
+  btn.disabled = false;
+}
+
+function savePost(){alert('In production: saves to /blog/ directory and updates sitemap.xml');}
+function copyPost(){navigator.clipboard.writeText(document.getElementById('blog-content').textContent);alert('Copied to clipboard!');}
+function sendNewsletter(){const n=JSON.parse(localStorage.getItem('fis_newsletter')||'[]').length;if(!n){alert('No subscribers yet.');return;}alert(`In production: sends to ${n} subscribers via Resend/SendGrid API\n\nConnect in /api/newsletter.js with your email service API key.`);}
+function previewNewsletter(){const s=document.getElementById('nl-subject')?.value;const b=document.getElementById('nl-body')?.value;const w=window.open('','_blank');w.document.write('<h2>'+s+'</h2><hr><div style="font-family:sans-serif;max-width:600px;margin:20px auto">'+b.replace(/\n/g,'<br>')+'</div>');}
+
+// Init
+document.addEventListener('DOMContentLoaded',()=>{
+  renderLeads('all');
+});
+</script>
+</body></html>

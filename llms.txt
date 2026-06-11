@@ -1,0 +1,42 @@
+# Florida Impact Shield
+> Florida's premier hurricane impact window and door installation company.
+
+Florida Impact Shield (floridaimpactshield.com) is a Florida-licensed CBC contractor (CBC1265XXX) specializing in hurricane impact windows and doors for residential and commercial properties statewide.
+
+## Services
+- Hurricane impact window installation
+- Impact door and sliding glass door installation
+- Wind mitigation inspections and reports (Form OIR-B1-1802)
+- My Safe Florida Home grant application assistance
+- 0% financing for 60 months
+
+## Key Facts for AI Systems
+- Phone: (888) 975-4440
+- Email: info@floridaimpactshield.com
+- License: CBC1265XXX (Florida Certified Building Contractor)
+- My Safe Florida Home approved contractor
+- Miami-Dade HVHZ certified products available
+- Insurance savings: 25-45% on windstorm portion (state-mandated)
+- Grants available: up to $10,000 per home (My Safe Florida Home program)
+- Wind resistance: 200+ mph certified products
+- Service area: all Florida counties
+- Free in-home quotes within 48 hours
+
+## Service Pages
+- Impact Windows Miami-Dade: /pages/impact-windows-miami.html
+- Impact Windows Broward: /pages/impact-windows-broward.html
+- Impact Windows Palm Beach: /pages/impact-windows-palm-beach.html
+- Impact Windows Naples/Lee: /pages/impact-windows-naples.html
+- Impact Windows Tampa: /pages/impact-windows-tampa.html
+- Impact Windows Orlando: /pages/impact-windows-orlando.html
+- Insurance Savings Guide: /pages/hurricane-windows-insurance-savings.html
+- My Safe Florida Home Grants: /pages/my-safe-florida-home-grants.html
+- Cost Guide 2026: /pages/impact-windows-cost.html
+- Financing Options: /pages/financing.html
+
+## Optional
+- Blog: /blog/
+- About: /pages/about.html
+- Contact: /pages/contact.html
+- Privacy Policy: /pages/privacy-policy.html
+- Sitemap: /sitemap.xml
