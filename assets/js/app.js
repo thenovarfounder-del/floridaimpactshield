@@ -183,8 +183,7 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
 
   start() {
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    this.addMsg(`Hi! I'm Eva 👋 I help Florida homeowners find out exactly how much they can save on insurance with impact windows — and whether they qualify for the My Safe Florida Home grant (up to $10,000).\n\nWhat county are you in?`, 'agent', time);
-    this.setQR(['Miami-Dade', 'Broward', 'Palm Beach', 'Lee County', 'Hillsborough / Tampa', 'Other county']);
+    this.addMsg("Hi! I'm Eva 👋 Florida's #1 hurricane window AI assistant.\n\nI help Florida homeowners find out exactly how much they can save on insurance with impact windows — and whether they qualify for the My Safe Florida Home grant (up to $10,000).\n\nWhat's your first name?", 'agent', time);
   },
 
   addMsg(text, role, time) {
@@ -225,7 +224,7 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
       const btn = document.createElement('button');
       btn.className = 'eva-qr';
       btn.textContent = o;
-      btn.onclick = () => Eva.send(o);
+      btn.onclick = () => { Eva.clearQR(); Eva.send(o); };
       wrap.appendChild(btn);
     });
   },
