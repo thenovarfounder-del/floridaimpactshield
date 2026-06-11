@@ -65,11 +65,6 @@
       "destination": "/admin/index.html"
     }
   ],
-  "functions": {
-    "api/chat.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
