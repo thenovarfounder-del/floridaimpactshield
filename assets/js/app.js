@@ -285,12 +285,10 @@ CLOSING: "Based on what you've told me, you could save [calculated amount]/year 
     this.showTyping();
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: CONFIG.anthropicModel,
-          max_tokens: 400,
           system: this.SYSTEM,
           messages: this.history
         })
