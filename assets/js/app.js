@@ -172,7 +172,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       div.appendChild(t);
     }
     msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => { msgs.scrollTop = msgs.scrollHeight; }, 100);
   },
 
   showTyping() {
@@ -188,6 +188,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
 
   removeTyping() {
     document.getElementById('evaTyping')?.remove();
+    const msgs2 = document.getElementById('evaMsgs'); if(msgs2) setTimeout(()=>{ msgs2.scrollTop = msgs2.scrollHeight; }, 100);
   },
 
   setQR(opts) {
