@@ -142,9 +142,9 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
   scrollToBottom() {
     const msgs = document.getElementById('evaMsgs');
     if (msgs) {
-      Eva.scrollToBottom();
-      setTimeout(() => { Eva.scrollToBottom(); }, 100);
-      setTimeout(() => { Eva.scrollToBottom(); }, 300);
+      const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight;
+      setTimeout(() => { const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight; }, 100);
+      setTimeout(() => { const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight; }, 300);
     }
   },
   toggle() {
@@ -181,7 +181,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       div.appendChild(t);
     }
     msgs.appendChild(div);
-    setTimeout(() => { Eva.scrollToBottom(); }, 100);
+    setTimeout(() => { const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight; }, 100);
   },
 
   showTyping() {
@@ -192,12 +192,11 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
     div.id = 'evaTyping';
     div.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(div);
-    Eva.scrollToBottom();
+    const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight;
   },
 
   removeTyping() {
     document.getElementById('evaTyping')?.remove();
-    const msgs2 = document.getElementById('evaMsgs'); if(msgs2) setTimeout(()=>{ msgs2.scrollTop = msgs2.scrollHeight; }, 100);
   },
 
   setQR(opts) {
@@ -222,7 +221,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       };
       wrap.appendChild(btn);
     });
-    Eva.scrollToBottom();
+    const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight;
   },
 
   clearQR() {
