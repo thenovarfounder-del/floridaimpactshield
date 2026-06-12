@@ -138,6 +138,15 @@ CONVERSATION RULES:
 - Always sign messages: - Eva
 CLOSING: Based on what you have told me, you could save [calculated amount]/year on insurance. I would love to connect you with one of our licensed estimators for a free in-home visit usually within 48 hours. Should I set that up, or would you prefer to call us directly at (888) 975-4440?`,
 
+
+  scrollToBottom() {
+    const msgs = document.getElementById('evaMsgs');
+    if (msgs) {
+      Eva.scrollToBottom();
+      setTimeout(() => { Eva.scrollToBottom(); }, 100);
+      setTimeout(() => { Eva.scrollToBottom(); }, 300);
+    }
+  },
   toggle() {
     this.open = !this.open;
     const win = document.getElementById('evaWindow');
@@ -172,7 +181,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       div.appendChild(t);
     }
     msgs.appendChild(div);
-    setTimeout(() => { msgs.scrollTop = msgs.scrollHeight; }, 100);
+    setTimeout(() => { Eva.scrollToBottom(); }, 100);
   },
 
   showTyping() {
@@ -183,7 +192,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
     div.id = 'evaTyping';
     div.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
+    Eva.scrollToBottom();
   },
 
   removeTyping() {
@@ -213,6 +222,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       };
       wrap.appendChild(btn);
     });
+    Eva.scrollToBottom();
   },
 
   clearQR() {
