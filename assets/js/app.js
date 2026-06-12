@@ -181,7 +181,6 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       div.appendChild(t);
     }
     msgs.appendChild(div);
-    setTimeout(() => { const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight; }, 100);
   },
 
   showTyping() {
@@ -192,7 +191,6 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
     div.id = 'evaTyping';
     div.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(div);
-    const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight;
   },
 
   removeTyping() {
@@ -315,6 +313,22 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       this.addMsg(reply, 'agent', rtime);
       this.history.push({ role: 'assistant', content: reply });
+      // Force email capture after 4 exchanges
+      if (!this.leadData.email && this.history.length >= 8) {
+        setTimeout(() => {
+          const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          Eva.addMsg("By the way — what email should I send your personalized savings report to? — Eva", 'agent', rtime);
+          Eva.history.push({ role: 'assistant', content: "What email should I send your personalized savings report to?" });
+        }, 1500);
+      }
+      // Force email capture after 4 exchanges
+      if (!this.leadData.email && this.history.length >= 8) {
+        setTimeout(() => {
+          const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          Eva.addMsg("By the way — what email should I send your personalized savings report to? — Eva", 'agent', rtime);
+          Eva.history.push({ role: 'assistant', content: "What email should I send your personalized savings report to?" });
+        }, 1500);
+      }
       // Force email capture after 4 exchanges
       if (!this.leadData.email && this.history.length >= 8) {
         setTimeout(() => {
