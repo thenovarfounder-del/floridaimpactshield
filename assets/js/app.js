@@ -211,7 +211,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
         if (o === 'Book Free Quote Now') {
           Modal.open();
           Eva.toggle();
-        } else if (o === 'Call (888) 975-4440') {
+        } else if (o === ) {
           window.location.href = 'tel:+18889754440';
         } else {
           Eva.send(o);
@@ -292,7 +292,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       setTimeout(() => {
         const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         Eva.addMsg("Perfect! I've saved your details \u2705\n\nThe last step is to book your FREE in-home quote \u2014 a licensed estimator visits within 48 hours, measures every opening, and gives you exact pricing plus your grant eligibility.\n\nClick the button below to schedule!", 'agent', rtime);
-        Eva.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
+        Eva.setQR(['Book Free Quote Now', ]);
       }, 1000);
     }
     if (/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/.test(text)) {
@@ -358,13 +358,13 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       } else if (/when.*looking|timeline|how soon/.test(rl)) {
         this.setQR(['ASAP', 'Within 3 months', 'Just researching']);
       } else if (/book|schedule|appointment|free quote|48 hours/.test(rl)) {
-        this.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
+        this.setQR(['Book Free Quote Now']);
       }
 
     } catch (err) {
       this.removeTyping();
       this.addMsg("I hit a snag \u2014 but our team is standing by!\n\nCall us: (888) 975-4440\n\nOr tap below to book your free quote.", 'agent');
-      this.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
+      this.setQR(['Book Free Quote Now', ]);
     }
   },
 
