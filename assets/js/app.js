@@ -343,57 +343,11 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
   }
 };
 
-const Toasts = {
-  data: [
-    { initials: 'MR', name: 'Maria R. in Coral Gables', action: 'just booked a free in-home quote', time: '2 min ago' },
-    { initials: 'DK', name: 'David K. in Boca Raton', action: 'saved $4,200/yr on insurance', time: '5 min ago' },
-    { initials: 'JS', name: 'Jennifer S. in Fort Myers', action: 'received a $9,800 MSFH grant', time: '8 min ago' },
-    { initials: 'TM', name: 'Tom M. in Tampa', action: 'is getting a free quote today', time: '11 min ago' },
-    { initials: 'LV', name: 'Lisa V. in Naples', action: 'installed 18 impact windows', time: '15 min ago' },
-    { initials: 'RC', name: 'Roberto C. in Miami Beach', action: 'saved 38% on Citizens insurance', time: '19 min ago' },
-    { initials: 'PH', name: 'Patricia H. in Sarasota', action: 'qualified for the $10K grant', time: '23 min ago' },
-    { initials: 'JB', name: 'James B. in Palm Beach', action: 'replaced 24 windows and doors', time: '28 min ago' }
-  ],
-  idx: 0,
-  show() {
-    const t = this.data[this.idx % this.data.length];
-    this.idx++;
-    const toast = document.getElementById('siteToast');
-    if (!toast) return;
-    const av = toast.querySelector('.toast-avatar');
-    const name = toast.querySelector('.toast-name');
-    const action = toast.querySelector('.toast-action');
-    const time = toast.querySelector('.toast-time');
-    if (av) av.textContent = t.initials;
-    if (name) name.textContent = t.name;
-    if (action) action.textContent = t.action;
-    if (time) time.textContent = t.time;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4200);
-  },
-  init() {
-    setTimeout(() => { this.show(); setInterval(() => this.show(), 13000); }, 6000);
-  }
-};
+const Toasts = { data:[], idx:0, show() {}, init() {} };
 
-const ExitIntent = {
-  shown: true,
-  init() {},
-  hide() {}
-};
+const ExitIntent = { shown:true, init() {}, hide() {} };
 
-const StickyBar = {
-  shown: false,
-  init() {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 600 && !this.shown) {
-        this.shown = true;
-        const bar = document.getElementById('stickyBar');
-        if (bar) bar.classList.add('show');
-      }
-    });
-  }
-};
+const StickyBar = { shown:true, init() {} };
 
 const Nav = {
   init() {
