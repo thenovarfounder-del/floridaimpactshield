@@ -201,6 +201,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       btn.textContent = o;
       btn.onclick = () => {
         wrap.innerHTML = '';
+        document.getElementById('evaQR').innerHTML = '';
         if (o === 'Book Free Quote Now') {
           Modal.open();
           Eva.toggle();
