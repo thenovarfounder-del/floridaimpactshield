@@ -7,7 +7,7 @@
 const CONFIG = {
   siteName: 'Florida Impact Shield',
   domain: 'floridaimpactshield.com',
-  phone: 'our team',
+  phone: '(888) 975-4440',
   phoneRaw: '+18889754440',
   email: 'info@floridaimpactshield.com',
   address: 'Miami, FL 33101',
@@ -107,7 +107,7 @@ const Eva = {
   SYSTEM: `You are Eva, the AI sales assistant for Florida Impact Shield (floridaimpactshield.com). You are warm, sharp, and genuinely helpful. You help Florida homeowners understand impact windows, insurance savings, and state grants.
 COMPANY INFO:
 - Name: Florida Impact Shield
-- Phone: our team
+- Phone: (888) 975-4440
 - Website: floridaimpactshield.com
 - License: CBC1265XXX (Florida Certified Building Contractor)
 - Service: All Florida counties
@@ -127,7 +127,7 @@ YOUR MISSION in order:
 3. After 2 exchanges capture EMAIL - ask: What email should I send your personalized savings report to?
 4. Capture PHONE if they are warm - ask: What is the best number to reach you?
 5. Calculate their EXACT dollar savings when you have their premium
-6. Push for appointment - tell them to click the Book Free Quote button or call our team
+6. Push for appointment - tell them to click the Book Free Quote button or call (888) 975-4440
 7. Check My Safe Florida Home grant eligibility
 CONVERSATION RULES:
 - Messages: 2-4 sentences max unless explaining calculations
@@ -136,7 +136,7 @@ CONVERSATION RULES:
 - Miami-Dade/Broward: x0.40, Palm Beach: x0.35, Lee/Collier: x0.33, Tampa/Pinellas: x0.30, Orlando: x0.27
 - Be a knowledgeable friend, not a pusher
 - Always sign messages: - Eva
-CLOSING: Based on what you have told me, you could save [calculated amount]/year on insurance. I would love to connect you with one of our licensed estimators for a free in-home visit usually within 48 hours. Should I set that up, or would you prefer to call us directly at our team?`,
+CLOSING: Based on what you have told me, you could save [calculated amount]/year on insurance. I would love to connect you with one of our licensed estimators for a free in-home visit usually within 48 hours. Should I set that up, or would you prefer to call us directly at (888) 975-4440?`,
 
 
   scrollToBottom() {
@@ -181,6 +181,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       div.appendChild(t);
     }
     msgs.appendChild(div);
+    setTimeout(() => { const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight; }, 100);
   },
 
   showTyping() {
@@ -191,6 +192,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
     div.id = 'evaTyping';
     div.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(div);
+    const m = document.getElementById('evaMsgs'); if(m) m.scrollTop = m.scrollHeight;
   },
 
   removeTyping() {
@@ -211,7 +213,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
         if (o === 'Book Free Quote Now') {
           Modal.open();
           Eva.toggle();
-        } else if (o === ) {
+        } else if (o === 'Call (888) 975-4440') {
           window.location.href = 'tel:+18889754440';
         } else {
           Eva.send(o);
@@ -292,7 +294,7 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       setTimeout(() => {
         const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         Eva.addMsg("Perfect! I've saved your details \u2705\n\nThe last step is to book your FREE in-home quote \u2014 a licensed estimator visits within 48 hours, measures every opening, and gives you exact pricing plus your grant eligibility.\n\nClick the button below to schedule!", 'agent', rtime);
-        Eva.setQR(['Book Free Quote Now', ]);
+        Eva.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
       }, 1000);
     }
     if (/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/.test(text)) {
@@ -309,34 +311,10 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       this.removeTyping();
       if (!res.ok) throw new Error('API error ' + res.status);
       const data = await res.json();
-      const reply = data.content?.[0]?.text || "I hit a snag \u2014 but our team is ready! Call our team or book online.";
+      const reply = data.content?.[0]?.text || "I hit a snag \u2014 but our team is ready! Call (888) 975-4440 or book online.";
       const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       this.addMsg(reply, 'agent', rtime);
       this.history.push({ role: 'assistant', content: reply });
-      // Force email capture after 4 exchanges
-      if (!this.leadData.email && this.history.length >= 8) {
-        setTimeout(() => {
-          const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          Eva.addMsg("By the way — what email should I send your personalized savings report to? — Eva", 'agent', rtime);
-          Eva.history.push({ role: 'assistant', content: "What email should I send your personalized savings report to?" });
-        }, 1500);
-      }
-      // Force email capture after 4 exchanges
-      if (!this.leadData.email && this.history.length >= 8) {
-        setTimeout(() => {
-          const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          Eva.addMsg("By the way — what email should I send your personalized savings report to? — Eva", 'agent', rtime);
-          Eva.history.push({ role: 'assistant', content: "What email should I send your personalized savings report to?" });
-        }, 1500);
-      }
-      // Force email capture after 4 exchanges
-      if (!this.leadData.email && this.history.length >= 8) {
-        setTimeout(() => {
-          const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          Eva.addMsg("By the way — what email should I send your personalized savings report to? — Eva", 'agent', rtime);
-          Eva.history.push({ role: 'assistant', content: "What email should I send your personalized savings report to?" });
-        }, 1500);
-      }
 
       if (this.leadData.email || this.leadData.phone) {
         LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'engaged', conversation: this.history.length });
@@ -352,19 +330,18 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
         this.setQR(['Under $5K/yr', '$5K-$8K/yr', '$8K-$12K/yr', 'Over $12K/yr', 'Not sure']);
       } else if (/how many window|number of window|how many opening/.test(rl)) {
         this.setQR(['Under 10', '10-15', '15-25', '25+']);
-      } else if (/do you own|homeowner|rent/.test(rl) && !this.ownRentShown) {
-        this.ownRentShown = true;
+      } else if (/do you own|homeowner|rent/.test(rl)) {
         this.setQR(['Yes I own it', 'Renting']);
       } else if (/when.*looking|timeline|how soon/.test(rl)) {
         this.setQR(['ASAP', 'Within 3 months', 'Just researching']);
       } else if (/book|schedule|appointment|free quote|48 hours/.test(rl)) {
-        this.setQR(['Book Free Quote Now']);
+        this.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
       }
 
     } catch (err) {
       this.removeTyping();
-      this.addMsg("I hit a snag \u2014 but our team is standing by!\n\nCall us: our team\n\nOr tap below to book your free quote.", 'agent');
-      this.setQR(['Book Free Quote Now', ]);
+      this.addMsg("I hit a snag \u2014 but our team is standing by!\n\nCall us: (888) 975-4440\n\nOr tap below to book your free quote.", 'agent');
+      this.setQR(['Book Free Quote Now', 'Call (888) 975-4440']);
     }
   },
 
