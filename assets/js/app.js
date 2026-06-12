@@ -315,6 +315,14 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
       const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       this.addMsg(reply, 'agent', rtime);
       this.history.push({ role: 'assistant', content: reply });
+      // Force email capture after 4 exchanges
+      if (!this.leadData.email && this.history.length >= 8) {
+        setTimeout(() => {
+          const rtime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          Eva.addMsg("By the way — what email should I send your personalized savings report to? — Eva", 'agent', rtime);
+          Eva.history.push({ role: 'assistant', content: "What email should I send your personalized savings report to?" });
+        }, 1500);
+      }
 
       if (this.leadData.email || this.leadData.phone) {
         LeadDB.save({ ...this.leadData, type: 'eva_conversation', status: 'engaged', conversation: this.history.length });
@@ -330,7 +338,8 @@ CLOSING: Based on what you have told me, you could save [calculated amount]/year
         this.setQR(['Under $5K/yr', '$5K-$8K/yr', '$8K-$12K/yr', 'Over $12K/yr', 'Not sure']);
       } else if (/how many window|number of window|how many opening/.test(rl)) {
         this.setQR(['Under 10', '10-15', '15-25', '25+']);
-      } else if (/do you own|homeowner|rent/.test(rl)) {
+      } else if (/do you own|homeowner|rent/.test(rl) && !this.ownRentShown) {
+        this.ownRentShown = true;
         this.setQR(['Yes I own it', 'Renting']);
       } else if (/when.*looking|timeline|how soon/.test(rl)) {
         this.setQR(['ASAP', 'Within 3 months', 'Just researching']);
