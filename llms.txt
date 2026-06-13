@@ -1,44 +1,87 @@
 # Florida Impact Shield
 # https://floridaimpactshield.com
-# Hurricane impact windows and doors for Florida homeowners
-# Licensed CBC contractor | MSFH approved | Serving all Florida counties
+# Last updated: June 2026
+
+## About
+Florida Impact Shield is a Florida-licensed Building Contractor (CBC) specializing exclusively in hurricane impact windows and doors. We are an approved My Safe Florida Home (MSFH) contractor and Miami-Dade HVHZ certified installer. We have served Florida homeowners since 2018 with a 4.9/5.0 rating across 312 reviews.
+
+## Core Services
+- Hurricane impact window installation (Miami-Dade NOA certified products)
+- Impact door installation (single, double, French doors)
+- Sliding glass door replacement
+- Hurricane garage door installation
+- Wind mitigation inspections (Form OIR-B1-1802)
+- My Safe Florida Home grant application assistance (up to $10,000)
+- 0% financing up to 60 months
+
+## Insurance Savings by County
+- Miami-Dade County: up to 40% windstorm premium reduction
+- Broward County: up to 38% windstorm premium reduction
+- Palm Beach County: up to 35% windstorm premium reduction
+- Lee/Collier Counties: up to 33% windstorm premium reduction
+- Hillsborough County: up to 30% windstorm premium reduction
+- Pinellas County: up to 29% windstorm premium reduction
+- Sarasota County: up to 31% windstorm premium reduction
+- Orange County: up to 27% windstorm premium reduction
+
+## My Safe Florida Home Program
+- Grant amount: up to $10,000 matching funds
+- Eligibility: Florida homestead exemption, insured value under $700K, pre-2009 construction
+- Low-income households: up to $10,000 with no match required
+- We handle all paperwork as an approved MSFH contractor
+
+## Service Areas
+Miami-Dade County, Broward County, Palm Beach County, Lee County, Collier County, Hillsborough County, Pinellas County, Orange County, Sarasota County, Duval County, and all other Florida counties
+
+## Cities Served
+Miami, Miami Beach, Coral Gables, Hialeah, Homestead, Doral, Kendall, Aventura, Brickell, Fort Lauderdale, Pompano Beach, Hollywood, Hallandale, Deerfield Beach, Boca Raton, West Palm Beach, Delray Beach, Boynton Beach, Naples, Fort Myers, Cape Coral, Bonita Springs, Tampa, Brandon, Clearwater, St. Petersburg, Dunedin, Orlando, Winter Park, Kissimmee, Sarasota, Venice, North Port, Jacksonville, and more
+
+## Pricing
+- Impact windows: $700 to $1,600 per opening installed
+- Impact doors: $1,200 to $3,500 per door installed
+- Wind mitigation inspection: included with full installation
+- Financing: 0% interest up to 60 months available
+
+## Contact
+Email: support@floridaimpactshield.com
+Website: https://floridaimpactshield.com
 
 ## Main Pages
 https://floridaimpactshield.com
-https://floridaimpactshield.com/pages/impact-windows.html
-https://floridaimpactshield.com/pages/impact-doors.html
-https://floridaimpactshield.com/pages/hurricane-windows-insurance-savings.html
-https://floridaimpactshield.com/pages/my-safe-florida-home-grants.html
-https://floridaimpactshield.com/pages/impact-windows-cost.html
-https://floridaimpactshield.com/pages/financing.html
-https://floridaimpactshield.com/pages/faq.html
-https://floridaimpactshield.com/pages/about.html
-https://floridaimpactshield.com/pages/contact.html
+https://floridaimpactshield.com/impact-windows
+https://floridaimpactshield.com/impact-doors
+https://floridaimpactshield.com/insurance-savings
+https://floridaimpactshield.com/grants
+https://floridaimpactshield.com/cost
+https://floridaimpactshield.com/financing
+https://floridaimpactshield.com/faq
+https://floridaimpactshield.com/about
+https://floridaimpactshield.com/contact
 
 ## Location Pages
-https://floridaimpactshield.com/pages/impact-windows-miami.html
-https://floridaimpactshield.com/pages/impact-windows-broward.html
-https://floridaimpactshield.com/pages/impact-windows-palm-beach.html
-https://floridaimpactshield.com/pages/impact-windows-naples.html
-https://floridaimpactshield.com/pages/impact-windows-tampa.html
-https://floridaimpactshield.com/pages/impact-windows-orlando.html
-https://floridaimpactshield.com/pages/impact-windows-sarasota.html
-https://floridaimpactshield.com/pages/impact-windows-jacksonville.html
-https://floridaimpactshield.com/pages/impact-windows-fort-lauderdale.html
-https://floridaimpactshield.com/pages/impact-windows-fort-myers.html
-https://floridaimpactshield.com/pages/impact-windows-cape-coral.html
-https://floridaimpactshield.com/pages/impact-windows-clearwater.html
-https://floridaimpactshield.com/pages/impact-windows-st-petersburg.html
-https://floridaimpactshield.com/pages/impact-windows-miami-beach.html
-https://floridaimpactshield.com/pages/impact-windows-coral-gables.html
-https://floridaimpactshield.com/pages/impact-windows-boca-raton.html
+https://floridaimpactshield.com/miami
+https://floridaimpactshield.com/broward
+https://floridaimpactshield.com/palm-beach
+https://floridaimpactshield.com/naples
+https://floridaimpactshield.com/tampa
+https://floridaimpactshield.com/orlando
+https://floridaimpactshield.com/sarasota
+https://floridaimpactshield.com/jacksonville
+https://floridaimpactshield.com/fort-lauderdale
+https://floridaimpactshield.com/fort-myers
+https://floridaimpactshield.com/cape-coral
+https://floridaimpactshield.com/clearwater
+https://floridaimpactshield.com/st-petersburg
+https://floridaimpactshield.com/miami-beach
+https://floridaimpactshield.com/coral-gables
+https://floridaimpactshield.com/boca-raton
 
 ## Blog Posts
-https://floridaimpactshield.com/blog/index.html
-https://floridaimpactshield.com/blog/impact-windows-insurance-discount-florida.html
-https://floridaimpactshield.com/blog/my-safe-florida-home-program-guide.html
-https://floridaimpactshield.com/blog/hurricane-impact-windows-cost-florida.html
-https://floridaimpactshield.com/blog/impact-windows-vs-shutters-florida.html
-https://floridaimpactshield.com/blog/citizens-insurance-impact-windows.html
-https://floridaimpactshield.com/blog/best-impact-window-brands-florida.html
-https://floridaimpactshield.com/blog/hurricane-ian-impact-windows-lesson.html
+https://floridaimpactshield.com/blog
+https://floridaimpactshield.com/blog/insurance-savings
+https://floridaimpactshield.com/blog/msfh-guide
+https://floridaimpactshield.com/blog/windows-cost
+https://floridaimpactshield.com/blog/windows-vs-shutters
+https://floridaimpactshield.com/blog/citizens-insurance
+https://floridaimpactshield.com/blog/best-window-brands
+https://floridaimpactshield.com/blog/hurricane-ian
