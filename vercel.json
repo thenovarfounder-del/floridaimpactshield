@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/miami",
-      "destination": "/pages/impact-windows-miami"
+      "destination": "/pages/impact-windows-miami.html"
     },
     {
       "source": "/broward",
@@ -26,11 +26,11 @@
     },
     {
       "source": "/insurance-savings",
-      "destination": "/pages/hurricane-windows-insurance-savings"
+      "destination": "/pages/hurricane-windows-insurance-savings.html"
     },
     {
       "source": "/grants",
-      "destination": "/pages/my-safe-florida-home-grants"
+      "destination": "/pages/my-safe-florida-home-grants.html"
     },
     {
       "source": "/cost",
