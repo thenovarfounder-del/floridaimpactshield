@@ -34,7 +34,7 @@ Florida Impact Shield is a Florida-licensed Building Contractor (CBC) specializi
 Miami-Dade County, Broward County, Palm Beach County, Lee County, Collier County, Hillsborough County, Pinellas County, Orange County, Sarasota County, Duval County, and all other Florida counties
 
 ## Cities Served
-Miami, Miami Beach, Coral Gables, Hialeah, Homestead, Doral, Kendall, Aventura, Brickell, Fort Lauderdale, Pompano Beach, Hollywood, Hallandale, Deerfield Beach, Boca Raton, West Palm Beach, Delray Beach, Boynton Beach, Naples, Fort Myers, Cape Coral, Bonita Springs, Tampa, Brandon, Clearwater, St. Petersburg, Dunedin, Orlando, Winter Park, Kissimmee, Sarasota, Venice, North Port, Jacksonville, and more
+Miami, Miami Beach, Coral Gables, Hialeah, Homestead, Doral, Kendall, Aventura, Brickell, Fort Lauderdale, Pompano Beach, Hollywood, Hallandale, Deerfield Beach, Pembroke Pines, Miramar, Boca Raton, West Palm Beach, Delray Beach, Boynton Beach, Naples, Fort Myers, Cape Coral, Bonita Springs, Tampa, Brandon, Clearwater, St. Petersburg, Dunedin, Orlando, Winter Park, Kissimmee, Sarasota, Venice, North Port, Jacksonville, and more
 
 ## Pricing
 - Impact windows: $700 to $1,600 per opening installed
@@ -48,40 +48,43 @@ Website: https://floridaimpactshield.com
 
 ## Main Pages
 https://floridaimpactshield.com
-https://floridaimpactshield.com/impact-windows
-https://floridaimpactshield.com/impact-doors
-https://floridaimpactshield.com/insurance-savings
-https://floridaimpactshield.com/grants
-https://floridaimpactshield.com/cost
-https://floridaimpactshield.com/financing
-https://floridaimpactshield.com/faq
-https://floridaimpactshield.com/about
-https://floridaimpactshield.com/contact
+https://floridaimpactshield.com/pages/impact-windows.html
+https://floridaimpactshield.com/pages/impact-doors.html
+https://floridaimpactshield.com/pages/hurricane-windows-insurance-savings.html
+https://floridaimpactshield.com/pages/my-safe-florida-home-grants.html
+https://floridaimpactshield.com/pages/impact-windows-cost.html
+https://floridaimpactshield.com/pages/financing.html
+https://floridaimpactshield.com/pages/faq.html
+https://floridaimpactshield.com/pages/about.html
+https://floridaimpactshield.com/pages/contact.html
 
 ## Location Pages
-https://floridaimpactshield.com/miami
-https://floridaimpactshield.com/broward
-https://floridaimpactshield.com/palm-beach
-https://floridaimpactshield.com/naples
-https://floridaimpactshield.com/tampa
-https://floridaimpactshield.com/orlando
-https://floridaimpactshield.com/sarasota
-https://floridaimpactshield.com/jacksonville
-https://floridaimpactshield.com/fort-lauderdale
-https://floridaimpactshield.com/fort-myers
-https://floridaimpactshield.com/cape-coral
-https://floridaimpactshield.com/clearwater
-https://floridaimpactshield.com/st-petersburg
-https://floridaimpactshield.com/miami-beach
-https://floridaimpactshield.com/coral-gables
-https://floridaimpactshield.com/boca-raton
+https://floridaimpactshield.com/pages/impact-windows-miami.html
+https://floridaimpactshield.com/pages/impact-windows-broward.html
+https://floridaimpactshield.com/pages/impact-windows-palm-beach.html
+https://floridaimpactshield.com/pages/impact-windows-naples.html
+https://floridaimpactshield.com/pages/impact-windows-tampa.html
+https://floridaimpactshield.com/pages/impact-windows-orlando.html
+https://floridaimpactshield.com/pages/impact-windows-sarasota.html
+https://floridaimpactshield.com/pages/impact-windows-jacksonville.html
+https://floridaimpactshield.com/pages/impact-windows-fort-lauderdale.html
+https://floridaimpactshield.com/pages/impact-windows-fort-myers.html
+https://floridaimpactshield.com/pages/impact-windows-cape-coral.html
+https://floridaimpactshield.com/pages/impact-windows-clearwater.html
+https://floridaimpactshield.com/pages/impact-windows-st-petersburg.html
+https://floridaimpactshield.com/pages/impact-windows-miami-beach.html
+https://floridaimpactshield.com/pages/impact-windows-coral-gables.html
+https://floridaimpactshield.com/pages/impact-windows-boca-raton.html
 
 ## Blog Posts
-https://floridaimpactshield.com/blog
-https://floridaimpactshield.com/blog/insurance-savings
-https://floridaimpactshield.com/blog/msfh-guide
-https://floridaimpactshield.com/blog/windows-cost
-https://floridaimpactshield.com/blog/windows-vs-shutters
-https://floridaimpactshield.com/blog/citizens-insurance
-https://floridaimpactshield.com/blog/best-window-brands
-https://floridaimpactshield.com/blog/hurricane-ian
+https://floridaimpactshield.com/blog/index.html
+https://floridaimpactshield.com/blog/impact-windows-insurance-discount-florida.html
+https://floridaimpactshield.com/blog/my-safe-florida-home-program-guide.html
+https://floridaimpactshield.com/blog/hurricane-impact-windows-cost-florida.html
+https://floridaimpactshield.com/blog/impact-windows-vs-shutters-florida.html
+https://floridaimpactshield.com/blog/citizens-insurance-impact-windows.html
+https://floridaimpactshield.com/blog/best-impact-window-brands-florida.html
+https://floridaimpactshield.com/blog/hurricane-ian-impact-windows-lesson.html
+https://floridaimpactshield.com/blog/impact-windows-florida-homeowners-insurance-guide.html
+https://floridaimpactshield.com/blog/hurricane-season-2026-florida-home-ready.html
+https://floridaimpactshield.com/blog/impact-windows-pembroke-pines-miramar-doral.html
