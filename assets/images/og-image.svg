@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0c2a45"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#0ea5e9"/>
+  <path d="M600 80L520 110V170C520 220 558 260 600 270C642 260 680 220 680 170V110L600 80Z" fill="none" stroke="#0ea5e9" stroke-width="3" opacity="0.6"/>
+  <path d="M615 110L580 158H600L590 195L625 147H605L615 110Z" fill="#0ea5e9"/>
+  <text x="600" y="340" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#ffffff" text-anchor="middle">Florida Impact Shield</text>
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="26" fill="#94a3b8" text-anchor="middle">Hurricane Impact Windows &amp; Insurance Savings</text>
+  <rect x="200" y="450" width="220" height="80" rx="8" fill="rgba(14,165,233,0.1)" stroke="rgba(14,165,233,0.3)" stroke-width="1"/>
+  <text x="310" y="485" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#0ea5e9" text-anchor="middle">45%</text>
+  <text x="310" y="512" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">Insurance Savings</text>
+  <rect x="490" y="450" width="220" height="80" rx="8" fill="rgba(14,165,233,0.1)" stroke="rgba(14,165,233,0.3)" stroke-width="1"/>
+  <text x="600" y="485" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#0ea5e9" text-anchor="middle">$10,000</text>
+  <text x="600" y="512" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">State Grant Available</text>
+  <rect x="780" y="450" width="220" height="80" rx="8" fill="rgba(14,165,233,0.1)" stroke="rgba(14,165,233,0.3)" stroke-width="1"/>
+  <text x="890" y="485" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#0ea5e9" text-anchor="middle">200+ mph</text>
+  <text x="890" y="512" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">Wind Resistance</text>
+  <text x="600" y="590" font-family="Arial, sans-serif" font-size="16" fill="#475569" text-anchor="middle">floridaimpactshield.com</text>
+</svg>
