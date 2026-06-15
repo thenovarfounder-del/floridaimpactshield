@@ -41,57 +41,29 @@
 </style>
 </head>
 <body>
-<!-- TOP NAV BAR -->
-<div class="site-nav-top" id="siteNavTop">
-  <a href="/" style="text-decoration:none;"><div style="display:flex;align-items:center;gap:14px;text-decoration:none;">
-  <svg width="44" height="52" viewBox="0 0 60 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="shieldGold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F5E6A3"/>
-        <stop offset="40%" stop-color="#D4AF37"/>
-        <stop offset="100%" stop-color="#8B6914"/>
-      </linearGradient>
-    </defs>
-    <polygon points="30,2 33,10 41,10 35,15 37,23 30,18 23,23 25,15 19,10 27,10" fill="#D4AF37" opacity="0.9"/>
-    <path d="M8,22 L52,22 L52,72 C52,92 32,104 30,105 C28,104 8,92 8,72 Z" fill="#111111" stroke="url(#shieldGold)" stroke-width="2"/>
-    <path d="M13,27 L47,27 L47,71 C47,88 32,99 30,100 C28,99 13,88 13,71 Z" fill="none" stroke="#D4AF37" stroke-width="0.5" opacity="0.3"/>
-    <path d="M36,38 L24,62 L32,62 L27,82 L42,56 L34,56 Z" fill="url(#shieldGold)"/>
-  </svg>
-  <div>
-    <div style="font-size:9px;color:#D4AF37;letter-spacing:4px;text-transform:uppercase;font-family:Arial,sans-serif;line-height:1.4;">Florida</div>
-    <div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:2px;font-family:Georgia,serif;line-height:1.1;">IMPACT</div>
-    <div style="font-size:9px;color:#D4AF37;letter-spacing:4px;text-transform:uppercase;font-family:Arial,sans-serif;line-height:1.4;">Shield</div>
-  </div>
-</div></a>
-  <div class="nav-motto">Built Strong.&nbsp;&nbsp;&nbsp;Certified Trusted.&nbsp;&nbsp;&nbsp;Hurricane Ready.</div>
-  <a href="#" onclick="Modal.open();return false;" class="btn btn-amber" style="font-size:11px;padding:9px 18px;">Free Quote</a>
-</div>
-<!-- LINKS NAV BAR -->
 <nav class="site-nav" id="siteNav">
-  <a href="/">Home</a>
-  <a href="/pages/impact-windows-miami.html">Miami</a>
-  <a href="/pages/impact-windows-broward.html">Broward</a>
-  <a href="/pages/hurricane-windows-insurance-savings.html">Insurance Savings</a>
-  <a href="/pages/my-safe-florida-home-grants.html">Grants</a>
-  <a href="/pages/financing.html">Financing</a>
-  <a href="/blog/index.html">Blog</a>
-  <a href="/pages/about.html">About Us</a>
-  <a href="/pages/contact.html">Contact</a>
-</nav>
-<button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
-<div class="mobile-nav" id="mobileNav">
-  <a href="/">Home</a>
-  <a href="/pages/impact-windows-miami.html">Miami</a>
-  <a href="/pages/impact-windows-broward.html">Broward</a>
-  <a href="/pages/hurricane-windows-insurance-savings.html">Insurance Savings</a>
-  <a href="/pages/my-safe-florida-home-grants.html">Grants</a>
-  <a href="/pages/financing.html">Financing</a>
-  <a href="/blog/index.html">Blog</a>
-  <a href="/pages/about.html">About Us</a>
-  <a href="/pages/contact.html">Contact</a>
-  <a href="#" onclick="Modal.open();return false;" class="mobile-quote-btn">Book Free Quote &rarr;</a>
-</div>
-Florida Impact Shield</a>
+  <a href="/" class="nav-logo"><div class="nav-logo-icon"><svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Outer shield -->
+  <path d="M21 2L3 9V22C3 31.5 12 39.5 21 41C30 39.5 39 31.5 39 22V9L21 2Z" fill="url(#shieldGrad)" filter="url(#glow)"/>
+  <!-- Inner shield border -->
+  <path d="M21 5L6 11V22C6 30 13.5 37 21 38.5C28.5 37 36 30 36 22V11L21 5Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+  <!-- Lightning bolt -->
+  <path d="M24.5 10L15 23H21.5L18 32L27.5 19H21L24.5 10Z" fill="url(#boltGrad)" filter="url(#glow)"/>
+</svg></div>Florida Impact Shield</a>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
     <li><a href="/pages/impact-windows-miami.html">Miami</a></li>
@@ -107,7 +79,7 @@ Florida Impact Shield</a>
     <a href="#" onclick="Modal.open();return false;" class="nav-cta-btn">Free Quote</a>
   </div>
 </nav>
-<section style="padding:130px 0 60px">
+<section style="padding:140px 0 60px">
 <div class="container">
   <div class="breadcrumb"><a href="/">Home</a> <span>/</span> <span>Hurricane Garage Doors</span></div>
   <div class="article-body">
@@ -271,24 +243,30 @@ Florida Impact Shield</a>
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-  <svg width="32" height="38" viewBox="0 0 60 110" fill="none">
-    <defs>
-      <linearGradient id="fg1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F5E6A3"/>
-        <stop offset="100%" stop-color="#8B6914"/>
-      </linearGradient>
-    </defs>
-    <path d="M8,22 L52,22 L52,72 C52,92 32,104 30,105 C28,104 8,92 8,72 Z" fill="#0A0A0A" stroke="url(#fg1)" stroke-width="2"/>
-    <path d="M36,38 L24,62 L32,62 L27,82 L42,56 L34,56 Z" fill="url(#fg1)"/>
-  </svg>
-  <div>
-    <div style="font-size:13px;font-weight:700;color:#0A0A0A;font-family:Georgia,serif;letter-spacing:1px;">Florida Impact Shield</div>
-    <div style="font-size:10px;font-style:italic;color:#8B6914;font-family:Georgia,serif;">Built Strong. Certified Trusted. Hurricane Ready.</div>
-  </div>
-</div>
+        <a href="/" class="nav-logo" style="display:inline-flex"><div class="nav-logo-icon"><svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Outer shield -->
+  <path d="M21 2L3 9V22C3 31.5 12 39.5 21 41C30 39.5 39 31.5 39 22V9L21 2Z" fill="url(#shieldGrad)" filter="url(#glow)"/>
+  <!-- Inner shield border -->
+  <path d="M21 5L6 11V22C6 30 13.5 37 21 38.5C28.5 37 36 30 36 22V11L21 5Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+  <!-- Lightning bolt -->
+  <path d="M24.5 10L15 23H21.5L18 32L27.5 19H21L24.5 10Z" fill="url(#boltGrad)" filter="url(#glow)"/>
+</svg></div>Florida Impact Shield</a>
         <p class="footer-brand-desc">Florida's premier hurricane impact window and door installation company. Licensed, insured, and My Safe Florida Home approved. Serving all Florida counties since 2018.</p>
-        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
           <span class="badge badge-sky">&#x2B50; 4.9/5.0</span>
           <span class="badge badge-green">&#x2705; Licensed CBC</span>
           <span class="badge badge-amber">&#x1F3DB;&#xFE0F; MSFH Approved</span>
@@ -301,22 +279,19 @@ Florida Impact Shield</a>
           <li><a href="/pages/impact-doors.html">Impact Doors</a></li>
           <li><a href="/pages/sliding-glass-doors.html">Sliding Glass Doors</a></li>
           <li><a href="/pages/hurricane-garage-doors.html">Garage Doors</a></li>
-          <li><a href="/pages/wind-mitigation-inspection.html">Wind Mitigation</a></li>
+          <li><a href="/pages/wind-mitigation-inspection.html">Wind Mitigation Reports</a></li>
           <li><a href="/pages/financing.html">0% Financing</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Locations</div>
         <ul class="footer-links">
-          <li><a href="/pages/impact-windows-miami.html">Miami-Dade</a></li>
-          <li><a href="/pages/impact-windows-broward.html">Broward</a></li>
-          <li><a href="/pages/impact-windows-palm-beach.html">Palm Beach</a></li>
-          <li><a href="/pages/impact-windows-naples.html">Naples</a></li>
-          <li><a href="/pages/impact-windows-tampa.html">Tampa</a></li>
-          <li><a href="/pages/impact-windows-orlando.html">Orlando</a></li>
-          <li><a href="/pages/impact-windows-port-st-lucie.html">Port St. Lucie</a></li>
-          <li><a href="/pages/impact-windows-martin-county.html">Martin County</a></li>
-          <li><a href="/pages/impact-windows-indian-river-county.html">Indian River</a></li>
+          <li><a href="/pages/impact-windows-miami.html">Miami-Dade County</a></li>
+          <li><a href="/pages/impact-windows-broward.html">Broward County</a></li>
+          <li><a href="/pages/impact-windows-palm-beach.html">Palm Beach County</a></li>
+          <li><a href="/pages/impact-windows-naples.html">Naples / Lee County</a></li>
+          <li><a href="/pages/impact-windows-tampa.html">Tampa / Hillsborough</a></li>
+          <li><a href="/pages/impact-windows-orlando.html">Orlando Area</a></li>
         </ul>
       </div>
       <div>
@@ -325,8 +300,7 @@ Florida Impact Shield</a>
           <li><a href="/pages/hurricane-windows-insurance-savings.html">Insurance Savings</a></li>
           <li><a href="/pages/my-safe-florida-home-grants.html">MSFH Grants</a></li>
           <li><a href="/pages/impact-windows-cost.html">Cost Guide 2026</a></li>
-          <li><a href="/pages/faq.html">FAQ</a></li>
-          <li><a href="/blog/index.html">Blog</a></li>
+          <li><a href="/blog/index.html">Blog &amp; News</a></li>
           <li><a href="/pages/about.html">About Us</a></li>
           <li><a href="/pages/contact.html">Contact</a></li>
           <li><a href="/pages/privacy-policy.html">Privacy Policy</a></li>
@@ -337,12 +311,8 @@ Florida Impact Shield</a>
     <hr class="divider">
     <div class="footer-bottom">
       <span>&copy; 2026 Florida Impact Shield. All rights reserved.</span>
-      <span>
-        <a href="/pages/privacy-policy.html" style="color:var(--slate-light)">Privacy</a> &middot;
-        <a href="/pages/terms.html" style="color:var(--slate-light)">Terms</a> &middot;
-        <a href="/pages/faq.html" style="color:var(--slate-light)">FAQ</a> &middot;
-        <a href="/sitemap.xml" style="color:var(--slate-light)">Sitemap</a>
-      </span>
+      
+      <span><a href="/pages/privacy-policy.html" style="color:var(--slate)">Privacy</a> &middot; <a href="/pages/terms.html" style="color:var(--slate)">Terms</a> &middot; <a href="/sitemap.xml" style="color:var(--slate)">Sitemap</a></span>
     </div>
   </div>
 </footer>
