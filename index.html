@@ -50,7 +50,7 @@
 .result-sub{font-size:12px;color:var(--slate-light);margin-top:5px}
 .result-tags{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;outline:none;border:none;padding:0;cursor:pointer;background:linear-gradient(to right,var(--gold) 50%,rgba(100,116,139,.3) 50%)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);border:3px solid var(--navy);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);border:3px solid var(--black);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
 .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--slate);margin-top:5px}
 .trust-bar{background:rgba(15,32,64,.8);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);padding:18px 0}
 .trust-bar-inner{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
@@ -99,7 +99,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 <body>
 
   <div style="display:flex;gap:10px;align-items:center">
-    <button onclick="Modal.open();ExitIntent.hide();" style="background:var(--amber);color:var(--navy);padding:8px 20px;border-radius:6px;font-size:13px;font-weight:700;border:none;cursor:pointer">Get Free Quote</button>
+    <button onclick="Modal.open();ExitIntent.hide();" style="background:var(--amber);color:var(--black);padding:8px 20px;border-radius:6px;font-size:13px;font-weight:700;border:none;cursor:pointer">Get Free Quote</button>
     <button onclick="ExitIntent.hide()" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:20px;cursor:pointer">✕</button>
   </div>
 </div>
@@ -389,7 +389,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <h2>Real Florida homeowners. Real savings.</h2>
   </div>
   <div class="three-col reveal">
-    <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"My insurance went from $11,200 to $6,800 per year. That's $4,400 back in my pocket every single year. The windows paid for themselves faster than I ever thought possible."</p><div class="testimonial-author"><div class="author-avatar">MR</div><div><div class="author-name">Maria R.</div><div class="author-location">Coral Gables, Miami-Dade</div><div class="savings-chip">Saved $4,400/yr</div></div></div></div>
+    </div>
     <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"The MSFH grant covered $9,800 of our install. Florida Impact Shield handled every piece of paperwork. The crew finished 22 windows in 3 days. Absolutely flawless experience."</p><div class="testimonial-author"><div class="author-avatar">DK</div><div><div class="author-name">David K.</div><div class="author-location">Boca Raton, Palm Beach</div><div class="savings-chip">$9,800 grant received</div></div></div></div>
     <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"After Hurricane Ian I swore I'd never board up again. Citizens premium dropped 38%. No more shutters. No more stress every storm season. Best home decision I've made in 20 years."</p><div class="testimonial-author"><div class="author-avatar">JS</div><div><div class="author-name">Jennifer S.</div><div class="author-location">Fort Myers, Lee County</div><div class="savings-chip">Citizens −38%</div></div></div></div>
   </div>
@@ -507,7 +507,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     </div>
     <div class="eva-powered">Powered by Claude AI · Florida Impact Shield © 2026</div>
   </div>
-  <button class="eva-btn" id="evaBtn" onclick="Eva.toggle()" style="padding:0;overflow:hidden;background:linear-gradient(135deg,#0c2a45,#D4AF37);box-shadow:0 0 20px rgba(212,175,55,0.7);"><img src="/assets/images/eva-avatar.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="Eva - Florida Impact Shield AI Assistant"></button>
+  <button class="eva-btn" id="evaBtn" onclick="Eva.toggle()" style="padding:0;overflow:hidden;background:linear-gradient(135deg,#1A1A1A,#D4AF37);box-shadow:0 0 20px rgba(212,175,55,0.7);"><img src="/assets/images/eva-avatar.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="Eva - Florida Impact Shield AI Assistant"></button>
 </div>
 
 <!-- QUOTE MODAL -->
