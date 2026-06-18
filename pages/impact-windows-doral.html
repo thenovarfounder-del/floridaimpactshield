@@ -340,119 +340,120 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<script>
-// Universal form handler - saves ALL leads to Supabase
-const SB_URL = 'https://ehjhsbrcbtqcvmgzjzkm.supabase.co';
-const SB_KEY = 'sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ';
 
-async function saveToSupabase(table, data) {
-  try {
-    const r = await fetch(SB_URL + '/rest/v1/' + table, {
+
+<script>
+(function() {
+  var SB = 'https://ehjhsbrcbtqcvmgzjzkm.supabase.co';
+  var SK = 'sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ';
+
+  function saveLead(data) {
+    return fetch(SB + '/rest/v1/contact_submissions', {
       method: 'POST',
       headers: {
-        'apikey': SB_KEY,
-        'Authorization': 'Bearer ' + SB_KEY,
+        'apikey': SK,
+        'Authorization': 'Bearer ' + SK,
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        name: data.name || '',
+        phone: data.phone || '',
+        email: data.email || '',
+        address: data.address || '',
+        message: data.message || '',
+        source: data.source || window.location.pathname,
+        created_at: new Date().toISOString()
+      })
+    }).then(function(r) {
+      console.log('Lead saved - status:', r.status);
+      return r;
+    }).catch(function(e) {
+      console.log('Save error:', e.message);
     });
-    console.log('Saved to', table, '- status:', r.status);
-    return r.status;
-  } catch(e) {
-    console.log('Save error:', e.message);
-    return 0;
-  }
-}
-
-// Grant page forms
-async function submitGrantForm(pageId) {
-  const first = (document.getElementById('gf-first-' + pageId)||{}).value||'';
-  const last = (document.getElementById('gf-last-' + pageId)||{}).value||'';
-  const phone = (document.getElementById('gf-phone-' + pageId)||{}).value||'';
-  const email = (document.getElementById('gf-email-' + pageId)||{}).value||'';
-  const address = (document.getElementById('gf-address-' + pageId)||{}).value||'';
-  const need = (document.getElementById('gf-need-' + pageId)||{}).value||'';
-
-  if (!first.trim() || !phone.trim() || !email.trim()) {
-    alert('Please fill in your name, phone, and email.');
-    return;
   }
 
-  const btn = document.getElementById('gf-btn-' + pageId);
-  if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
-
-  await saveToSupabase('contact_submissions', {
-    name: (first + ' ' + last).trim(),
-    phone: phone.trim(),
-    email: email.trim(),
-    address: address.trim(),
-    message: 'Grant inquiry: ' + need,
-    source: 'grant-page-' + pageId,
-    created_at: new Date().toISOString()
+  // Override Modal.submit - fixes the Free Quote popup on every page
+  window.addEventListener('load', function() {
+    if (typeof Modal !== 'undefined') {
+      Modal.submit = async function() {
+        var first = (document.getElementById('mf-first') || {}).value || '';
+        var last = (document.getElementById('mf-last') || {}).value || '';
+        var email = (document.getElementById('mf-email') || {}).value || '';
+        var phone = (document.getElementById('mf-phone') || {}).value || '';
+        var county = (document.getElementById('mf-county') || {}).value || '';
+        if (!first.trim() || !email.trim() || !phone.trim()) {
+          alert('Please fill in your name, email and phone number.');
+          return;
+        }
+        await saveLead({
+          name: (first + ' ' + last).trim(),
+          phone: phone,
+          email: email,
+          address: county,
+          message: 'Free quote request',
+          source: 'modal-' + window.location.pathname
+        });
+        var mf = document.getElementById('modal-form');
+        var ms = document.getElementById('modal-success');
+        if (mf) mf.style.display = 'none';
+        if (ms) ms.style.display = 'block';
+      };
+    }
   });
 
-  const formDiv = document.getElementById('gf-form-' + pageId);
-  const successDiv = document.getElementById('gf-success-' + pageId);
-  if (formDiv) formDiv.style.display = 'none';
-  if (successDiv) successDiv.style.display = 'block';
-}
+  // Fix contact page form
+  window.submitContact = async function() {
+    var first = (document.getElementById('cf-first') || {}).value || '';
+    var last = (document.getElementById('cf-last') || {}).value || '';
+    var email = (document.getElementById('cf-email') || {}).value || '';
+    var phone = (document.getElementById('cf-phone') || {}).value || '';
+    var county = (document.getElementById('cf-county') || {}).value || '';
+    var msg = (document.getElementById('cf-msg') || {}).value || '';
+    if (!email.trim()) { alert('Please enter your email.'); return; }
+    var btns = document.querySelectorAll('.btn-amber');
+    btns.forEach(function(b) { b.textContent = 'Sending...'; b.disabled = true; });
+    await saveLead({
+      name: (first + ' ' + last).trim(),
+      phone: phone,
+      email: email,
+      address: county,
+      message: msg,
+      source: 'contact-page'
+    });
+    var success = document.getElementById('contact-success');
+    if (success) success.style.display = 'block';
+    btns.forEach(function(b) { b.style.display = 'none'; });
+  };
 
-// Contact page form
-async function submitContact() {
-  const email = (document.getElementById('cf-email')||{}).value||'';
-  const first = (document.getElementById('cf-first')||{}).value||'';
-  const last = (document.getElementById('cf-last')||{}).value||'';
-  const phone = (document.getElementById('cf-phone')||{}).value||'';
-  const county = (document.getElementById('cf-county')||{}).value||'';
-  const msg = (document.getElementById('cf-msg')||{}).value||'';
-
-  if (!email.trim()) { alert('Please enter your email.'); return; }
-
-  const btn = document.querySelector('.btn-amber');
-  if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
-
-  await saveToSupabase('contact_submissions', {
-    name: (first + ' ' + last).trim(),
-    phone: phone.trim(),
-    email: email.trim(),
-    address: county,
-    message: msg.trim(),
-    source: 'contact-page',
-    created_at: new Date().toISOString()
-  });
-
-  const success = document.getElementById('contact-success');
-  if (success) success.style.display = 'block';
-  if (btn) btn.style.display = 'none';
-}
-
-// Modal quote form
-const _origModalSubmit = typeof Modal !== 'undefined' ? Modal.submit.bind(Modal) : null;
-if (typeof Modal !== 'undefined') {
-  Modal.submit = async function() {
-    const first = (document.getElementById('mf-first')||{}).value||'';
-    const last = (document.getElementById('mf-last')||{}).value||'';
-    const email = (document.getElementById('mf-email')||{}).value||'';
-    const phone = (document.getElementById('mf-phone')||{}).value||'';
-    const county = (document.getElementById('mf-county')||{}).value||'';
-    if (!first.trim() || !email.trim() || !phone.trim()) {
-      alert('Please fill in your name, email, and phone number.');
+  // Fix grant page forms
+  window.submitGrantForm = async function(pageId) {
+    var first = (document.getElementById('gf-first-' + pageId) || {}).value || '';
+    var last = (document.getElementById('gf-last-' + pageId) || {}).value || '';
+    var phone = (document.getElementById('gf-phone-' + pageId) || {}).value || '';
+    var email = (document.getElementById('gf-email-' + pageId) || {}).value || '';
+    var address = (document.getElementById('gf-address-' + pageId) || {}).value || '';
+    var need = (document.getElementById('gf-need-' + pageId) || {}).value || '';
+    if (!first.trim() || !phone.trim() || !email.trim()) {
+      alert('Please fill in your name, phone and email.');
       return;
     }
-    await saveToSupabase('contact_submissions', {
+    var btn = document.getElementById('gf-btn-' + pageId);
+    if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
+    await saveLead({
       name: (first + ' ' + last).trim(),
-      phone: phone.trim(),
-      email: email.trim(),
-      address: county,
-      message: 'Quote request via modal',
-      source: 'modal-quote-' + window.location.pathname,
-      created_at: new Date().toISOString()
+      phone: phone,
+      email: email,
+      address: address,
+      message: 'Grant inquiry: ' + need,
+      source: 'grant-' + pageId
     });
-    document.getElementById('modal-form').style.display = 'none';
-    document.getElementById('modal-success').style.display = 'block';
+    var formDiv = document.getElementById('gf-form-' + pageId);
+    var successDiv = document.getElementById('gf-success-' + pageId);
+    if (formDiv) formDiv.style.display = 'none';
+    if (successDiv) successDiv.style.display = 'block';
   };
-}
+})();
 </script>
 </body>
 </html>
