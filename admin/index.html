@@ -5,312 +5,210 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin | Florida Impact Shield</title>
 <meta name="robots" content="noindex,nofollow">
-<link rel="stylesheet" href="/assets/css/global.css">
 <style>
-body{background:#060E1A;margin:0}
-.admin-nav{background:#0a1628;border-bottom:1px solid rgba(14,165,233,0.2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.admin-body{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 56px)}
-.sidebar{background:#0a1628;border-right:1px solid rgba(14,165,233,0.15);padding:20px 0}
-.sidebar-item{padding:12px 20px;font-size:13px;font-weight:600;color:#64748b;cursor:pointer;display:flex;align-items:center;gap:8px;border-left:3px solid transparent;transition:all .2s}
-.sidebar-item:hover,.sidebar-item.active{color:#fff;background:rgba(14,165,233,0.08);border-left-color:#0ea5e9}
-.main{padding:24px;overflow-y:auto}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.metric{background:#0a1628;border:1px solid rgba(14,165,233,0.2);border-radius:10px;padding:20px}
-.metric-num{font-size:36px;font-weight:800;color:#38bdf8;line-height:1}
-.metric-label{font-size:12px;color:#64748b;margin-top:6px}
-.panel{display:none}
-.panel.active{display:block}
-.card{background:#0a1628;border:1px solid rgba(14,165,233,0.15);border-radius:12px;overflow:hidden}
-.card-header{padding:16px 20px;border-bottom:1px solid rgba(14,165,233,0.1);display:flex;justify-content:space-between;align-items:center}
-.card-title{font-size:15px;font-weight:700;color:#fff}
-table{width:100%;border-collapse:collapse}
-th{padding:10px 14px;text-align:left;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(14,165,233,0.1)}
-td{padding:11px 14px;font-size:13px;color:#94a3b8;border-bottom:1px solid rgba(100,116,139,0.08)}
-tr:last-child td{border-bottom:none}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#060E1A;color:#f0f7ff}
+.lw{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.lb{background:#0a1628;border:1px solid rgba(14,165,233,0.3);border-radius:12px;padding:48px;width:100%;max-width:400px;text-align:center}
+input[type=password]{width:100%;padding:12px 16px;background:rgba(0,0,0,0.4);border:1px solid rgba(14,165,233,0.3);border-radius:6px;font-size:14px;outline:none;margin-bottom:16px;color:#fff}
+.bp{background:#0ea5e9;color:#fff;border:none;border-radius:6px;padding:12px;font-size:15px;font-weight:600;cursor:pointer;width:100%}
+.btn{padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.sc{background:#0a1628;border:1px solid rgba(14,165,233,0.2);border-radius:8px;padding:20px}
+.sv{font-size:32px;font-weight:800;margin-bottom:4px;color:#38bdf8}
+.tw{background:#0a1628;border:1px solid rgba(14,165,233,0.15);border-radius:8px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:11px 14px;text-align:left;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(14,165,233,0.1);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid rgba(100,116,139,0.08);vertical-align:middle;color:#94a3b8}
 tr:hover td{background:rgba(14,165,233,0.03)}
-.btn{background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:#38bdf8;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
-.btn:hover{background:rgba(14,165,233,0.2)}
-.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tag-grant{background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.2)}
-.tag-contact{background:rgba(14,165,233,0.12);color:#38bdf8;border:1px solid rgba(14,165,233,0.2)}
-.empty{text-align:center;padding:48px;color:#475569}
-.loading-row td{text-align:center;padding:48px;color:#475569}
+.empty{padding:48px;text-align:center;color:#475569}
+.ab{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;border:none;margin:0 2px}
+@media(max-width:768px){.stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<div class="admin-nav">
-  <div style="display:flex;align-items:center;gap:10px">
-    <span style="font-size:20px">🛡️</span>
-    <span style="font-size:15px;font-weight:700;color:#fff">Florida Impact Shield — Admin</span>
-  </div>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a href="/" target="_blank" class="btn">View Site</a>
-    <button onclick="loadLeads()" class="btn">↻ Refresh</button>
+
+<div class="lw" id="LW">
+  <div class="lb">
+    <div style="font-size:48px;margin-bottom:16px">🛡️</div>
+    <div style="font-size:22px;font-weight:700;margin-bottom:8px;color:#fff">Florida Impact Shield</div>
+    <div style="font-size:14px;color:#64748b;margin-bottom:24px">Admin Panel</div>
+    <input type="password" id="PW" placeholder="Enter password" onkeydown="if(event.key==='Enter')LGN()">
+    <button class="bp" onclick="LGN()">Access Admin</button>
   </div>
 </div>
 
-<div class="admin-body">
-  <div class="sidebar">
-    <div class="sidebar-item active" onclick="switchPanel('all',this)">📋 All Leads</div>
-    <div class="sidebar-item" onclick="switchPanel('grant',this)">🏛️ Grant Pages</div>
-    <div class="sidebar-item" onclick="switchPanel('contact',this)">📞 Contact Form</div>
+<div id="DW" style="display:none;padding:32px 20px;max-width:1400px;margin:0 auto">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:24px;font-weight:700;color:#fff">Florida Impact Shield — Leads</div>
+      <div style="font-size:14px;color:#64748b;margin-top:4px" id="TC">Loading...</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="/" target="_blank" class="btn" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:#38bdf8;text-decoration:none">View Site</a>
+      <button class="btn" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:#38bdf8" onclick="LOAD()">↻ Refresh</button>
+      <button class="btn" style="background:#0ea5e9;color:#fff" onclick="PALL()">Print All</button>
+      <button class="btn" style="background:none;border:1px solid #475569;color:#64748b" onclick="LGT()">Logout</button>
+    </div>
   </div>
 
-  <div class="main">
-    <div class="metrics">
-      <div class="metric"><div class="metric-num" id="m-total">—</div><div class="metric-label">Total Leads</div></div>
-      <div class="metric"><div class="metric-num" id="m-grant">—</div><div class="metric-label">Grant Inquiries</div></div>
-      <div class="metric"><div class="metric-num" id="m-contact">—</div><div class="metric-label">Contact Forms</div></div>
-      <div class="metric"><div class="metric-num" id="m-today">—</div><div class="metric-label">Today</div></div>
-    </div>
+  <div class="stats">
+    <div class="sc"><div class="sv" id="S1">0</div><div style="font-size:12px;color:#64748b">Total Leads</div></div>
+    <div class="sc"><div class="sv" id="S2" style="color:#4ade80">0</div><div style="font-size:12px;color:#64748b">Grant Inquiries</div></div>
+    <div class="sc"><div class="sv" id="S3" style="color:#f59e0b">0</div><div style="font-size:12px;color:#64748b">Contact Forms</div></div>
+    <div class="sc"><div class="sv" id="S4" style="color:#a78bfa">0</div><div style="font-size:12px;color:#64748b">Today</div></div>
+  </div>
 
-    <div id="panel-all" class="panel active">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">All Leads</div>
-          <button onclick="exportCSV('all')" class="btn">⬇ Export CSV</button>
-        </div>
-        <div style="overflow-x:auto"><table>
-          <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>What They Need</th><th>Source</th><th>Date</th></tr></thead>
-          <tbody id="tbody-all"><tr class="loading-row"><td colspan="7">Loading leads...</td></tr></tbody>
-        </table></div>
-      </div>
-    </div>
+  <div style="display:flex;gap:10px;margin-bottom:16px">
+    <button class="btn" id="B1" onclick="FILT('all',this)" style="background:#0ea5e9;color:#fff">All Leads</button>
+    <button class="btn" id="B2" onclick="FILT('grant',this)" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:#38bdf8">Grant Pages</button>
+    <button class="btn" id="B3" onclick="FILT('contact',this)" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:#38bdf8">Contact Forms</button>
+  </div>
 
-    <div id="panel-grant" class="panel">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🏛️ Grant Page Leads</div>
-          <button onclick="exportCSV('grant')" class="btn">⬇ Export CSV</button>
-        </div>
-        <div style="overflow-x:auto"><table>
-          <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>What They Need</th><th>Source</th><th>Date</th></tr></thead>
-          <tbody id="tbody-grant"><tr class="loading-row"><td colspan="7">Loading...</td></tr></tbody>
-        </table></div>
-      </div>
-    </div>
-
-    <div id="panel-contact" class="panel">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">📞 Contact Form Leads</div>
-          <button onclick="exportCSV('contact')" class="btn">⬇ Export CSV</button>
-        </div>
-        <div style="overflow-x:auto"><table>
-          <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Message</th><th>Source</th><th>Date</th></tr></thead>
-          <tbody id="tbody-contact"><tr class="loading-row"><td colspan="7">Loading...</td></tr></tbody>
-        </table></div>
-      </div>
+  <div class="tw">
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>What They Need</th><th>Source</th><th>Date</th>
+        </tr></thead>
+        <tbody id="TB"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <script>
-let allLeads = [];
-let currentPanel = 'all';
+var PW="FIS2026!";
+var SB="https://ehjhsbrcbtqcvmgzjzkm.supabase.co";
+var SK="sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ";
+var LD=[];
+var CF="all";
 
-function switchPanel(id, el) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
-  el.classList.add('active');
-  currentPanel = id;
-  renderPanel(id);
+function LGN(){
+  if(document.getElementById("PW").value===PW){
+    document.getElementById("LW").style.display="none";
+    document.getElementById("DW").style.display="block";
+    LOAD();
+  } else { alert("Wrong password"); }
 }
 
-function isGrant(l) {
-  return (l.source||'').includes('grant');
+function LGT(){
+  document.getElementById("LW").style.display="flex";
+  document.getElementById("DW").style.display="none";
+  document.getElementById("PW").value="";
+  LD=[];
 }
 
-function rowHtml(l) {
-  const cls = isGrant(l) ? 'tag tag-grant' : 'tag tag-contact';
-  const date = l.created_at ? new Date(l.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
-  return '<tr>' +
-    '<td style="color:#fff;font-weight:600">' + (l.name||'—') + '</td>' +
-    '<td><a href="tel:' + l.phone + '" style="color:#4ade80;font-weight:600">' + (l.phone||'—') + '</a></td>' +
-    '<td><a href="mailto:' + l.email + '" style="color:#38bdf8">' + (l.email||'—') + '</a></td>' +
-    '<td style="font-size:12px">' + (l.address||'—') + '</td>' +
-    '<td style="font-size:12px;max-width:200px">' + (l.message||'—') + '</td>' +
-    '<td><span class="' + cls + '">' + (l.source||'unknown') + '</span></td>' +
-    '<td style="font-size:12px;color:#64748b">' + date + '</td>' +
-    '</tr>';
-}
+async function LOAD(){
+  document.getElementById("TB").innerHTML="<tr><td colspan=7 class=empty>Loading...</td></tr>";
+  document.getElementById("TC").textContent="Loading...";
 
-function renderPanel(type) {
-  let leads = allLeads;
-  if (type === 'grant') leads = allLeads.filter(l => isGrant(l));
-  if (type === 'contact') leads = allLeads.filter(l => !isGrant(l));
+  var h1={"apikey":SK,"Authorization":"Bearer "+SK};
+  var r1=[],r2=[];
 
-  const tbody = document.getElementById('tbody-' + type);
-  if (!tbody) return;
-
-  if (!leads.length) {
-    tbody.innerHTML = '<tr><td colspan="7" class="empty">No leads yet.</td></tr>';
-    return;
-  }
-  tbody.innerHTML = leads.map(rowHtml).join('');
-}
-
-function updateMetrics() {
-  const today = new Date().toDateString();
-  document.getElementById('m-total').textContent = allLeads.length;
-  document.getElementById('m-grant').textContent = allLeads.filter(l => isGrant(l)).length;
-  document.getElementById('m-contact').textContent = allLeads.filter(l => !isGrant(l)).length;
-  document.getElementById('m-today').textContent = allLeads.filter(l => new Date(l.created_at).toDateString() === today).length;
-}
-
-function exportCSV(type) {
-  let leads = allLeads;
-  if (type === 'grant') leads = allLeads.filter(l => isGrant(l));
-  if (type === 'contact') leads = allLeads.filter(l => !isGrant(l));
-  if (!leads.length) { alert('No leads to export.'); return; }
-  const headers = ['Name','Phone','Email','Address','Message','Source','Date'];
-  const rows = leads.map(l => [l.name,l.phone,l.email,l.address,l.message,l.source,l.created_at].map(v => '"'+(v||'')+'"').join(','));
-  const csv = [headers.join(','),...rows].join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'fis-leads-' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
-}
-
-async function loadLeads() {
-  ['all','grant','contact'].forEach(t => {
-    const tb = document.getElementById('tbody-' + t);
-    if (tb) tb.innerHTML = '<tr class="loading-row"><td colspan="7">Loading...</td></tr>';
-  });
-
-  try {
-    const res = await fetch('/api/get-leads');
-    const data = await res.json();
-
-    // Handle both array and object with leads property
-    const leads = Array.isArray(data) ? data : (data.leads || []);
-
-    allLeads = leads;
-    updateMetrics();
-    renderPanel(currentPanel);
-
-  } catch(e) {
-    console.error('Load error:', e);
-    document.getElementById('tbody-all').innerHTML = '<tr><td colspan="7" class="empty">Failed to load: ' + e.message + '</td></tr>';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', loadLeads);
-</script>
-
-<script>
-// Universal form handler - saves ALL leads to Supabase
-const SB_URL = 'https://ehjhsbrcbtqcvmgzjzkm.supabase.co';
-const SB_KEY = 'sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ';
-
-async function saveToSupabase(table, data) {
-  try {
-    const r = await fetch(SB_URL + '/rest/v1/' + table, {
-      method: 'POST',
-      headers: {
-        'apikey': SB_KEY,
-        'Authorization': 'Bearer ' + SB_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(data)
-    });
-    console.log('Saved to', table, '- status:', r.status);
-    return r.status;
-  } catch(e) {
-    console.log('Save error:', e.message);
-    return 0;
-  }
-}
-
-// Grant page forms
-async function submitGrantForm(pageId) {
-  const first = (document.getElementById('gf-first-' + pageId)||{}).value||'';
-  const last = (document.getElementById('gf-last-' + pageId)||{}).value||'';
-  const phone = (document.getElementById('gf-phone-' + pageId)||{}).value||'';
-  const email = (document.getElementById('gf-email-' + pageId)||{}).value||'';
-  const address = (document.getElementById('gf-address-' + pageId)||{}).value||'';
-  const need = (document.getElementById('gf-need-' + pageId)||{}).value||'';
-
-  if (!first.trim() || !phone.trim() || !email.trim()) {
-    alert('Please fill in your name, phone, and email.');
-    return;
-  }
-
-  const btn = document.getElementById('gf-btn-' + pageId);
-  if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
-
-  await saveToSupabase('contact_submissions', {
-    name: (first + ' ' + last).trim(),
-    phone: phone.trim(),
-    email: email.trim(),
-    address: address.trim(),
-    message: 'Grant inquiry: ' + need,
-    source: 'grant-page-' + pageId,
-    created_at: new Date().toISOString()
-  });
-
-  const formDiv = document.getElementById('gf-form-' + pageId);
-  const successDiv = document.getElementById('gf-success-' + pageId);
-  if (formDiv) formDiv.style.display = 'none';
-  if (successDiv) successDiv.style.display = 'block';
-}
-
-// Contact page form
-async function submitContact() {
-  const email = (document.getElementById('cf-email')||{}).value||'';
-  const first = (document.getElementById('cf-first')||{}).value||'';
-  const last = (document.getElementById('cf-last')||{}).value||'';
-  const phone = (document.getElementById('cf-phone')||{}).value||'';
-  const county = (document.getElementById('cf-county')||{}).value||'';
-  const msg = (document.getElementById('cf-msg')||{}).value||'';
-
-  if (!email.trim()) { alert('Please enter your email.'); return; }
-
-  const btn = document.querySelector('.btn-amber');
-  if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
-
-  await saveToSupabase('contact_submissions', {
-    name: (first + ' ' + last).trim(),
-    phone: phone.trim(),
-    email: email.trim(),
-    address: county,
-    message: msg.trim(),
-    source: 'contact-page',
-    created_at: new Date().toISOString()
-  });
-
-  const success = document.getElementById('contact-success');
-  if (success) success.style.display = 'block';
-  if (btn) btn.style.display = 'none';
-}
-
-// Modal quote form
-const _origModalSubmit = typeof Modal !== 'undefined' ? Modal.submit.bind(Modal) : null;
-if (typeof Modal !== 'undefined') {
-  Modal.submit = async function() {
-    const first = (document.getElementById('mf-first')||{}).value||'';
-    const last = (document.getElementById('mf-last')||{}).value||'';
-    const email = (document.getElementById('mf-email')||{}).value||'';
-    const phone = (document.getElementById('mf-phone')||{}).value||'';
-    const county = (document.getElementById('mf-county')||{}).value||'';
-    if (!first.trim() || !email.trim() || !phone.trim()) {
-      alert('Please fill in your name, email, and phone number.');
-      return;
+  try{
+    var res1=await fetch(SB+"/rest/v1/fis_leads?order=created_at.desc&limit=500",{headers:h1});
+    var d1=await res1.json();
+    if(Array.isArray(d1)){
+      r1=d1.map(function(l){return{
+        name:((l.first_name||"")+" "+(l.last_name||"")).trim(),
+        phone:l.phone||"",
+        email:l.email||"",
+        address:"",
+        message:l.message||"",
+        source:l.page||l.type||"contact-form",
+        created_at:l.created_at,
+        is_grant:false
+      };});
     }
-    await saveToSupabase('contact_submissions', {
-      name: (first + ' ' + last).trim(),
-      phone: phone.trim(),
-      email: email.trim(),
-      address: county,
-      message: 'Quote request via modal',
-      source: 'modal-quote-' + window.location.pathname,
-      created_at: new Date().toISOString()
-    });
-    document.getElementById('modal-form').style.display = 'none';
-    document.getElementById('modal-success').style.display = 'block';
-  };
+  }catch(e){console.log("fis_leads error:",e.message);}
+
+  try{
+    var res2=await fetch(SB+"/rest/v1/contact_submissions?order=created_at.desc&limit=500",{headers:h1});
+    var d2=await res2.json();
+    if(Array.isArray(d2)){
+      r2=d2.map(function(l){return{
+        name:l.name||"",
+        phone:l.phone||"",
+        email:l.email||"",
+        address:l.address||"",
+        message:l.message||"",
+        source:l.source||"grant-page",
+        created_at:l.created_at,
+        is_grant:true
+      };});
+    }
+  }catch(e){console.log("contact_submissions error:",e.message);}
+
+  LD=r1.concat(r2).sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});
+  STAT();
+  REND();
+}
+
+function STAT(){
+  var now=new Date();
+  var today=now.toDateString();
+  var grants=LD.filter(function(l){return l.is_grant;});
+  var contacts=LD.filter(function(l){return !l.is_grant;});
+  var todayL=LD.filter(function(l){return new Date(l.created_at).toDateString()===today;});
+  document.getElementById("S1").textContent=LD.length;
+  document.getElementById("S2").textContent=grants.length;
+  document.getElementById("S3").textContent=contacts.length;
+  document.getElementById("S4").textContent=todayL.length;
+  document.getElementById("TC").textContent=LD.length+" total leads";
+}
+
+function ESC(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function REND(){
+  var tb=document.getElementById("TB");
+  var list=LD;
+  if(CF==="grant")list=LD.filter(function(l){return l.is_grant;});
+  if(CF==="contact")list=LD.filter(function(l){return !l.is_grant;});
+
+  if(!list.length){tb.innerHTML="<tr><td colspan=7 class=empty>No leads yet.</td></tr>";return;}
+
+  var h="";
+  for(var i=0;i<list.length;i++){
+    var l=list[i];
+    var dt=l.created_at?new Date(l.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit"}):"—";
+    var sc=l.is_grant?"background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.2)":"background:rgba(14,165,233,0.12);color:#38bdf8;border:1px solid rgba(14,165,233,0.2)";
+    h+="<tr>";
+    h+="<td style="color:#fff;font-weight:600">"+ESC(l.name||"—")+"</td>";
+    h+="<td>"+(l.phone?"<a href="tel:"+l.phone+"" style="color:#4ade80;font-weight:600">"+ESC(l.phone)+"</a>":"—")+"</td>";
+    h+="<td>"+(l.email?"<a href="mailto:"+l.email+"" style="color:#38bdf8">"+ESC(l.email)+"</a>":"—")+"</td>";
+    h+="<td style="font-size:12px">"+ESC(l.address||"—")+"</td>";
+    h+="<td style="font-size:12px;max-width:200px">"+ESC(l.message||"—")+"</td>";
+    h+="<td><span style=""+sc+";font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block">"+ESC(l.source||"unknown")+"</span></td>";
+    h+="<td style="font-size:12px;color:#64748b">"+dt+"</td>";
+    h+="</tr>";
+  }
+  tb.innerHTML=h;
+}
+
+function FILT(type,btn){
+  CF=type;
+  document.querySelectorAll(".btn").forEach(function(b){
+    if(b.id&&b.id.match(/^B/)){
+      b.style.background="rgba(14,165,233,0.1)";
+      b.style.color="#38bdf8";
+    }
+  });
+  btn.style.background="#0ea5e9";
+  btn.style.color="#fff";
+  REND();
+}
+
+function PALL(){
+  var w=window.open("","_blank");
+  w.document.write("<html><head><title>FIS Leads</title><style>body{font-family:Arial;font-size:11px;padding:20px}h1{font-size:16px}table{width:100%;border-collapse:collapse}th{background:#0ea5e9;color:#fff;padding:7px;text-align:left;font-size:10px}td{padding:7px;border-bottom:1px solid #eee;font-size:10px}tr:nth-child(even){background:#f9f9f9}</style></head><body>");
+  w.document.write("<h1>Florida Impact Shield - Leads</h1><p>"+new Date().toLocaleString()+" - "+LD.length+" leads</p>");
+  w.document.write("<table><thead><tr><th>#</th><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Message</th><th>Source</th></tr></thead><tbody>");
+  LD.forEach(function(l,i){
+    w.document.write("<tr><td>"+(i+1)+"</td><td>"+new Date(l.created_at).toLocaleDateString()+"</td><td>"+(l.name||"-")+"</td><td>"+(l.phone||"-")+"</td><td>"+(l.email||"-")+"</td><td>"+(l.address||"-")+"</td><td>"+(l.message||"-")+"</td><td>"+(l.source||"-")+"</td></tr>");
+  });
+  w.document.write("</tbody></table></body></html>");
+  w.document.close();setTimeout(function(){w.print();},400);
 }
 </script>
 </body>
