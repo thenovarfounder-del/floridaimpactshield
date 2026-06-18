@@ -183,13 +183,10 @@ async function loadLeads() {
     const res = await fetch('/api/get-leads');
     const data = await res.json();
 
-    if (!Array.isArray(data)) {
-      console.error('Bad response:', data);
-      document.getElementById('tbody-all').innerHTML = '<tr><td colspan="7" class="empty">Error: ' + JSON.stringify(data) + '</td></tr>';
-      return;
-    }
+    // Handle both array and object with leads property
+    const leads = Array.isArray(data) ? data : (data.leads || []);
 
-    allLeads = data;
+    allLeads = leads;
     updateMetrics();
     renderPanel(currentPanel);
 
