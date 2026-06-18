@@ -174,13 +174,13 @@ function REND(){
     var dt=l.created_at?new Date(l.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit"}):"—";
     var sc=l.is_grant?"background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.2)":"background:rgba(14,165,233,0.12);color:#38bdf8;border:1px solid rgba(14,165,233,0.2)";
     h+="<tr>";
-    h+="<td style="color:#fff;font-weight:600">"+ESC(l.name||"—")+"</td>";
-    h+="<td>"+(l.phone?"<a href="tel:"+l.phone+"" style="color:#4ade80;font-weight:600">"+ESC(l.phone)+"</a>":"—")+"</td>";
-    h+="<td>"+(l.email?"<a href="mailto:"+l.email+"" style="color:#38bdf8">"+ESC(l.email)+"</a>":"—")+"</td>";
-    h+="<td style="font-size:12px">"+ESC(l.address||"—")+"</td>";
-    h+="<td style="font-size:12px;max-width:200px">"+ESC(l.message||"—")+"</td>";
-    h+="<td><span style=""+sc+";font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block">"+ESC(l.source||"unknown")+"</span></td>";
-    h+="<td style="font-size:12px;color:#64748b">"+dt+"</td>";
+    h+='<td style="color:#fff;font-weight:600">'+ESC(l.name||'—')+'</td>';
+    h+='<td>'+(l.phone?'<a href="tel:'+l.phone+'" style="color:#4ade80;font-weight:600">'+ESC(l.phone)+'</a>':'—')+'</td>';
+    h+='<td>'+(l.email?'<a href="mailto:'+l.email+'" style="color:#38bdf8">'+ESC(l.email)+'</a>':'—')+'</td>';
+    h+='<td style="font-size:12px">'+ESC(l.address||'—')+'</td>';
+    h+='<td style="font-size:12px;max-width:200px">'+ESC(l.message||'—')+'</td>';
+    h+='<td><span style="'+sc+';font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block">'+ESC(l.source||'unknown')+'</span></td>';
+    h+='<td style="font-size:12px;color:#64748b">'+dt+'</td>';
     h+="</tr>";
   }
   tb.innerHTML=h;
