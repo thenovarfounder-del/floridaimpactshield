@@ -499,5 +499,39 @@ document.querySelectorAll('.faq-item').forEach(item => {
   };
 })();
 </script>
+
+<script>
+async function FISSave() {
+  var name = ((document.getElementById('mf-first')||{}).value||'') + ' ' + ((document.getElementById('mf-last')||{}).value||'');
+  var email = (document.getElementById('mf-email')||{}).value||'';
+  var phone = (document.getElementById('mf-phone')||{}).value||'';
+  var county = (document.getElementById('mf-county')||{}).value||'';
+  var windows = (document.getElementById('mf-windows')||{}).value||'';
+  var premium = (document.getElementById('mf-premium')||{}).value||'';
+  var notes = (document.getElementById('mf-notes')||{}).value||'';
+  if (!email || !phone) return;
+  try {
+    var r = await fetch('https://ehjhsbrcbtqcvmgzjzkm.supabase.co/rest/v1/contact_submissions', {
+      method: 'POST',
+      headers: {
+        'apikey': 'sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ',
+        'Authorization': 'Bearer sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: name.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
+        address: county,
+        message: 'Quote. Windows:' + windows + ' Premium:' + premium + ' Notes:' + notes,
+        source: 'modal-' + window.location.pathname,
+        created_at: new Date().toISOString()
+      })
+    });
+    console.log('FIS Lead saved - status:', r.status);
+  } catch(e) { console.log('FIS save error:', e.message); }
+}
+</script>
 </body>
 </html>
