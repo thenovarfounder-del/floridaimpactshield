@@ -542,26 +542,21 @@ async function FISSave() {
   var notes = (document.getElementById('mf-notes')||{}).value||'';
   if (!email || !phone) return;
   try {
-    var r = await fetch('https://ehjhsbrcbtqcvmgzjzkm.supabase.co/rest/v1/contact_submissions', {
+    var r = await fetch('/api/save-lead', {
       method: 'POST',
-      headers: {
-        'apikey': 'sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ',
-        'Authorization': 'Bearer sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ',
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: name.trim(),
         phone: phone.trim(),
         email: email.trim(),
         address: county,
         message: 'Quote. Windows:' + windows + ' Premium:' + premium + ' Notes:' + notes,
-        source: 'modal-' + window.location.pathname,
-        created_at: new Date().toISOString()
+        source: 'modal-' + window.location.pathname
       })
     });
-    console.log('FIS Lead saved - status:', r.status);
-  } catch(e) { console.log('FIS save error:', e.message); }
+    var d = await r.json();
+    console.log('Lead saved:', d);
+  } catch(e) { console.log('Save error:', e.message); }
 }
 </script>
 </body>
