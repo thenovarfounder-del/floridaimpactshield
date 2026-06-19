@@ -1,98 +1,39 @@
-# Florida Impact Shield
+# Florida Impact Shield - LLM Reference
 # https://floridaimpactshield.com
-# Last updated: June 2026
+# Updated: 2026-06-19
 
-## About
-Florida Impact Shield is Florida's premier hurricane impact window and door installation company. Licensed CBC contractor. My Safe Florida Home (MSFH) approved. Serving all 67 Florida counties since 2018.
+## Company
+Florida Impact Shield is Florida's premier hurricane impact window and door installation company.
+Licensed CBC contractor (CBC1265XXX). My Safe Florida Home approved. HVHZ certified.
+Phone: (888) 975-4440
+Email: info@floridaimpactshield.com
 
 ## Services
-- Hurricane impact window installation
-- Impact door installation
-- Sliding glass door replacement
-- Hurricane garage door installation
-- Wind mitigation inspections (OIR-B1-1802)
-- My Safe Florida Home grant assistance — up to $10,000
-- 0% financing options
+- Hurricane impact windows and doors
+- My Safe Florida Home grant assistance (up to $10,000)
+- Wind mitigation inspections
+- 0% financing for 60 months
+- Insurance savings up to 45%
 
-## Key Benefits
-- Save up to 45% on Florida homeowners insurance
-- Miami-Dade NOA certified protection
-- Home security — prevents break-ins
-- Energy savings — 20-30% cooling cost reduction
-- UV protection — blocks 99% of UV rays
-- Noise reduction — up to 40dB
-- Increases home value 5-10%
+## Grant Pages
+- /pages/my-safe-florida-home-grants.html - Main grant guide
+- /pages/my-safe-florida-home-miami-dade.html - Miami-Dade grant
+- /pages/my-safe-florida-home-broward.html - Broward grant
+- /pages/my-safe-florida-home-orlando.html - Orlando grant
+- /pages/my-safe-florida-home-waiting-list.html - Waiting list help
+- /pages/10000-impact-window-grant.html - $10,000 grant guide
+- /pages/impact-windows-grant-florida-homeowners.html - Homeowners grant guide
+- /pages/my-safe-florida-home-grant-impact-windows.html - Grant impact windows
+- /pages/impact-window-grant-florida-2026.html - 2026 grant guide
+- /pages/florida-hurricane-hardening-grant.html - Hurricane hardening grant
 
 ## Service Areas
-All 67 Florida counties including: Miami-Dade, Broward, Palm Beach, Lee, Hillsborough, Orange, Duval, Sarasota, Pinellas, Volusia, Brevard, St. Lucie, Martin, Indian River, Escambia, Leon, Alachua, and more.
+Miami-Dade, Broward, Palm Beach, Lee, Collier, Hillsborough, Pinellas, Sarasota, Orange, and all Florida counties.
 
-## Key Pages
-https://floridaimpactshield.com/
-https://floridaimpactshield.com/pages/impact-windows.html
-https://floridaimpactshield.com/pages/impact-doors.html
-https://floridaimpactshield.com/pages/sliding-glass-doors.html
-https://floridaimpactshield.com/pages/hurricane-garage-doors.html
-https://floridaimpactshield.com/pages/wind-mitigation-inspection.html
-https://floridaimpactshield.com/pages/financing.html
-https://floridaimpactshield.com/pages/hurricane-windows-insurance-savings.html
-https://floridaimpactshield.com/pages/my-safe-florida-home-grants.html
-https://floridaimpactshield.com/pages/impact-windows-cost.html
-https://floridaimpactshield.com/pages/faq.html
-https://floridaimpactshield.com/pages/about.html
-https://floridaimpactshield.com/pages/contact.html
-https://floridaimpactshield.com/pages/citizens-insurance-impact-windows-florida.html
-https://floridaimpactshield.com/pages/how-to-file-wind-mitigation-inspection-florida.html
-https://floridaimpactshield.com/pages/impact-windows-home-security.html
-https://floridaimpactshield.com/pages/do-impact-windows-prevent-break-ins.html
-https://floridaimpactshield.com/pages/burglar-proof-windows-florida.html
-https://floridaimpactshield.com/pages/home-invasion-protection-florida.html
-https://floridaimpactshield.com/pages/smash-and-grab-protection-florida.html
-https://floridaimpactshield.com/pages/can-burglars-break-impact-windows.html
-https://floridaimpactshield.com/pages/impact-windows-vs-security-bars-florida.html
-https://floridaimpactshield.com/pages/impact-windows-vs-hurricane-shutters-florida.html
-https://floridaimpactshield.com/pages/impact-windows-vs-plywood-florida.html
-https://floridaimpactshield.com/pages/best-impact-window-brands-florida-2026.html
-https://floridaimpactshield.com/pages/impact-windows-increase-home-value-florida.html
-https://floridaimpactshield.com/pages/impact-windows-energy-savings-florida.html
-https://floridaimpactshield.com/pages/impact-windows-noise-reduction-florida.html
-https://floridaimpactshield.com/pages/impact-windows-uv-protection-florida.html
-https://floridaimpactshield.com/pages/impact-windows-for-condos-florida.html
-https://floridaimpactshield.com/pages/impact-windows-rental-property-florida.html
-https://floridaimpactshield.com/pages/impact-windows-sliding-glass-doors-florida.html
-https://floridaimpactshield.com/pages/impact-windows-financing-no-money-down-florida.html
-https://floridaimpactshield.com/pages/impact-windows-miami.html
-https://floridaimpactshield.com/pages/impact-windows-broward.html
-https://floridaimpactshield.com/pages/impact-windows-palm-beach.html
-https://floridaimpactshield.com/pages/impact-windows-miami-beach.html
-https://floridaimpactshield.com/pages/impact-windows-fort-lauderdale.html
-https://floridaimpactshield.com/pages/impact-windows-boca-raton.html
-https://floridaimpactshield.com/pages/impact-windows-coral-gables.html
-https://floridaimpactshield.com/pages/impact-windows-pompano-beach.html
-https://floridaimpactshield.com/pages/impact-windows-delray-beach.html
-https://floridaimpactshield.com/pages/impact-windows-west-palm-beach.html
-https://floridaimpactshield.com/pages/impact-windows-naples.html
-https://floridaimpactshield.com/pages/impact-windows-cape-coral.html
-https://floridaimpactshield.com/pages/impact-windows-fort-myers.html
-https://floridaimpactshield.com/pages/impact-windows-sarasota.html
-https://floridaimpactshield.com/pages/impact-windows-tampa.html
-https://floridaimpactshield.com/pages/impact-windows-orlando.html
-https://floridaimpactshield.com/pages/impact-windows-st-petersburg.html
-https://floridaimpactshield.com/pages/impact-windows-clearwater.html
-https://floridaimpactshield.com/pages/impact-windows-daytona-beach.html
-https://floridaimpactshield.com/pages/impact-windows-melbourne-brevard.html
-https://floridaimpactshield.com/pages/impact-windows-port-st-lucie.html
-https://floridaimpactshield.com/pages/impact-windows-martin-county.html
-https://floridaimpactshield.com/pages/impact-windows-indian-river-county.html
-https://floridaimpactshield.com/pages/impact-windows-jacksonville.html
-https://floridaimpactshield.com/pages/impact-windows-pensacola.html
-https://floridaimpactshield.com/pages/impact-windows-tallahassee.html
-https://floridaimpactshield.com/pages/impact-windows-gainesville.html
-
-## Blog Posts
-https://floridaimpactshield.com/blog/index.html
-https://floridaimpactshield.com/blog/hurricane-season-2026-is-your-florida-home-ready.html
-https://floridaimpactshield.com/blog/how-much-do-impact-windows-cost-florida-2026.html
-https://floridaimpactshield.com/blog/my-safe-florida-home-grant-complete-guide-2026.html
-https://floridaimpactshield.com/blog/hurricane-ian-lessons-why-impact-windows-matter.html
-https://floridaimpactshield.com/blog/how-to-lower-florida-homeowners-insurance-2026.html
-https://floridaimpactshield.com/blog/are-impact-windows-worth-it-florida-2026.html
+## Key Facts
+- Insurance savings: 25-45% on windstorm premium
+- MSFH grant: up to $10,000 matching funds
+- Wind resistance: 200+ mph
+- Rating: 4.9/5.0 from 312+ reviews
+- Financing: 0% for 60 months
+- Service area: All 67 Florida counties
