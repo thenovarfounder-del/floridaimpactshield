@@ -97,47 +97,29 @@ function LGT() {
 
 async function LOAD() {
   document.getElementById('TB').innerHTML = '<tr><td colspan="7" class="empty">Loading...</td></tr>';
-  var h = { 'apikey': SK, 'Authorization': 'Bearer ' + SK };
-  var r1 = [], r2 = [];
+  document.getElementById('TC').textContent = 'Loading...';
   try {
-    var res1 = await fetch(SB + '/rest/v1/fis_leads?order=created_at.desc&limit=500', { headers: h });
-    var d1 = await res1.json();
-    if (Array.isArray(d1)) {
-      r1 = d1.map(function(l) {
-        return {
-          name: ((l.first_name || '') + ' ' + (l.last_name || '')).trim(),
-          phone: l.phone || '',
-          email: l.email || '',
-          address: '',
-          message: l.message || '',
-          source: l.page || l.type || 'contact-form',
-          created_at: l.created_at,
-          is_grant: false
-        };
-      });
-    }
-  } catch(e) {}
-  try {
-    var res2 = await fetch(SB + '/rest/v1/contact_submissions?order=created_at.desc&limit=500', { headers: h });
-    var d2 = await res2.json();
-    if (Array.isArray(d2)) {
-      r2 = d2.map(function(l) {
-        return {
-          name: l.name || '',
-          phone: l.phone || '',
-          email: l.email || '',
-          address: l.address || '',
-          message: l.message || '',
-          source: l.source || 'grant-page',
-          created_at: l.created_at,
-          is_grant: true
-        };
-      });
-    }
-  } catch(e) {}
-  LD = r1.concat(r2).sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at); });
-  STAT();
-  REND();
+    var r = await fetch('/api/leads');
+    var data = await r.json();
+    if (!Array.isArray(data)) { console.log('Bad data:', data); return; }
+    LD = data.map(function(l) {
+      return {
+        name: ((l.first_name||'') + ' ' + (l.last_name||'')).trim() || l.name || '',
+        phone: l.phone || '',
+        email: l.email || '',
+        address: l.county || l.address || '',
+        message: l.message || '',
+        source: l.page || l.source || '',
+        created_at: l.created_at,
+        is_grant: (l.type||'').includes('grant')
+      };
+    });
+    STAT();
+    REND();
+  } catch(e) {
+    console.log('Load error:', e);
+    document.getElementById('TB').innerHTML = '<tr><td colspan="7" class="empty">Error: ' + e.message + '</td></tr>';
+  }
 }
 
 function STAT() {
