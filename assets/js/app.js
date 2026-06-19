@@ -483,3 +483,32 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = this.scrollHeight + 'px';
   });
 });
+
+
+// Wire Modal.submit to /api/leads
+(function() {
+  var _orig = Modal.submit.bind(Modal);
+  Modal.submit = function() {
+    var first = (document.getElementById('mf-first')||{}).value||'';
+    var last = (document.getElementById('mf-last')||{}).value||'';
+    var email = (document.getElementById('mf-email')||{}).value||'';
+    var phone = (document.getElementById('mf-phone')||{}).value||'';
+    var county = (document.getElementById('mf-county')||{}).value||'';
+    var windows = (document.getElementById('mf-windows')||{}).value||'';
+    var premium = (document.getElementById('mf-premium')||{}).value||'';
+    var notes = (document.getElementById('mf-notes')||{}).value||'';
+    if (!first || !email || !phone) { alert('Please fill in your name, email, and phone number.'); return; }
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: first, lastName: last, email: email, phone: phone,
+        county: county, message: 'Windows: ' + windows + ' Premium: ' + premium + ' Notes: ' + notes,
+        type: 'quote_request', source: 'modal', page: window.location.pathname
+      })
+    }).catch(function(e){ console.log('save error:', e); });
+    LeadDB.save({ firstName: first, lastName: last, email: email, phone: phone, county: county, type: 'quote_request', status: 'new' });
+    document.getElementById('modal-form').style.display = 'none';
+    document.getElementById('modal-success').style.display = 'block';
+  };
+})();

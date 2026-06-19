@@ -380,146 +380,38 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 
 
-<script>
-(function() {
-  var SB = 'https://ehjhsbrcbtqcvmgzjzkm.supabase.co';
-  var SK = 'sb_secret_B9AG8VXwdsj5D5SK7Ebn6g_KRLgiHOZ';
 
-  function saveLead(data) {
-    return fetch(SB + '/rest/v1/contact_submissions', {
-      method: 'POST',
-      headers: {
-        'apikey': SK,
-        'Authorization': 'Bearer ' + SK,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        name: data.name || '',
-        phone: data.phone || '',
-        email: data.email || '',
-        address: data.address || '',
-        message: data.message || '',
-        source: data.source || window.location.pathname,
-        created_at: new Date().toISOString()
-      })
-    }).then(function(r) {
-      console.log('Lead saved - status:', r.status);
-      return r;
-    }).catch(function(e) {
-      console.log('Save error:', e.message);
-    });
-  }
-
-  // Override Modal.submit - fixes the Free Quote popup on every page
-  window.addEventListener('load', function() {
-    if (typeof Modal !== 'undefined') {
-      Modal.submit = async function() {
-        var first = (document.getElementById('mf-first') || {}).value || '';
-        var last = (document.getElementById('mf-last') || {}).value || '';
-        var email = (document.getElementById('mf-email') || {}).value || '';
-        var phone = (document.getElementById('mf-phone') || {}).value || '';
-        var county = (document.getElementById('mf-county') || {}).value || '';
-        if (!first.trim() || !email.trim() || !phone.trim()) {
-          alert('Please fill in your name, email and phone number.');
-          return;
-        }
-        await saveLead({
-          name: (first + ' ' + last).trim(),
-          phone: phone,
-          email: email,
-          address: county,
-          message: 'Free quote request',
-          source: 'modal-' + window.location.pathname
-        });
-        var mf = document.getElementById('modal-form');
-        var ms = document.getElementById('modal-success');
-        if (mf) mf.style.display = 'none';
-        if (ms) ms.style.display = 'block';
-      };
-    }
-  });
-
-  // Fix contact page form
-  window.submitContact = async function() {
-    var first = (document.getElementById('cf-first') || {}).value || '';
-    var last = (document.getElementById('cf-last') || {}).value || '';
-    var email = (document.getElementById('cf-email') || {}).value || '';
-    var phone = (document.getElementById('cf-phone') || {}).value || '';
-    var county = (document.getElementById('cf-county') || {}).value || '';
-    var msg = (document.getElementById('cf-msg') || {}).value || '';
-    if (!email.trim()) { alert('Please enter your email.'); return; }
-    var btns = document.querySelectorAll('.btn-amber');
-    btns.forEach(function(b) { b.textContent = 'Sending...'; b.disabled = true; });
-    await saveLead({
-      name: (first + ' ' + last).trim(),
-      phone: phone,
-      email: email,
-      address: county,
-      message: msg,
-      source: 'contact-page'
-    });
-    var success = document.getElementById('contact-success');
-    if (success) success.style.display = 'block';
-    btns.forEach(function(b) { b.style.display = 'none'; });
-  };
-
-  // Fix grant page forms
-  window.submitGrantForm = async function(pageId) {
-    var first = (document.getElementById('gf-first-' + pageId) || {}).value || '';
-    var last = (document.getElementById('gf-last-' + pageId) || {}).value || '';
-    var phone = (document.getElementById('gf-phone-' + pageId) || {}).value || '';
-    var email = (document.getElementById('gf-email-' + pageId) || {}).value || '';
-    var address = (document.getElementById('gf-address-' + pageId) || {}).value || '';
-    var need = (document.getElementById('gf-need-' + pageId) || {}).value || '';
-    if (!first.trim() || !phone.trim() || !email.trim()) {
-      alert('Please fill in your name, phone and email.');
-      return;
-    }
-    var btn = document.getElementById('gf-btn-' + pageId);
-    if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
-    await saveLead({
-      name: (first + ' ' + last).trim(),
-      phone: phone,
-      email: email,
-      address: address,
-      message: 'Grant inquiry: ' + need,
-      source: 'grant-' + pageId
-    });
-    var formDiv = document.getElementById('gf-form-' + pageId);
-    var successDiv = document.getElementById('gf-success-' + pageId);
-    if (formDiv) formDiv.style.display = 'none';
-    if (successDiv) successDiv.style.display = 'block';
-  };
-})();
-</script>
 
 <script>
-async function FISSave() {
-  var name = ((document.getElementById('mf-first')||{}).value||'') + ' ' + ((document.getElementById('mf-last')||{}).value||'');
-  var email = (document.getElementById('mf-email')||{}).value||'';
-  var phone = (document.getElementById('mf-phone')||{}).value||'';
-  var county = (document.getElementById('mf-county')||{}).value||'';
-  var windows = (document.getElementById('mf-windows')||{}).value||'';
-  var premium = (document.getElementById('mf-premium')||{}).value||'';
-  var notes = (document.getElementById('mf-notes')||{}).value||'';
-  if (!email || !phone) return;
+async function submitGrantForm(pageId) {
+  var first = (document.getElementById('gf-first-' + pageId)||{}).value||'';
+  var last = (document.getElementById('gf-last-' + pageId)||{}).value||'';
+  var phone = (document.getElementById('gf-phone-' + pageId)||{}).value||'';
+  var email = (document.getElementById('gf-email-' + pageId)||{}).value||'';
+  var address = (document.getElementById('gf-address-' + pageId)||{}).value||'';
+  var need = (document.getElementById('gf-need-' + pageId)||{}).value||'';
+  if (!first.trim() || !phone.trim() || !email.trim()) { alert('Please fill in your name, phone, and email.'); return; }
+  var btn = document.getElementById('gf-btn-' + pageId);
+  if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
   try {
-    var r = await fetch('/api/save-lead', {
+    await fetch('/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: name.trim(),
-        phone: phone.trim(),
-        email: email.trim(),
-        address: county,
-        message: 'Quote. Windows:' + windows + ' Premium:' + premium + ' Notes:' + notes,
-        source: 'modal-' + window.location.pathname
+        firstName: first, lastName: last,
+        email: email, phone: phone,
+        county: address,
+        message: 'Grant inquiry: ' + need,
+        type: 'grant_inquiry',
+        source: 'grant-page-' + pageId,
+        page: window.location.pathname
       })
     });
-    var d = await r.json();
-    console.log('Lead saved:', d);
-  } catch(e) { console.log('Save error:', e.message); }
+  } catch(e) { console.log('Error:', e); }
+  var formDiv = document.getElementById('gf-form-' + pageId);
+  var successDiv = document.getElementById('gf-success-' + pageId);
+  if (formDiv) formDiv.style.display = 'none';
+  if (successDiv) successDiv.style.display = 'block';
 }
 </script>
 </body>
