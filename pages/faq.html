@@ -467,6 +467,9 @@ async function FISSave() {
   var notes = (document.getElementById('mf-notes')||{}).value||'';
   if (!email || !phone) return;
   try {
+    await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({access_key:'0eb8fd14-c890-4a80-972a-37d45b597d6f',subject:'FIS LEAD - Quote Request',from_name:'Florida Impact Shield Leads',name:name.trim(),email:email.trim(),phone:phone.trim(),page:window.location.pathname})});
+  } catch(e) {}
+  try {
     var r = await fetch('/api/save-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -484,5 +487,5 @@ async function FISSave() {
   } catch(e) { console.log('Save error:', e.message); }
 }
 </script>
-</body>
+<!-- FIS-QUOTE-CTA --><a href="/free-quote.html" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fbbf24;color:#0f172a;text-align:center;font-family:Arial,sans-serif;font-weight:900;font-size:18px;padding:15px;text-decoration:none;box-shadow:0 -6px 20px rgba(0,0,0,.3)">GET MY FREE QUOTE &rarr;</a><div style="height:60px"></div></body>
 </html>

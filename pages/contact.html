@@ -157,7 +157,7 @@
         <label style="display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--slate);margin-bottom:12px;cursor:pointer">
           <input type="checkbox" checked style="margin-top:2px"> I consent to be contacted. <a href="/pages/privacy-policy.html" style="color:var(--sky-light)">Privacy Policy</a>.
         </label>
-        <button class="btn btn-amber" style="width:100%;justify-content:center;font-size:14px;padding:12px" onclick="submitContactForm()">Schedule Free Quote &rarr;</button>
+        <button class="btn btn-amber" style="width:100%;justify-content:center;font-size:14px;padding:12px" onclick="submitContact()">Schedule Free Quote &rarr;</button>
       </div>
 
       <div id="cf-success" style="display:none;text-align:center;padding:32px 0">
@@ -171,7 +171,7 @@
 </div>
 </section>
 
-<div class="modal-overlay" id="quoteModal"><div class="modal-box"><button class="modal-close" onclick="Modal.close()">&#x2715;</button><div id="modal-form"><h2 style="font-size:22px;margin-bottom:6px">Book Free Quote</h2><p style="font-size:13px;margin-bottom:22px">Free in-home estimate within 48 hours.</p><div class="form-row"><div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="mf-first" type="text"></div><div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="mf-last" type="text"></div></div><div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="mf-email" type="email"></div><div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="mf-phone" type="tel"></div><div class="form-group"><label class="form-label">County</label><select class="form-select" id="mf-county"><option>Miami-Dade</option><option>Broward</option><option>Palm Beach</option><option>Lee</option><option>Hillsborough</option><option>Other</option></select></div><label style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--slate-light);margin-bottom:14px;cursor:pointer"><input type="checkbox" checked style="margin-top:1px"> I consent to be contacted. <a href="/pages/privacy-policy.html" style="color:var(--sky-light)">Privacy Policy</a>.</label><button class="btn btn-amber" style="width:100%;justify-content:center" onclick="FISSave();Modal.submit()">Schedule Free Quote &rarr;</button></div><div id="modal-success" style="display:none;text-align:center;padding:24px 0"><div style="font-size:48px;margin-bottom:12px">&#x2705;</div><h3 style="font-family:var(--font-display);font-size:20px;margin-bottom:8px">You're booked!</h3><p style="font-size:13px">We'll call within 2 hours to confirm.</p></div></div></div>
+<div class="modal-overlay" id="quoteModal"><div class="modal-box"><button class="modal-close" onclick="Modal.close()">&#x2715;</button><div id="modal-form"><h2 style="font-size:22px;margin-bottom:6px">Book Free Quote</h2><p style="font-size:13px;margin-bottom:22px">Free in-home estimate within 48 hours.</p><div class="form-row"><div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="mf-first" type="text"></div><div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="mf-last" type="text"></div></div><div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="mf-email" type="email"></div><div class="form-group"><label class="form-label">Phone *</label><input class="form-input" id="mf-phone" type="tel"></div><div class="form-group"><label class="form-label">County</label><select class="form-select" id="mf-county"><option>Miami-Dade</option><option>Broward</option><option>Palm Beach</option><option>Lee</option><option>Hillsborough</option><option>Other</option></select></div><label style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--slate-light);margin-bottom:14px;cursor:pointer"><input type="checkbox" checked style="margin-top:1px"> I consent to be contacted. <a href="/pages/privacy-policy.html" style="color:var(--sky-light)">Privacy Policy</a>.</label><button class="btn btn-amber" style="width:100%;justify-content:center" onclick="submitContact()">Schedule Free Quote &rarr;</button></div><div id="modal-success" style="display:none;text-align:center;padding:24px 0"><div style="font-size:48px;margin-bottom:12px">&#x2705;</div><h3 style="font-family:var(--font-display);font-size:20px;margin-bottom:8px">You're booked!</h3><p style="font-size:13px">We'll call within 2 hours to confirm.</p></div></div></div>
 
 <footer class="site-footer">
   <div class="container">
@@ -250,6 +250,7 @@ async function submitContact() {
   var btn = event.target;
   btn.textContent = 'Sending...'; btn.disabled = true;
   try {
+    await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ access_key:'0eb8fd14-c890-4a80-972a-37d45b597d6f', subject:'FIS LEAD - Contact Page', from_name:'Florida Impact Shield Leads', name:(first+' '+last).trim(), email:email, phone:phone||'none', county:county||'none', message:msg||'none', page:'contact.html' }) });
     await fetch('/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -261,11 +262,19 @@ async function submitContact() {
       })
     });
   } catch(e) { console.log('Error:', e); }
-  var success = document.getElementById('contact-success');
+  var success = document.getElementById('cf-success');
   if (success) success.style.display = 'block';
   btn.style.display = 'none';
 }
+
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const ham = document.getElementById('hamburger');
+  if (!nav || !ham) return;
+  nav.classList.toggle('open');
+  ham.classList.toggle('open');
+}
 </script>
-</body>
+<!-- FIS-QUOTE-CTA --><a href="/free-quote.html" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fbbf24;color:#0f172a;text-align:center;font-family:Arial,sans-serif;font-weight:900;font-size:18px;padding:15px;text-decoration:none;box-shadow:0 -6px 20px rgba(0,0,0,.3)">GET MY FREE QUOTE &rarr;</a><div style="height:60px"></div></body>
 </html>f i x  
  

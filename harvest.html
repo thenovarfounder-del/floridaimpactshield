@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V3390MPTVC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-V3390MPTVC');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Harvesting Command Center | Florida Impact Shield</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0b1626;color:#e8eef5;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:20px}
+h1{font-size:23px;color:#fff;margin-bottom:4px}
+.sub{color:#8fa3b8;font-size:14px;margin-bottom:20px}
+.card{background:#152740;border:1px solid #24405f;border-radius:14px;padding:20px;margin-bottom:18px}
+.card h2{font-size:16px;color:#fbbf24;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card .desc{font-size:13px;color:#8fa3b8;margin-bottom:14px}
+/* stats */
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.stat{background:#152740;border:1px solid #24405f;border-radius:12px;padding:12px 16px;flex:1;min-width:110px;text-align:center}
+.stat .n{font-size:24px;font-weight:800;color:#fbbf24}
+.stat .l{font-size:11px;color:#8fa3b8;text-transform:uppercase;letter-spacing:.5px}
+.stat.grn .n{color:#4ade80}
+.stat.streak .n{color:#f472b6}
+/* search launcher */
+.hookgroup{margin-bottom:16px}
+.hookgroup h3{font-size:14px;color:#cbd5e1;margin-bottom:8px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+.searchbtn{background:#0f1f36;border:1px solid #2c4a6e;color:#cfe0f2;border-radius:9px;padding:9px 14px;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block;transition:.15s}
+.searchbtn:hover{background:#1a3554;border-color:#3b5f8a}
+.searchbtn.reddit{border-color:#ff4500aa}
+.searchbtn.fb{border-color:#1877f2aa}
+.searchbtn.nd{border-color:#00b246aa}
+.launchall{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1203;font-weight:800;border:none;padding:10px 18px;border-radius:9px;cursor:pointer;font-size:13px;margin-top:6px}
+/* AI generator */
+textarea{width:100%;background:#0f1f36;border:1px solid #2c4a6e;color:#e8eef5;border-radius:9px;padding:12px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px}
+.airow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+select{background:#0f1f36;border:1px solid #2c4a6e;color:#e8eef5;border-radius:9px;padding:10px 12px;font-size:13px}
+.genbtn{background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#fff;font-weight:800;border:none;padding:11px 20px;border-radius:9px;cursor:pointer;font-size:14px}
+.genbtn:disabled{opacity:.5}
+.output{background:#0d2137;border:1px solid #2c4a6e;border-radius:9px;padding:14px;margin-top:12px;font-size:14px;white-space:pre-wrap;display:none;color:#e8f2ff}
+.copybtn{background:#1a3554;border:1px solid #3b5f8a;color:#cfe0f2;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer;margin-top:10px}
+/* log */
+.logform{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.logform input,.logform select{background:#0f1f36;border:1px solid #2c4a6e;color:#e8eef5;border-radius:8px;padding:9px 11px;font-size:13px}
+.logform input{flex:1;min-width:120px}
+.logadd{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1203;font-weight:800;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-size:13px}
+.logitem{background:#0f1f36;border:1px solid #24405f;border-radius:9px;padding:11px 13px;margin-bottom:8px;font-size:13px;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.logitem .meta{color:#9fb3c8}
+.logitem .plat{font-size:10px;padding:2px 7px;border-radius:99px;background:#1e3a52;color:#7dd3fc;margin-right:6px}
+.logstage{display:flex;gap:5px}
+.ls{font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid #2c4a6e;background:#0b1626;color:#9fb3c8;cursor:pointer}
+.ls.on{color:#1a1203;font-weight:700;border-color:transparent}
+.ls.on.found{background:#94a3b8}.ls.on.replied{background:#60a5fa}.ls.on.dm{background:#fbbf24}.ls.on.lead{background:#4ade80}
+.del{color:#f87171;cursor:pointer;font-size:16px;background:none;border:none}
+.empty{color:#8fa3b8;text-align:center;padding:24px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎯 Harvesting Command Center</h1>
+  <div class="sub">Your daily 10-minute lead hunt: launch searches → find homeowners asking for help → generate a reply → log it. All free, all safe.</div>
+
+  <div class="stats">
+    <div class="stat"><div class="n" id="s-found">0</div><div class="l">Posts Found</div></div>
+    <div class="stat"><div class="n" id="s-replied">0</div><div class="l">Replies Sent</div></div>
+    <div class="stat grn"><div class="n" id="s-leads">0</div><div class="l">Leads Captured</div></div>
+    <div class="stat streak"><div class="n" id="s-streak">0</div><div class="l">Day Streak</div></div>
+  </div>
+
+  <!-- SEARCH LAUNCHER -->
+  <div class="card">
+    <h2>🚀 One-Click Search Launcher</h2>
+    <div class="desc">Click a hook to open pre-built searches in new tabs. Sort results by "most recent" and look for homeowners asking questions.</div>
+
+    <div class="hookgroup">
+      <h3>💰 Grant Hunters (easiest to help)</h3>
+      <div class="btnrow" id="grp-grant"></div>
+    </div>
+    <div class="hookgroup">
+      <h3>📉 Insurance Pain (biggest pool)</h3>
+      <div class="btnrow" id="grp-insurance"></div>
+    </div>
+    <div class="hookgroup">
+      <h3>🔨 Company Hunters (hottest — ready to buy)</h3>
+      <div class="btnrow" id="grp-company"></div>
+    </div>
+    <button class="launchall" onclick="launchDaily()">⚡ Launch My Daily Hunt (opens top 6)</button>
+  </div>
+
+  <!-- AI REPLY GENERATOR -->
+  <div class="card">
+    <h2>✍️ Smart Reply Picker</h2>
+    <div class="desc">Pick the angle + platform, click Get Reply, and get an instant proven reply with your link built in. It rotates variants so you never paste the same thing twice.</div>
+    <textarea id="post-input" placeholder="Paste the homeowner's post here... e.g. 'Anyone know a good impact window company in Broward? My insurance is killing me.'"></textarea>
+    <div class="airow">
+      <select id="angle">
+        <option value="company">They're asking for a company recommendation</option>
+        <option value="grant">They're asking about the grant / free money</option>
+        <option value="insurance">They're venting about insurance costs</option>
+        <option value="general">General question about impact windows</option>
+      </select>
+      <select id="platform-ai">
+        <option value="facebook">Facebook group</option>
+        <option value="nextdoor">Nextdoor</option>
+        <option value="reddit">Reddit</option>
+      </select>
+      <button class="genbtn" id="genbtn" onclick="generateReply()">Get Reply →</button>
+    </div>
+    <div class="output" id="ai-output"></div>
+    <button class="copybtn" id="copybtn" style="display:none" onclick="copyReply()">📋 Copy Reply</button>
+  </div>
+
+  <!-- TRACKING LOG -->
+  <div class="card">
+    <h2>📋 Today's Harvest Log</h2>
+    <div class="desc">Log each homeowner you find and track them: Found → Replied → DM'd → Lead. Data saves in your browser.</div>
+    <div class="logform">
+      <input type="text" id="log-name" placeholder="Name / username">
+      <select id="log-plat"><option>Facebook</option><option>Nextdoor</option><option>Reddit</option></select>
+      <input type="text" id="log-note" placeholder="What they asked / link">
+      <button class="logadd" onclick="addLog()">+ Log Post</button>
+    </div>
+    <div id="loglist"></div>
+  </div>
+</div>
+<script>
+var SEARCHES = {
+  grant: [
+    { label:'FB: My Safe Florida Home', plat:'fb', url:'https://www.facebook.com/search/posts?q=my%20safe%20florida%20home%20grant' },
+    { label:'FB: $10000 window grant', plat:'fb', url:'https://www.facebook.com/search/posts?q=10000%20window%20grant%20florida' },
+    { label:'Reddit: Florida grant', plat:'reddit', url:'https://www.reddit.com/search/?q=my%20safe%20florida%20home%20grant&sort=new' },
+    { label:'Nextdoor', plat:'nd', url:'https://nextdoor.com/search/posts/?query=impact%20windows%20grant' }
+  ],
+  insurance: [
+    { label:'FB: insurance went up', plat:'fb', url:'https://www.facebook.com/search/posts?q=florida%20homeowners%20insurance%20went%20up' },
+    { label:'FB: wind mitigation', plat:'fb', url:'https://www.facebook.com/search/posts?q=wind%20mitigation%20florida%20insurance' },
+    { label:'Reddit: FL insurance', plat:'reddit', url:'https://www.reddit.com/search/?q=florida%20homeowners%20insurance%20impact%20windows&sort=new' },
+    { label:'Nextdoor', plat:'nd', url:'https://nextdoor.com/search/posts/?query=homeowners%20insurance%20windows' }
+  ],
+  company: [
+    { label:'FB: impact window recommend', plat:'fb', url:'https://www.facebook.com/search/posts?q=impact%20windows%20recommendation%20florida' },
+    { label:'FB: who did your windows', plat:'fb', url:'https://www.facebook.com/search/posts?q=who%20did%20your%20impact%20windows' },
+    { label:'Reddit: window company', plat:'reddit', url:'https://www.reddit.com/search/?q=impact%20window%20company%20florida&sort=new' },
+    { label:'Nextdoor: recommend', plat:'nd', url:'https://nextdoor.com/search/posts/?query=impact%20window%20company' }
+  ]
+};
+
+function renderSearches(){
+  ['grant','insurance','company'].forEach(function(g){
+    var el = document.getElementById('grp-'+g);
+    el.innerHTML = SEARCHES[g].map(function(s){
+      return '<a class="searchbtn '+s.plat+'" href="'+s.url+'" target="_blank" rel="noopener" onclick="bumpFound()">'+s.label+'</a>';
+    }).join('');
+  });
+}
+function launchDaily(){
+  var picks = [SEARCHES.grant[0], SEARCHES.grant[2], SEARCHES.insurance[0], SEARCHES.insurance[2], SEARCHES.company[0], SEARCHES.company[2]];
+  picks.forEach(function(p){ window.open(p.url, '_blank', 'noopener'); });
+  markStreak();
+}
+function getStats(){ try { return JSON.parse(localStorage.getItem('fis_harvest_stats')||'{}'); } catch(e){ return {}; } }
+function saveStats(o){ localStorage.setItem('fis_harvest_stats', JSON.stringify(o)); }
+function bumpFound(){ }
+function markStreak(){
+  var st = getStats();
+  var today = new Date().toDateString();
+  if (st.lastDay !== today) {
+    var yest = new Date(Date.now()-86400000).toDateString();
+    st.streak = (st.lastDay === yest) ? (st.streak||0)+1 : 1;
+    st.lastDay = today;
+    saveStats(st);
+    renderStats();
+  }
+}
+var TEMPLATES = {
+  company: [
+    "Happy to help. One honest tip before you pick anyone: make sure whoever you use pulls a permit and the windows carry a Miami-Dade NOA (that is what gets you the insurance discount and passes inspection). Also get your wind-mitigation inspection done after install or the discount will not apply automatically. If it helps, there is a free report that shows your potential insurance savings plus whether you qualify for the $10K state grant: LINK. Good luck either way.",
+    "A couple things worth knowing when shopping impact windows: verify the company handles the permit AND the wind-mitigation paperwork, since that is what actually unlocks your insurance discount (a lot of people miss that). You may also qualify for the $10,000 My Safe Florida Home grant. There is a free eligibility and savings report here if you want the numbers first: LINK.",
+    "Before you get quotes, one tip that saves people money: the insurance discount only kicks in if you file a wind-mitigation inspection after install, so pick a company that handles that for you. You might also qualify for grant money toward the project. Free report that checks both here: LINK, no cost, no obligation."
+  ],
+  grant: [
+    "The program you are thinking of is My Safe Florida Home. It is real and currently funded. Quick honest heads-up: it is a matching grant (state pays $2 for every $1 you put in, up to $10K), first-come-first-served, and your home generally needs a homestead exemption to qualify. There is a free eligibility report that walks you through whether your home qualifies: LINK. You may qualify, worth checking before funding runs low.",
+    "Yes, the $10,000 grant is real, it is the My Safe Florida Home program. It is a 2:1 match (you put in $5K, state adds up to $10K toward hardening like impact windows), first-come-first-served each cycle. Homestead exemption is usually required. If you want to see if your home may qualify, there is a free report here: LINK.",
+    "That grant is legit and currently funded, but it moves fast when it reopens. It is a matching program up to $10,000 for impact windows and other hardening, and you generally need a homestead exemption. Never a guarantee, but you may qualify. This free report checks your eligibility plus your insurance savings: LINK."
+  ],
+  insurance: [
+    "You are not alone, South Florida premiums have been brutal. One thing a lot of people miss: if you add impact windows and file a wind-mitigation inspection with your carrier, Florida law requires them to give you a wind credit, often 10-40% off the wind portion. Older homes get hit hardest. There is a free report that estimates your specific savings plus grant eligibility if you want the numbers: LINK.",
+    "Feeling that pain too, insurance in FL is rough right now. Worth knowing: impact windows plus a wind-mitigation inspection can unlock a state-required wind credit that meaningfully cuts your premium, and you may qualify for a $10K grant to help pay for them. Free savings and eligibility report here if useful: LINK.",
+    "The premium jumps have been rough statewide. The single biggest lever most homeowners have is impact windows plus a wind-mitigation inspection, which unlocks a wind credit your insurer is required to apply. You may also qualify for grant money toward it. Here is a free report that runs your savings estimate: LINK."
+  ],
+  general: [
+    "Good question. The short version: impact windows protect against storms AND unlock insurance discounts (via a wind-mitigation inspection), and you may qualify for up to $10,000 in state grant money to help pay for them. If you want your specific numbers, there is a free savings and grant eligibility report here: LINK. Happy to help if you have other questions.",
+    "Happy to help with that. The two big benefits people care about are storm protection and the insurance savings (which come through a wind-mitigation credit). Plus you may qualify for the $10K My Safe Florida Home grant. Free report that checks your eligibility and savings: LINK.",
+    "From what I have seen, the biggest things to know are: impact windows lower your insurance through a wind-mitigation credit, and grant money (up to $10K) may be available to help. Worth checking your specifics, there is a free no-cost report here: LINK."
+  ]
+};
+var pickIndex = {};
+function generateReply(){
+  var angle = document.getElementById('angle').value;
+  var platform = document.getElementById('platform-ai').value;
+  var out = document.getElementById('ai-output');
+  var arr = TEMPLATES[angle] || TEMPLATES.general;
+  pickIndex[angle] = (pickIndex[angle]==null) ? 0 : (pickIndex[angle]+1) % arr.length;
+  var text = arr[pickIndex[angle]];
+  var link = 'floridaimpactshield.com/pages/free-savings-grant-report.html';
+  if (platform === 'facebook') { text = text.replace('LINK', link + " (or DM me and I will send it if the group blocks links)"); }
+  else { text = text.replace('LINK', link); }
+  out.style.display='block';
+  out.textContent = text;
+  document.getElementById('copybtn').style.display='inline-block';
+}
+
+function copyReply(){
+  var t = document.getElementById('ai-output').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copybtn'); b.textContent='✓ Copied!'; setTimeout(function(){b.textContent='📋 Copy Reply';},1500);
+  });
+}
+var STAGES = [['found','Found'],['replied','Replied'],['dm','DM\'d'],['lead','Lead']];
+function getLog(){ try { return JSON.parse(localStorage.getItem('fis_harvest_log')||'[]'); } catch(e){ return []; } }
+function saveLog(a){ localStorage.setItem('fis_harvest_log', JSON.stringify(a)); }
+function addLog(){
+  var name=(document.getElementById('log-name').value||'').trim();
+  if(!name){ document.getElementById('log-name').focus(); return; }
+  var plat=document.getElementById('log-plat').value;
+  var note=(document.getElementById('log-note').value||'').trim();
+  var log=getLog();
+  log.unshift({ id:Date.now(), name:name, plat:plat, note:note, stage:'found' });
+  saveLog(log);
+  document.getElementById('log-name').value=''; document.getElementById('log-note').value='';
+  renderLog(); renderStats(); markStreak();
+}
+function setLogStage(id, stage){
+  var log=getLog();
+  var it=log.find(function(x){return x.id===id;});
+  if(it) it.stage=stage;
+  saveLog(log); renderLog(); renderStats();
+}
+function delLog(id){
+  saveLog(getLog().filter(function(x){return x.id!==id;}));
+  renderLog(); renderStats();
+}
+function renderLog(){
+  var log=getLog();
+  var el=document.getElementById('loglist');
+  if(!log.length){ el.innerHTML='<div class="empty">No posts logged yet today. Launch a search, find a homeowner asking for help, and log them here.</div>'; return; }
+  el.innerHTML = log.map(function(it){
+    var stages = STAGES.map(function(s){
+      return '<button class="ls '+(it.stage===s[0]?'on '+s[0]:'')+'" onclick="setLogStage('+it.id+',\''+s[0]+'\')">'+s[1]+'</button>';
+    }).join('');
+    return '<div class="logitem"><div><span class="plat">'+it.plat+'</span><b>'+esc(it.name)+'</b>'+(it.note?'<div class="meta">'+esc(it.note)+'</div>':'')+'</div>'+
+      '<div class="logstage">'+stages+'</div>'+
+      '<button class="del" onclick="delLog('+it.id+')">&times;</button></div>';
+  }).join('');
+}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function renderStats(){
+  var log=getLog();
+  var found=log.length;
+  var replied=log.filter(function(x){return x.stage==='replied'||x.stage==='dm'||x.stage==='lead';}).length;
+  var leads=log.filter(function(x){return x.stage==='lead';}).length;
+  document.getElementById('s-found').textContent=found;
+  document.getElementById('s-replied').textContent=replied;
+  document.getElementById('s-leads').textContent=leads;
+  document.getElementById('s-streak').textContent=(getStats().streak||0);
+}
+renderSearches(); renderLog(); renderStats();
+</script>
+</body>
+</html>

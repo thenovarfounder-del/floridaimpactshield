@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V3390MPTVC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-V3390MPTVC');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Lead Tracker | Florida Impact Shield</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0f1b2d;color:#e8eef5}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+.top{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.top h1{font-size:22px;color:#fff}
+.stats{display:flex;gap:12px;flex-wrap:wrap}
+.stat{background:#16273d;border:1px solid #23374f;border-radius:12px;padding:12px 18px;min-width:120px}
+.stat .n{font-size:22px;font-weight:800;color:#fbbf24}
+.stat .l{font-size:11px;color:#8fa3b8;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.stat.money .n{color:#4ade80}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.bar button,.bar select,.bar input{padding:10px 14px;border:1px solid #2a3f5a;background:#16273d;color:#e8eef5;border-radius:9px;font-size:14px;cursor:pointer}
+.bar input{flex:1;min-width:180px;cursor:text}
+.bar .add{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1203;font-weight:800;border:none}
+.lead{background:#16273d;border:1px solid #23374f;border-radius:12px;padding:16px;margin-bottom:12px}
+.lead-name{font-size:17px;font-weight:700;color:#fff}
+.src{background:#1e3a52;color:#7dd3fc;font-size:10px;padding:2px 8px;border-radius:99px;margin-left:6px}
+.lead-meta{font-size:13px;color:#9fb3c8;margin-top:5px;line-height:1.7}
+.lead-meta a{color:#60a5fa;text-decoration:none}
+.stage-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.sb{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid #2a3f5a;background:#0f1b2d;color:#9fb3c8;cursor:pointer;font-weight:600}
+.sb.on{color:#1a1203;border-color:transparent}
+.on.new{background:#94a3b8}.on.called{background:#60a5fa}.on.appt{background:#fbbf24}.on.closed{background:#4ade80}.on.paid{background:#a78bfa}
+.extra{margin-top:12px;display:none;gap:10px;flex-wrap:wrap;align-items:center;border-top:1px solid #23374f;padding-top:12px}
+.extra.show{display:flex}
+.extra label{font-size:12px;color:#8fa3b8}
+.extra input{padding:8px 10px;border:1px solid #2a3f5a;background:#0f1b2d;color:#fff;border-radius:7px;font-size:13px;width:100px}
+.comm{font-size:14px;font-weight:800;color:#4ade80}
+.notes{width:100%;margin-top:10px;padding:9px 12px;border:1px solid #2a3f5a;background:#0f1b2d;color:#e8eef5;border-radius:8px;font-size:13px;min-height:36px}
+.empty{text-align:center;color:#8fa3b8;padding:50px}
+</style></head><body>
+<div class="wrap">
+<div class="top"><h1>Lead Tracker</h1><div class="stats">
+<div class="stat"><div class="n" id="s-total">0</div><div class="l">Total</div></div>
+<div class="stat"><div class="n" id="s-appt">0</div><div class="l">Appointments</div></div>
+<div class="stat"><div class="n" id="s-closed">0</div><div class="l">Closed</div></div>
+<div class="stat money"><div class="n" id="s-owed">$0</div><div class="l">Owed</div></div>
+<div class="stat money"><div class="n" id="s-paid">$0</div><div class="l">Paid</div></div>
+</div></div>
+<div class="bar">
+<button class="add" id="btn-add">+ Add Lead</button>
+<select id="filter"><option value="all">All Stages</option><option value="new">New</option><option value="called">Called</option><option value="appt">Appointment Set</option><option value="closed">Closed</option><option value="paid">Paid</option></select>
+<input type="text" id="search" placeholder="Search...">
+<button id="btn-refresh">Refresh</button>
+</div>
+<div id="list"><div class="empty">Loading leads...</div></div>
+</div>
+<script>
+var STAGES=[["new","New"],["called","Called"],["appt","Appt Set"],["closed","Closed"],["paid","Paid"]];
+var leads=[],manual=[],meta={},byIdx={};
+function lm(){try{meta=JSON.parse(localStorage.getItem("fis_meta")||"{}")}catch(e){meta={}}}
+function sm(){localStorage.setItem("fis_meta",JSON.stringify(meta))}
+function lman(){try{manual=JSON.parse(localStorage.getItem("fis_manual")||"[]")}catch(e){manual=[]}}
+function sman(){localStorage.setItem("fis_manual",JSON.stringify(manual))}
+function lid(l){return (l.email||"")+"|"+(l.phone||"")+"|"+(l.created_at||l.name||"")}
+function all(){return manual.concat(leads)}
+function comm(id){var m=meta[id]||{};var v=parseFloat(m.jv||0),p=parseFloat(m.cp||0);if(!v||!p)return 0;return Math.round(v*p/100)}
+async function loadLeads(){try{var r=await fetch("/api/get-leads");var d=await r.json();var a=Array.isArray(d)?d:(d.leads||d.grantLeads||[]);leads=a.map(function(l){return{name:l.name||"",email:l.email||"",phone:l.phone||"",address:l.address||"",message:l.message||"",source:l.source||"website",created_at:l.created_at||""}})}catch(e){leads=[]}render()}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function render(){
+  var f=document.getElementById("filter").value;
+  var q=(document.getElementById("search").value||"").toLowerCase();
+  var arr=all();byIdx={};
+  var items=[];
+  for(var i=0;i<arr.length;i++){
+    var l=arr[i];var id=lid(l);byIdx[i]=id;
+    var st=(meta[id]&&meta[id].stage)||"new";
+    if(f!=="all"&&st!==f)continue;
+    if(q){var h=(l.name+" "+l.phone+" "+l.email+" "+l.address).toLowerCase();if(h.indexOf(q)<0)continue}
+    items.push(i);
+  }
+  var list=document.getElementById("list");
+  if(!items.length){list.innerHTML='<div class="empty">No leads yet. Website leads load automatically. Use + Add Lead for social leads.</div>';stats();return}
+  var htmlOut="";
+  for(var k=0;k<items.length;k++){
+    var idx=items[k];var l=arr[idx];var id=lid(l);var m=meta[id]||{};var st=m.stage||"new";
+    var btns="";
+    for(var b=0;b<STAGES.length;b++){
+      btns+='<button class="sb '+(st===STAGES[b][0]?"on "+STAGES[b][0]:"")+'" data-idx="'+idx+'" data-stage="'+STAGES[b][0]+'">'+STAGES[b][1]+'</button>';
+    }
+    var sc=(st==="closed"||st==="paid");var c=comm(id);
+    var w=l.created_at?new Date(l.created_at).toLocaleDateString():"";
+    var mh='<div class="lead-meta">';
+    if(l.phone)mh+='\ud83d\udcde <a href="tel:'+esc(l.phone)+'">'+esc(l.phone)+'</a>  ';
+    if(l.email)mh+='\u2709\ufe0f <a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>';
+    if(l.address)mh+='<br>\ud83d\udccd '+esc(l.address);
+    if(l.message)mh+='<br>\ud83d\udcac '+esc(l.message);
+    if(w)mh+='<br>\ud83d\udd52 '+w;
+    mh+='</div>';
+    htmlOut+='<div class="lead"><div class="lead-name">'+esc(l.name||"(no name)")+'<span class="src">'+esc(l.source)+'</span></div>'+mh+
+      '<div class="stage-row">'+btns+'</div>'+
+      '<div class="extra '+(sc?"show":"")+'"><label>Job Value $</label><input type="number" class="in-jv" data-idx="'+idx+'" value="'+(m.jv||"")+'" placeholder="15000"><label>Commission %</label><input type="number" class="in-cp" data-idx="'+idx+'" value="'+(m.cp||"")+'" placeholder="5"><span class="comm" id="earn-'+idx+'">You earn: $'+c+'</span></div>'+
+      '<textarea class="notes in-notes" data-idx="'+idx+'" placeholder="Notes...">'+esc(m.notes||"")+'</textarea></div>';
+  }
+  list.innerHTML=htmlOut;
+  stats();
+}
+function stats(){var a=all(),ap=0,cl=0,ow=0,pd=0;for(var i=0;i<a.length;i++){var id=lid(a[i]);var m=meta[id]||{};var st=m.stage||"new";if(st==="appt")ap++;if(st==="closed"||st==="paid")cl++;var c=comm(id);if(st==="closed")ow+=c;if(st==="paid")pd+=c}
+document.getElementById("s-total").textContent=a.length;document.getElementById("s-appt").textContent=ap;document.getElementById("s-closed").textContent=cl;document.getElementById("s-owed").textContent="$"+ow.toLocaleString();document.getElementById("s-paid").textContent="$"+pd.toLocaleString()}
+document.getElementById("list").addEventListener("click",function(e){
+  var b=e.target.closest(".sb");if(!b)return;
+  var idx=b.getAttribute("data-idx");var id=byIdx[idx];
+  meta[id]=meta[id]||{};meta[id].stage=b.getAttribute("data-stage");sm();render();
+});
+document.getElementById("list").addEventListener("input",function(e){
+  var t=e.target;var idx=t.getAttribute("data-idx");if(idx===null)return;var id=byIdx[idx];
+  meta[id]=meta[id]||{};
+  if(t.classList.contains("in-jv"))meta[id].jv=t.value;
+  else if(t.classList.contains("in-cp"))meta[id].cp=t.value;
+  else if(t.classList.contains("in-notes"))meta[id].notes=t.value;
+  sm();
+  if(t.classList.contains("in-jv")||t.classList.contains("in-cp")){
+    var el=document.getElementById("earn-"+idx);if(el)el.textContent="You earn: $"+comm(id);
+    stats();
+  }
+});
+document.getElementById("filter").addEventListener("change",render);
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("btn-refresh").addEventListener("click",loadLeads);
+document.getElementById("btn-add").addEventListener("click",function(){
+  var n=prompt("Name:");if(!n)return;var p=prompt("Phone:")||"";var em=prompt("Email:")||"";var s=prompt("Source:")||"social";
+  manual.unshift({name:n,phone:p,email:em,address:"",message:"",source:s,created_at:new Date().toISOString()});sman();render();
+});
+lm();lman();loadLeads();
+</script></body></html>
