@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://floridaimpactshield.com/sitemap.xml
+Sitemap: https://www.floridaimpactshield.com/sitemap.xml

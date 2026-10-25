@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title># FOR IMMEDIATE RELEASE | Press Release June 2026</title>
 <meta name="description" content="Florida Impact Shield press release June 2026. Serving all 67 Florida counties with impact windows and hurricane protection.">
-<link rel="canonical" href="https://floridaimpactshield.com/pages/press-release-florida-impact-shield-launch-2026.html">
+<link rel="canonical" href="https://www.floridaimpactshield.com/pages/press-release-florida-impact-shield-launch-2026.html">
 <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V3390MPTVC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V3390MPTVC');</script>
@@ -200,5 +200,26 @@ async function FISSave() {
   } catch(e) { console.log('Save error:', e.message); }
 }
 </script>
-<!-- FIS-QUOTE-CTA --><a href="/free-quote.html" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fbbf24;color:#0f172a;text-align:center;font-family:Arial,sans-serif;font-weight:900;font-size:18px;padding:15px;text-decoration:none;box-shadow:0 -6px 20px rgba(0,0,0,.3)">GET MY FREE QUOTE &rarr;</a><div style="height:60px"></div></body>
+<!-- FIS-QUOTE-CTA --><a href="/free-quote.html" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fbbf24;color:#0f172a;text-align:center;font-family:Arial,sans-serif;font-weight:900;font-size:18px;padding:15px;text-decoration:none;box-shadow:0 -6px 20px rgba(0,0,0,.3)">GET MY FREE QUOTE &rarr;</a><div style="height:60px"></div>
+<script>
+(function(){
+  function sb(){
+    if(document.getElementById('sb-midbar')) return;
+    var scope=document.querySelector('.blog-body')||document.querySelector('article')||document.querySelector('main');
+    if(!scope) return;
+    var heads=scope.querySelectorAll('h2'); var target=null;
+    if(heads.length>=2) target=heads[1];
+    else { var ps=scope.querySelectorAll('p'); if(ps.length>=5) target=ps[4]; }
+    if(!target) return;
+    var bar=document.createElement('div');
+    bar.id='sb-midbar';
+    bar.style.cssText='background:#0f2436;border-radius:8px;padding:13px 17px;margin:24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
+    bar.innerHTML='<div style="color:#fff;font-size:14.5px;line-height:1.4"><strong style="color:#d6a44e">\u26A1 Free Florida money alerts</strong><span style="color:#c9d6de"> \u2014 grant windows, insurance changes, storm deadlines.</span></div><a href="https://shieldbriefing.beehiiv.com/subscribe?utm_source=floridaimpactshield&utm_medium=midbar" rel="noopener" style="background:#d6a44e;color:#0f2436;font-weight:800;padding:8px 16px;border-radius:5px;text-decoration:none;font-size:13.5px;white-space:nowrap">Join free \u2192</a>';
+    target.parentNode.insertBefore(bar,target);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sb); else sb();
+})();
+</script>
+
+</body>
 </html>

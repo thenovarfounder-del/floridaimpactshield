@@ -79,5 +79,197 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/blog/my-safe-florida-home-grant-complete-guide-2026.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/my-safe-florida-home-program-guide.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/10000-impact-window-grant.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/florida-hurricane-hardening-grant.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impact-window-grant-florida-2026.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impact-windows-grant-florida-homeowners.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/my-safe-florida-home-grant-2026-funding-renewed.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/my-safe-florida-home-grant-impact-windows.html",
+      "destination": "/pages/my-safe-florida-home-grants.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/wind-mitigation-inspection.html",
+      "destination": "/blog/what-is-wind-mitigation-inspection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/wind-mitigation-inspection-what-to-expect.html",
+      "destination": "/blog/what-is-wind-mitigation-inspection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/wind-mitigation-florida.html",
+      "destination": "/blog/what-is-wind-mitigation-inspection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/florida-wind-mitigation-savings-calculator.html",
+      "destination": "/pages/wind-mitigation-discount-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impact-windows-insurance-and-grants-florida.html",
+      "destination": "/pages/wind-mitigation-discount-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hurricane-impact-windows-cost-florida.html",
+      "destination": "/blog/how-much-do-impact-windows-cost-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/how-much-do-impact-windows-cost-florida.html",
+      "destination": "/blog/how-much-do-impact-windows-cost-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/hurricane-windows-cost-florida.html",
+      "destination": "/blog/how-much-do-impact-windows-cost-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impact-window-cost-guides-florida.html",
+      "destination": "/blog/how-much-do-impact-windows-cost-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-impact-window-brands-florida.html",
+      "destination": "/pages/best-impact-window-brands-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/best-impact-window-brands-florida-2026-comparison.html",
+      "destination": "/pages/best-impact-window-brands-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impact-window-brands-florida.html",
+      "destination": "/pages/best-impact-window-brands-florida-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hurricane-ian-impact-windows-lesson.html",
+      "destination": "/blog/hurricane-ian-lessons-why-impact-windows-matter.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hurricane-season-2026-florida-home-ready.html",
+      "destination": "/blog/hurricane-season-2026-is-your-florida-home-ready.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pace-financing-impact-windows-florida.html",
+      "destination": "/blog/pace-financing-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/renew-financial-pace-florida.html",
+      "destination": "/blog/pace-financing-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hurricane-deductible-explained.html",
+      "destination": "/pages/florida-hurricane-deductible-explained.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/citizens-insurance-impact-windows.html",
+      "destination": "/pages/citizens-insurance-impact-windows-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/how-long-does-impact-window-installation-take.html",
+      "destination": "/blog/how-long-does-impact-window-installation-take-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/do-impact-windows-prevent-break-ins.html",
+      "destination": "/pages/smash-and-grab-protection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/can-burglars-break-impact-windows.html",
+      "destination": "/pages/smash-and-grab-protection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/burglar-proof-windows-florida.html",
+      "destination": "/pages/smash-and-grab-protection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/home-invasion-protection-florida.html",
+      "destination": "/pages/smash-and-grab-protection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impact-windows-home-security.html",
+      "destination": "/pages/smash-and-grab-protection-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/do-impact-windows-increase-home-resale-value-florida.html",
+      "destination": "/pages/impact-windows-increase-home-value-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/how-to-lower-florida-home-insurance.html",
+      "destination": "/blog/how-to-lower-florida-homeowners-insurance-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/florida-insurance-savings-center.html",
+      "destination": "/pages/hurricane-windows-insurance-savings.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/florida-insurance-savings-impact-windows-worth-it.html",
+      "destination": "/pages/hurricane-windows-insurance-savings.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/pgt-winguard-impact-windows-florida-review.html",
+      "destination": "/pages/pgt-impact-windows-florida.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/do-impact-windows-really-work-in-a-hurricane.html",
+      "destination": "/pages/will-impact-windows-break-in-a-storm.html",
+      "permanent": true
+    }
   ]
 }

@@ -168,5 +168,26 @@ async function send(){
   if(done) done.style.display='block';
 }
 </script>
+
+<script>
+(function(){
+  function sb(){
+    if(document.getElementById('sb-midbar')) return;
+    var scope=document.querySelector('.blog-body')||document.querySelector('article')||document.querySelector('main');
+    if(!scope) return;
+    var heads=scope.querySelectorAll('h2'); var target=null;
+    if(heads.length>=2) target=heads[1];
+    else { var ps=scope.querySelectorAll('p'); if(ps.length>=5) target=ps[4]; }
+    if(!target) return;
+    var bar=document.createElement('div');
+    bar.id='sb-midbar';
+    bar.style.cssText='background:#0f2436;border-radius:8px;padding:13px 17px;margin:24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
+    bar.innerHTML='<div style="color:#fff;font-size:14.5px;line-height:1.4"><strong style="color:#d6a44e">\u26A1 Free Florida money alerts</strong><span style="color:#c9d6de"> \u2014 grant windows, insurance changes, storm deadlines.</span></div><a href="https://shieldbriefing.beehiiv.com/subscribe?utm_source=floridaimpactshield&utm_medium=midbar" rel="noopener" style="background:#d6a44e;color:#0f2436;font-weight:800;padding:8px 16px;border-radius:5px;text-decoration:none;font-size:13.5px;white-space:nowrap">Join free \u2192</a>';
+    target.parentNode.insertBefore(bar,target);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sb); else sb();
+})();
+</script>
+
 </body>
 </html>

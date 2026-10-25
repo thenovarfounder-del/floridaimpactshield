@@ -1,0 +1,12 @@
+﻿const fs=require("fs");
+const d=fs.readFileSync("pages/wind-mitigation-inspection.html","utf8");
+const head=d.slice(0,d.indexOf("</head>"));
+console.log("=== HEAD (links/styles) ===");
+console.log([...head.matchAll(/<link[^>]+>/g)].map(m=>m[0]).join("\n")||"no <link> tags");
+console.log("style blocks in head:",(head.match(/<style/g)||[]).length,"| head length:",head.length);
+const bi=d.indexOf("<body");
+console.log("=== BODY OPEN + first 800 ===");
+console.log(d.slice(bi,bi+800));
+const mi=d.search(/<main|<article|class="container|class="content/);
+console.log("=== CONTENT WRAPPER (at "+mi+") ===");
+console.log(mi>=0?d.slice(mi,mi+400):"none found");
